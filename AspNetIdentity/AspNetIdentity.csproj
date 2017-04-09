@@ -161,6 +161,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="LEEME.md" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

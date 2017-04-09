@@ -1,13 +1,16 @@
-ProyectoCapas
+# ProyectoCapas
 
-Cuenta hotmail.com:
+Cuenta HotMail del cliente SMTP para el envío de correos:
 
-Nombre: Elliot Alderson
-Email: mr.elliotalderson@hotmail.com
-Contraseña: unDiaSol3@do.
+**Nombre**: Cobro Coactivo
+**Email**: tais2coactivo@hotmail.com
+**Contraseña**: electiva2taisII.
+
+## Operaciones
 
 Crear un usuario para obtener un Token:
 
+```
 { 
   "Email": "mr.elliotalderson@hotmail.com", 
   "Username":"3lliot@ld3rs0n", 
@@ -16,25 +19,31 @@ Crear un usuario para obtener un Token:
   "FirstName": "Elliot", 
   "LastName": "Alderson"
 }
+```
 
-Antes de guardar una factura debo tener un cliente:
+### Antes de guardar una factura debo tener un cliente:
 
+```
 {
   "Direccion": "Calle 30 No. 30-17",
   "Nombre": "Duvan Palmera",
   "Telefono": "3003432858"
 }
+```
 
-Crear una factura (sin Items):
+### Crear una factura (sin Items):
 
+```
 {
   "Fecha": "2016-11-24",
   "NumeroFactura": "723",
   "ClienteId": 
 }
+```
 
-Guardar una factura con los item incluidos desde el cliente REST
+### Guardar una factura con los item incluidos desde el cliente REST
 
+```
 {
   "Fecha": 1480002326532,
   "NumeroFactura": "324",
@@ -54,9 +63,11 @@ Guardar una factura con los item incluidos desde el cliente REST
     },
   ]
 }
+```
 
 Para guardar un proyecto:
 
+```
 { 
   "ClienteId": 4009, 
   "Nombre": "anibaljoseguerraz@gmail.com", 
@@ -71,8 +82,10 @@ Para guardar un proyecto:
     "FacturaId":"1"
   }]
 }
+```
 
-Comandos:
+## Comandos:
 
-enable-migrations
-add-migration InitialCreate
+- `enable-migrations`: habilitar las migraciones en el proyecto.
+- `add-migration InitialCreate`: así se crea un migración.
+- `update-database`: para aplicar las migraciones en la base de datos.
