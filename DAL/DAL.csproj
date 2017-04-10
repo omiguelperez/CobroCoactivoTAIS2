@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountBindingModels.cs" />
+    <Compile Include="ClaimBindingModel.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Contexto.cs" />
     <Compile Include="Facturas.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="ProgramacionPago.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proyecto.cs" />
+    <Compile Include="RoleBindingModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

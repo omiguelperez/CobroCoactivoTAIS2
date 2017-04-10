@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using AspNetIdentity.Models;
 using System.Security.Claims;
 using AspNetIdentity.WebApi.Controllers;
+using DAL;
 
 namespace AspNetIdentity.Controllers
 {
