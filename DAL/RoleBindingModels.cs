@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace AspNetIdentity.Models
+namespace DAL
 {
     public class CreateRoleBindingModel
     {

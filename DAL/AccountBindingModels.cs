@@ -8,6 +8,7 @@ namespace DAL
 {
     public class CreateUserBindingModel
     {
+        public string Id { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

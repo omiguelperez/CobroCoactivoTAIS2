@@ -20,6 +20,10 @@ namespace DAL
         public DbSet<Facturas> Facturas { get; set; }
         public DbSet<ItemFactura> ItemFacturas { get; set; }
         public DbSet<ProgramacionPago> ProgramacionPagos { get; set; }
+        public DbSet<Persona> Personas { get; set; }
+        public DbSet<Obligacion> Obligaciones { get; set; }
+        public DbSet<Cobro> Cobros { get; set; }
+        public DbSet<TipoCobro> TiposCobros { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

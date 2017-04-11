@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using DAL;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace AspNetIdentity
 
         [Required]
         public DateTime JoinDate { get; set; }
+
+        public virtual Persona Persona { get; set; }
 
         //Rest of code is removed for brevity
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)

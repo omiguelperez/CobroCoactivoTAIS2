@@ -12,6 +12,23 @@ namespace PPTConsola
     {
         static void Main(string[] args)
         {
+            //PersonaDTO para guardar
+            PersonaDTO cliente1 = new PersonaDTO
+            {
+                Identificacion=1065827940,
+                Nombres = "Miguel",
+                Direccion = "Alamos 1",
+                Telefono = 311329837,
+                Apellidos = "Jjdnjdn",
+                Sexo = "M",
+            };
+
+           // Guardar el cliente
+            PersonaBLL clienteBLL = new PersonaBLL();
+            Respuesta respuesta = clienteBLL.Insertar(cliente1);
+            Console.WriteLine(respuesta.Mensaje + ", Filas afactadas: " + respuesta.FilasAfectadas);
+            Console.ReadKey();
+
             //Cliente para guardar
             //ClienteDTO cliente1 = new ClienteDTO
             //{
@@ -55,7 +72,7 @@ namespace PPTConsola
             //Respuesta respuesta = facturaBLL.Insertar(factura1);
             //Console.WriteLine(respuesta.Mensaje + ", Filas afactadas: " + respuesta.FilasAfectadas);
             //Console.ReadKey();
-            
+
 
             // Guardar un ItemFactura con una factura que ya esta en la base de datos
             //ItemFacturaDTO itemFactura1 = new ItemFacturaDTO

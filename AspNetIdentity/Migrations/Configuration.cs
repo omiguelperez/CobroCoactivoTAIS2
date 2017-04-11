@@ -25,27 +25,29 @@ namespace AspNetIdentity.Migrations
 
             var user = new ApplicationUser()
             {
-                UserName = "SuperPowerUser",
-                Email = "taiseer.joudeh@mymail.com",
+                UserName = "lider",
+                Email = "liderdetodos@gmail.com",
                 EmailConfirmed = true,
-                FirstName = "Taiseer",
-                LastName = "Joudeh",
+                FirstName = "Lider",
+                LastName = "Proyecto",
                 Level = 1,
                 JoinDate = DateTime.Now.AddYears(-3)
             };
 
-            manager.Create(user, "MySuperP@ssword!");
+            manager.Create(user, "passwordlider1*");
 
             if (roleManager.Roles.Count() == 0)
             {
-                roleManager.Create(new IdentityRole { Name = "SuperAdmin" });
-                roleManager.Create(new IdentityRole { Name = "Admin" });
-                roleManager.Create(new IdentityRole { Name = "User" });
+                roleManager.Create(new IdentityRole { Name = "Deudor" });
+                roleManager.Create(new IdentityRole { Name = "Abogado" });
+                roleManager.Create(new IdentityRole { Name = "Lider" });
+                roleManager.Create(new IdentityRole { Name = "Secretaria" });
+                roleManager.Create(new IdentityRole { Name = "Auxiliar Administrativo" });
             }
 
-            var adminUser = manager.FindByName("SuperPowerUser");
+            var adminUser = manager.FindByName("lider");
 
-            manager.AddToRoles(adminUser.Id, new string[] { "SuperAdmin", "Admin" });
+            manager.AddToRoles(adminUser.Id, new string[] { "Lider" });
 
 
 
