@@ -5,17 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Infrastructure;
 
 namespace BLL
 {
     public class ItemFacturaBLL
     {
         Respuesta respuesta = new Respuesta();
-        Contexto db;
+        ApplicationDbContext db;
 
         public Respuesta Insertar(ItemFacturaDTO itemFactura)
         {
-            using (db = new Contexto())
+            using (db = new ApplicationDbContext())
             {
                 try
                 {

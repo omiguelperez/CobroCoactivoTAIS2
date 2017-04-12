@@ -1,4 +1,4 @@
-﻿using AspNetIdentity.Infrastructure;
+﻿using DAL.Infrastructure;
 using AspNetIdentity.Providers;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;

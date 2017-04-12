@@ -1,4 +1,5 @@
 ﻿using DAL;
+using DAL.Infrastructure;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,11 @@ namespace BLL
     public class PersonaBLL
     {
         Respuesta respuesta = new Respuesta();
-        Contexto db = new Contexto();
+        ApplicationDbContext db = new ApplicationDbContext();
 
         public Respuesta Insertar(PersonaDTO cliente)
         {
-            using (db = new Contexto())
+            using (db = new ApplicationDbContext())
             {
                 try
                 {

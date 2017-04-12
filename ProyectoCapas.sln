@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPTConsola", "PPTConsola\PPTConsola.csproj", "{9DEDA705-4BBF-47DB-83DD-6FA5AA0BC58D}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{4D766990-0806-4997-AF9D-C1A1D7195D7B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetIdentity", "AspNetIdentity\AspNetIdentity.csproj", "{5843F20C-564D-4DB4-AB11-DAF147B1B567}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicesProviders", "ServicesProviders\ServicesProviders.csproj", "{70141AE7-BA85-400D-940D-2B1728122D75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{5843F20C-564D-4DB4-AB11-DAF147B1B567}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5843F20C-564D-4DB4-AB11-DAF147B1B567}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5843F20C-564D-4DB4-AB11-DAF147B1B567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70141AE7-BA85-400D-940D-2B1728122D75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70141AE7-BA85-400D-940D-2B1728122D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70141AE7-BA85-400D-940D-2B1728122D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70141AE7-BA85-400D-940D-2B1728122D75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

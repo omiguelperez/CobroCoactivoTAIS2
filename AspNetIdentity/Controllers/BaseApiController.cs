@@ -1,4 +1,4 @@
-﻿using AspNetIdentity.Infrastructure;
+﻿using DAL.Infrastructure;
 using AspNetIdentity.Models;
 using Microsoft.AspNet.Identity;
 using System;

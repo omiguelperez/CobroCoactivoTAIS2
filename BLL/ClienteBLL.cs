@@ -5,17 +5,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using DAL.Infrastructure;
 namespace BLL
 {
     public class ClienteBLL
     {
         Respuesta respuesta = new Respuesta();
-        Contexto db = new Contexto();
+        ApplicationDbContext db = new ApplicationDbContext();
 
         public Respuesta Insertar(ClienteDTO cliente)
         {
-            using(db = new Contexto())
+            using(db = new ApplicationDbContext())
             {
                 try
                 {
@@ -51,7 +51,7 @@ namespace BLL
 
         public List<ClienteDTO> GetRecords()
         {
-            using(Contexto db = new Contexto())
+            using(ApplicationDbContext db = new ApplicationDbContext())
             {
                 return db.Clientes
                     .Select(t => 

@@ -5,17 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities;
 using DAL;
+using DAL.Infrastructure;
 
 namespace BLL
 {
     public class ProyectoBLL
     {
         Respuesta respuesta = new Respuesta();
-        Contexto db;
+        ApplicationDbContext db;
 
         public Respuesta Insertar(ProyectoDTO proyecto)
         {
-            using (db = new Contexto())
+            using (db = new ApplicationDbContext())
             {
                 try
                 {
@@ -65,7 +66,7 @@ namespace BLL
 
         public List<ProyectoDTO> GetRecords()
         {
-            using (Contexto db = new Contexto())
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 return db.Proyectos
                     .Select(t =>
@@ -85,7 +86,7 @@ namespace BLL
 
         public Respuesta PutProyecto(ProyectoDTO proyecto)
         {
-            using (Contexto db = new Contexto())
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 #region Ejemplo4
                 //ejemplo de delete
@@ -121,7 +122,7 @@ namespace BLL
 
         public Respuesta DeleteProyecto(ProyectoDTO proyecto)
         {
-            using (Contexto db = new Contexto())
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 #region Ejemplo3
                 //ejemplo de delete

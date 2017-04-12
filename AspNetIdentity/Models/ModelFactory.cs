@@ -1,4 +1,4 @@
-﻿using AspNetIdentity.Infrastructure;
+﻿using DAL.Infrastructure;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;

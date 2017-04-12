@@ -1,6 +1,6 @@
 namespace AspNetIdentity.Migrations
 {
-    using AspNetIdentity.Infrastructure;
+    using DAL.Infrastructure;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
@@ -8,14 +8,14 @@ namespace AspNetIdentity.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<AspNetIdentity.Infrastructure.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<DAL.Infrastructure.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(AspNetIdentity.Infrastructure.ApplicationDbContext context)
+        protected override void Seed(DAL.Infrastructure.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace AspNetIdentity.Validators
+namespace DAL.Validators
 {
     public class MyCustomUserValidator : UserValidator<ApplicationUser>
     {

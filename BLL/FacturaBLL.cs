@@ -5,18 +5,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Infrastructure;
 
 namespace BLL
 {
     public class FacturaBLL
     {
         Respuesta respuesta = new Respuesta();
-        Contexto db;
+        ApplicationDbContext db;
 
         // Guardar una factura
         public Respuesta Insertar(FacturaDTO factura)
         {
-            using (db = new Contexto())
+            using (db = new ApplicationDbContext())
             {
                 using (var transaction = db.Database.BeginTransaction())
                 {
@@ -72,7 +73,7 @@ namespace BLL
         // Obtener las facturas
         public List<FacturaDTO> GetRecords()
         {
-            using (Contexto db = new Contexto())
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 return db.Facturas
                     .Select(t =>
@@ -90,7 +91,7 @@ namespace BLL
         // Modificar una factura
         public Respuesta UpdateFactura(FacturaDTO facturaDTO)
         {
-            using (Contexto db = new Contexto())
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var facturaUpdate = db.Facturas.Find(facturaDTO.FacturasId);
                 if (facturaUpdate != null)
@@ -120,7 +121,7 @@ namespace BLL
         // Eliminar una factura
         public Respuesta DeleteFactura(FacturaDTO facturaDTO)
         {
-            using (Contexto db = new Contexto())
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var facturaDelete = db.Facturas.Find(facturaDTO.FacturasId);
                 if (facturaDelete != null)
