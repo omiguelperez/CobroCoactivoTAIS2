@@ -179,30 +179,12 @@
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProyectoController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
-    <Compile Include="Infrastructure\ApplicationDbContext.cs" />
-    <Compile Include="Infrastructure\ApplicationRoleManager.cs" />
-    <Compile Include="Infrastructure\ApplicationUser.cs" />
-    <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\ClaimsAuthorizationAttribute.cs" />
-    <Compile Include="Infrastructure\ExtendedClaimsProvider.cs" />
-    <Compile Include="Infrastructure\RolesFromClaims.cs" />
-    <Compile Include="Migrations\201610072343477_InitialCreate.cs" />
-    <Compile Include="Migrations\201610072343477_InitialCreate.Designer.cs">
-      <DependentUpon>201610072343477_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704110422490_RelacionUsuariosPersonas.cs" />
-    <Compile Include="Migrations\201704110422490_RelacionUsuariosPersonas.Designer.cs">
-      <DependentUpon>201704110422490_RelacionUsuariosPersonas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ModelFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CustomJwtFormat.cs" />
     <Compile Include="Providers\CustomOAuthProvider.cs" />
-    <Compile Include="Services\EmailService.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Validators\MyCustomPasswordValidator.cs" />
-    <Compile Include="Validators\MyCustomUserValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -212,14 +194,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610072343477_InitialCreate.resx">
-      <DependentUpon>201610072343477_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704110422490_RelacionUsuariosPersonas.resx">
-      <DependentUpon>201704110422490_RelacionUsuariosPersonas.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
