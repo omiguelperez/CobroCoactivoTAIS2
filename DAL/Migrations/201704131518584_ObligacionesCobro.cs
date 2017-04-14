@@ -3,7 +3,7 @@
 //    using System;
 //    using System.Data.Entity.Migrations;
     
-//    public partial class CobroUsuario : DbMigration
+//    public partial class ObligacionesCobro : DbMigration
 //    {
 //        public override void Up()
 //        {
@@ -89,17 +89,27 @@
 //                        Nombre = c.String(),
 //                        UpdateAt = c.DateTime(nullable: false),
 //                        CreatedAt = c.DateTime(nullable: false),
-//                        UserId = c.String(nullable: false, maxLength: 128),//toco modificarlo porque ni de vaina lo agarraba
+//                        UsuarioId = c.String(nullable: false, maxLength: 128),
 //                        TipoCobro_TipoCobroId = c.Int(),
-//                        Obligacion_ObligacionId = c.Int(),
 //                    })
 //                .PrimaryKey(t => t.CobroId)
 //                .ForeignKey("dbo.TipoCobroes", t => t.TipoCobro_TipoCobroId)
-//                .ForeignKey("dbo.Obligacions", t => t.Obligacion_ObligacionId)
-//                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)//toco modificarlo porque ni de vaina lo agarraba
-//                .Index(t => t.UserId)
-//                .Index(t => t.TipoCobro_TipoCobroId)
-//                .Index(t => t.Obligacion_ObligacionId);
+//                .ForeignKey("dbo.AspNetUsers", t => t.UsuarioId, cascadeDelete: true)
+//                .Index(t => t.UsuarioId)
+//                .Index(t => t.TipoCobro_TipoCobroId);
+            
+//            CreateTable(
+//                "dbo.Obligacions",
+//                c => new
+//                    {
+//                        ObligacionId = c.Int(nullable: false, identity: true),
+//                        UpdateAt = c.DateTime(nullable: false),
+//                        CreatedAt = c.DateTime(nullable: false),
+//                        Persona_PersonaId = c.Int(),
+//                    })
+//                .PrimaryKey(t => t.ObligacionId)
+//                .ForeignKey("dbo.Personas", t => t.Persona_PersonaId)
+//                .Index(t => t.Persona_PersonaId);
             
 //            CreateTable(
 //                "dbo.TipoCobroes",
@@ -179,19 +189,6 @@
 //                .PrimaryKey(t => t.PersonaId);
             
 //            CreateTable(
-//                "dbo.Obligacions",
-//                c => new
-//                    {
-//                        ObligacionId = c.Int(nullable: false, identity: true),
-//                        UpdateAt = c.DateTime(nullable: false),
-//                        CreatedAt = c.DateTime(nullable: false),
-//                        Persona_PersonaId = c.Int(),
-//                    })
-//                .PrimaryKey(t => t.ObligacionId)
-//                .ForeignKey("dbo.Personas", t => t.Persona_PersonaId)
-//                .Index(t => t.Persona_PersonaId);
-            
-//            CreateTable(
 //                "dbo.AspNetUserRoles",
 //                c => new
 //                    {
@@ -214,6 +211,19 @@
 //                .PrimaryKey(t => t.Id)
 //                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
+//            CreateTable(
+//                "dbo.ObligacionCobroes",
+//                c => new
+//                    {
+//                        Obligacion_ObligacionId = c.Int(nullable: false),
+//                        Cobro_CobroId = c.Int(nullable: false),
+//                    })
+//                .PrimaryKey(t => new { t.Obligacion_ObligacionId, t.Cobro_CobroId })
+//                .ForeignKey("dbo.Obligacions", t => t.Obligacion_ObligacionId, cascadeDelete: true)
+//                .ForeignKey("dbo.Cobroes", t => t.Cobro_CobroId, cascadeDelete: true)
+//                .Index(t => t.Obligacion_ObligacionId)
+//                .Index(t => t.Cobro_CobroId);
+            
 //        }
         
 //        public override void Down()
@@ -223,24 +233,26 @@
 //            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
 //            DropForeignKey("dbo.AspNetUsers", "Persona_PersonaId", "dbo.Personas");
 //            DropForeignKey("dbo.Obligacions", "Persona_PersonaId", "dbo.Personas");
-//            DropForeignKey("dbo.Cobroes", "Obligacion_ObligacionId", "dbo.Obligacions");
 //            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
 //            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
 //            DropForeignKey("dbo.Cobroes", "TipoCobro_TipoCobroId", "dbo.TipoCobroes");
+//            DropForeignKey("dbo.ObligacionCobroes", "Cobro_CobroId", "dbo.Cobroes");
+//            DropForeignKey("dbo.ObligacionCobroes", "Obligacion_ObligacionId", "dbo.Obligacions");
 //            DropForeignKey("dbo.ProgramacionPagoes", "ProyectoId", "dbo.Proyectoes");
 //            DropForeignKey("dbo.ProgramacionPagoes", "Factura_FacturasId", "dbo.Facturas");
 //            DropForeignKey("dbo.Proyectoes", "ClienteId", "dbo.Clientes");
 //            DropForeignKey("dbo.ItemFacturas", "Factura_FacturasId", "dbo.Facturas");
 //            DropForeignKey("dbo.Facturas", "ClienteId", "dbo.Clientes");
+//            DropIndex("dbo.ObligacionCobroes", new[] { "Cobro_CobroId" });
+//            DropIndex("dbo.ObligacionCobroes", new[] { "Obligacion_ObligacionId" });
 //            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
 //            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
 //            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-//            DropIndex("dbo.Obligacions", new[] { "Persona_PersonaId" });
 //            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
 //            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
 //            DropIndex("dbo.AspNetUsers", new[] { "Persona_PersonaId" });
 //            DropIndex("dbo.AspNetUsers", "UserNameIndex");
-//            DropIndex("dbo.Cobroes", new[] { "Obligacion_ObligacionId" });
+//            DropIndex("dbo.Obligacions", new[] { "Persona_PersonaId" });
 //            DropIndex("dbo.Cobroes", new[] { "TipoCobro_TipoCobroId" });
 //            DropIndex("dbo.Cobroes", new[] { "UsuarioId" });
 //            DropIndex("dbo.ProgramacionPagoes", new[] { "Factura_FacturasId" });
@@ -248,14 +260,15 @@
 //            DropIndex("dbo.Proyectoes", new[] { "ClienteId" });
 //            DropIndex("dbo.ItemFacturas", new[] { "Factura_FacturasId" });
 //            DropIndex("dbo.Facturas", new[] { "ClienteId" });
+//            DropTable("dbo.ObligacionCobroes");
 //            DropTable("dbo.AspNetRoles");
 //            DropTable("dbo.AspNetUserRoles");
-//            DropTable("dbo.Obligacions");
 //            DropTable("dbo.Personas");
 //            DropTable("dbo.AspNetUserLogins");
 //            DropTable("dbo.AspNetUserClaims");
 //            DropTable("dbo.AspNetUsers");
 //            DropTable("dbo.TipoCobroes");
+//            DropTable("dbo.Obligacions");
 //            DropTable("dbo.Cobroes");
 //            DropTable("dbo.ProgramacionPagoes");
 //            DropTable("dbo.Proyectoes");

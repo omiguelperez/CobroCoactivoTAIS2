@@ -13,7 +13,7 @@ namespace Entities
             Obligaciones = new List<ObligacionDTO>();
         }
         public int PersonaId { get; set; }
-        public long Identificacion { get; set; }
+        public string Identificacion { get; set; }
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
         public string Sexo { get; set; }

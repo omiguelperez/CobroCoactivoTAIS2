@@ -18,7 +18,7 @@ namespace DAL
 
         
         // [Column("Fecha", TypeName = "datetime2", Order = 1)]
-        public long Identificacion { get; set; }
+        public string Identificacion { get; set; }
         [Required]
         [StringLength(35)]
         public string Nombres { get; set; }

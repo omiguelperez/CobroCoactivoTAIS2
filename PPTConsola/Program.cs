@@ -13,21 +13,21 @@ namespace PPTConsola
         static void Main(string[] args)
         {
             //PersonaDTO para guardar
-            PersonaDTO cliente1 = new PersonaDTO
-            {
-                Identificacion=1065827940,
-                Nombres = "Miguel",
-                Direccion = "Alamos 1",
-                Telefono = 311329837,
-                Apellidos = "Jjdnjdn",
-                Sexo = "M",
-            };
+           // PersonaDTO cliente1 = new PersonaDTO
+           // {
+           //     Identificacion=1065827940,
+           //     Nombres = "Miguel",
+           //     Direccion = "Alamos 1",
+           //     Telefono = 311329837,
+           //     Apellidos = "Jjdnjdn",
+           //     Sexo = "M",
+           // };
 
-           // Guardar el cliente
-            PersonaBLL clienteBLL = new PersonaBLL();
-            Respuesta respuesta = clienteBLL.Insertar(cliente1);
-            Console.WriteLine(respuesta.Mensaje + ", Filas afactadas: " + respuesta.FilasAfectadas);
-            Console.ReadKey();
+           //// Guardar el cliente
+           // PersonaBLL clienteBLL = new PersonaBLL();
+           // Respuesta respuesta = clienteBLL.Insertar(cliente1);
+           // Console.WriteLine(respuesta.Mensaje + ", Filas afactadas: " + respuesta.FilasAfectadas);
+           // Console.ReadKey();
 
             //Cliente para guardar
             //ClienteDTO cliente1 = new ClienteDTO

@@ -1,168 +1,168 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entities;
-using DAL;
-using DAL.Infrastructure;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using Entities;
+//using DAL;
+//using DAL.Infrastructure;
 
-namespace BLL
-{
-    public class ProyectoBLL
-    {
-        Respuesta respuesta = new Respuesta();
-        ApplicationDbContext db;
+//namespace BLL
+//{
+//    public class ProyectoBLL
+//    {
+//        Respuesta respuesta = new Respuesta();
+//        ApplicationDbContext db;
 
-        public Respuesta Insertar(ProyectoDTO proyecto)
-        {
-            using (db = new ApplicationDbContext())
-            {
-                try
-                {
-                    // preparar el proyecto para guardar
-                    Proyecto p = new Proyecto();
-                    // p.ProyectoId = proyecto.ProyectoId;
-                    p.Nombre = proyecto.Nombre;
-                    p.Valor = proyecto.Valor;
-                    p.FechaInicio = proyecto.FechaInicio;
-                    p.Plazo = proyecto.Plazo;
-                    p.Estado = proyecto.Estado;
-                    p.ClienteId = proyecto.ClienteId;
-                    foreach (ProgramacionPagoDTO item in proyecto.lista)
-                    {
-                        ProgramacionPago itemFactura = new ProgramacionPago();
-                        itemFactura.Estado=item.Estado;
-                        itemFactura.Valor = item.Valor;
-                        itemFactura.FechaPago = item.FechaPago;
-                        itemFactura.ProyectoId = item.ProyectoId;
-                        itemFactura.FacturaId = item.FacturaId;
-                        //itemFactura.Factura = f;
-                        p.ProgramacionPagos.Add(itemFactura);
-                    }
-                    db.Proyectos.Add(p);
+//        public Respuesta Insertar(ProyectoDTO proyecto)
+//        {
+//            using (db = new ApplicationDbContext())
+//            {
+//                try
+//                {
+//                    // preparar el proyecto para guardar
+//                    Proyecto p = new Proyecto();
+//                    // p.ProyectoId = proyecto.ProyectoId;
+//                    p.Nombre = proyecto.Nombre;
+//                    p.Valor = proyecto.Valor;
+//                    p.FechaInicio = proyecto.FechaInicio;
+//                    p.Plazo = proyecto.Plazo;
+//                    p.Estado = proyecto.Estado;
+//                    p.ClienteId = proyecto.ClienteId;
+//                    foreach (ProgramacionPagoDTO item in proyecto.lista)
+//                    {
+//                        ProgramacionPago itemFactura = new ProgramacionPago();
+//                        itemFactura.Estado=item.Estado;
+//                        itemFactura.Valor = item.Valor;
+//                        itemFactura.FechaPago = item.FechaPago;
+//                        itemFactura.ProyectoId = item.ProyectoId;
+//                        itemFactura.FacturaId = item.FacturaId;
+//                        //itemFactura.Factura = f;
+//                        p.ProgramacionPagos.Add(itemFactura);
+//                    }
+//                    db.Proyectos.Add(p);
 
-                    // preparar la respuesta
-                    respuesta.FilasAfectadas = db.SaveChanges();
-                    respuesta.Mensaje = "Se realizó la operación satisfactoriamente";
-                    respuesta.Error = false;
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
-                {
-                    respuesta.Mensaje = ex.Message;
-                    respuesta.FilasAfectadas = 0;
-                    respuesta.Error = true;
-                }
-                catch (Exception ex)
-                {
-                    respuesta.Mensaje = ex.Message;
-                    respuesta.FilasAfectadas = 0;
-                    respuesta.Error = true;
-                }
+//                    // preparar la respuesta
+//                    respuesta.FilasAfectadas = db.SaveChanges();
+//                    respuesta.Mensaje = "Se realizó la operación satisfactoriamente";
+//                    respuesta.Error = false;
+//                }
+//                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+//                {
+//                    respuesta.Mensaje = ex.Message;
+//                    respuesta.FilasAfectadas = 0;
+//                    respuesta.Error = true;
+//                }
+//                catch (Exception ex)
+//                {
+//                    respuesta.Mensaje = ex.Message;
+//                    respuesta.FilasAfectadas = 0;
+//                    respuesta.Error = true;
+//                }
 
-                return respuesta;
-            }
-        }
+//                return respuesta;
+//            }
+//        }
 
-        public List<ProyectoDTO> GetRecords()
-        {
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                return db.Proyectos
-                    .Select(t =>
-                        new ProyectoDTO
-                        {
-                            ProyectoId = t.ProyectoId,
-                            Nombre = t.Nombre,
-                            Valor = t.Valor,
-                            FechaInicio = t.FechaInicio,
-                            Plazo = t.Plazo,
-                            Estado = t.Estado,
-                            ClienteId = t.ClienteId
-                        }
-                    ).ToList();
-            }
-        }
+//        public List<ProyectoDTO> GetRecords()
+//        {
+//            using (ApplicationDbContext db = new ApplicationDbContext())
+//            {
+//                return db.Proyectos
+//                    .Select(t =>
+//                        new ProyectoDTO
+//                        {
+//                            ProyectoId = t.ProyectoId,
+//                            Nombre = t.Nombre,
+//                            Valor = t.Valor,
+//                            FechaInicio = t.FechaInicio,
+//                            Plazo = t.Plazo,
+//                            Estado = t.Estado,
+//                            ClienteId = t.ClienteId
+//                        }
+//                    ).ToList();
+//            }
+//        }
 
-        public Respuesta PutProyecto(ProyectoDTO proyecto)
-        {
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                #region Ejemplo4
-                //ejemplo de delete
-                //1. Consultamos el registro 2..
-                var blogUpdate = db.Proyectos.Find(proyecto.ProyectoId); // Busca por llave primaria
-                if (blogUpdate != null)
-                {
-                    blogUpdate.Nombre = proyecto.Nombre;
-                    blogUpdate.Valor = proyecto.Valor;
-                    blogUpdate.FechaInicio = proyecto.FechaInicio;
-                    blogUpdate.Plazo = proyecto.Plazo;
-                    blogUpdate.Estado = proyecto.Estado;
-                    blogUpdate.ClienteId = proyecto.ClienteId;
+//        public Respuesta PutProyecto(ProyectoDTO proyecto)
+//        {
+//            using (ApplicationDbContext db = new ApplicationDbContext())
+//            {
+//                #region Ejemplo4
+//                //ejemplo de delete
+//                //1. Consultamos el registro 2..
+//                var blogUpdate = db.Proyectos.Find(proyecto.ProyectoId); // Busca por llave primaria
+//                if (blogUpdate != null)
+//                {
+//                    blogUpdate.Nombre = proyecto.Nombre;
+//                    blogUpdate.Valor = proyecto.Valor;
+//                    blogUpdate.FechaInicio = proyecto.FechaInicio;
+//                    blogUpdate.Plazo = proyecto.Plazo;
+//                    blogUpdate.Estado = proyecto.Estado;
+//                    blogUpdate.ClienteId = proyecto.ClienteId;
 
-                    Respuesta resp = new Respuesta();
-                    resp.Mensaje = "Modificado correctamente";
-                    resp.Error = false;
-                    resp.FilasAfectadas = db.SaveChanges();
-                    return resp;
-                }
-                else
-                {
-                    Respuesta resp = new Respuesta();
-                    resp.Mensaje = "No se encontro";
-                    resp.Error = false;
-                    resp.FilasAfectadas = db.SaveChanges();
-                    return resp;
-                }
-                #endregion 
-            }
-        }
+//                    Respuesta resp = new Respuesta();
+//                    resp.Mensaje = "Modificado correctamente";
+//                    resp.Error = false;
+//                    resp.FilasAfectadas = db.SaveChanges();
+//                    return resp;
+//                }
+//                else
+//                {
+//                    Respuesta resp = new Respuesta();
+//                    resp.Mensaje = "No se encontro";
+//                    resp.Error = false;
+//                    resp.FilasAfectadas = db.SaveChanges();
+//                    return resp;
+//                }
+//                #endregion 
+//            }
+//        }
 
 
-        public Respuesta DeleteProyecto(ProyectoDTO proyecto)
-        {
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                #region Ejemplo3
-                //ejemplo de delete
-                //1. Consultamos el registro 2..
-                var blogDelete = db.Proyectos.Find(proyecto.ProyectoId); // Busca por llave primaria
-                if (blogDelete != null)
-                {
-                    Proyecto proyectoDAL = new Proyecto();
+//        public Respuesta DeleteProyecto(ProyectoDTO proyecto)
+//        {
+//            using (ApplicationDbContext db = new ApplicationDbContext())
+//            {
+//                #region Ejemplo3
+//                //ejemplo de delete
+//                //1. Consultamos el registro 2..
+//                var blogDelete = db.Proyectos.Find(proyecto.ProyectoId); // Busca por llave primaria
+//                if (blogDelete != null)
+//                {
+//                    Proyecto proyectoDAL = new Proyecto();
 
-                    proyectoDAL.ClienteId = proyecto.ClienteId;
-                    proyectoDAL.Nombre = proyecto.Nombre;
-                    proyectoDAL.Valor = proyecto.Valor;
-                    proyectoDAL.FechaInicio = proyecto.FechaInicio;
-                    proyectoDAL.Plazo = proyecto.Plazo;
-                    proyectoDAL.Estado = proyecto.Estado;
-                    proyectoDAL.ProyectoId = proyecto.ProyectoId;
+//                    proyectoDAL.ClienteId = proyecto.ClienteId;
+//                    proyectoDAL.Nombre = proyecto.Nombre;
+//                    proyectoDAL.Valor = proyecto.Valor;
+//                    proyectoDAL.FechaInicio = proyecto.FechaInicio;
+//                    proyectoDAL.Plazo = proyecto.Plazo;
+//                    proyectoDAL.Estado = proyecto.Estado;
+//                    proyectoDAL.ProyectoId = proyecto.ProyectoId;
 
-                    db.Proyectos.Remove(blogDelete);
-                    db.SaveChanges();
+//                    db.Proyectos.Remove(blogDelete);
+//                    db.SaveChanges();
 
-                    Respuesta resp = new Respuesta();
-                    resp.Mensaje = "Eliminado";
-                    resp.Error = false;
-                    resp.FilasAfectadas = db.SaveChanges();
-                    return resp;
-                }
-                else {
-                    Respuesta resp = new Respuesta();
-                    resp.Mensaje = "No encontro el registro";
-                    resp.Error = false;
-                    resp.FilasAfectadas = db.SaveChanges();
-                    return resp;
-                }
-                #endregion 
-            }
-        }
+//                    Respuesta resp = new Respuesta();
+//                    resp.Mensaje = "Eliminado";
+//                    resp.Error = false;
+//                    resp.FilasAfectadas = db.SaveChanges();
+//                    return resp;
+//                }
+//                else {
+//                    Respuesta resp = new Respuesta();
+//                    resp.Mensaje = "No encontro el registro";
+//                    resp.Error = false;
+//                    resp.FilasAfectadas = db.SaveChanges();
+//                    return resp;
+//                }
+//                #endregion 
+//            }
+//        }
 
 
 
         
 
-    }
-}
+//    }
+//}

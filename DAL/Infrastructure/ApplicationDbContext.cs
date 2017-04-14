@@ -28,11 +28,6 @@ namespace DAL.Infrastructure
 
             base.OnModelCreating(modelBuilder);
         }
-        public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<Proyecto> Proyectos { get; set; }
-        public DbSet<Facturas> Facturas { get; set; }
-        public DbSet<ItemFactura> ItemFacturas { get; set; }
-        public DbSet<ProgramacionPago> ProgramacionPagos { get; set; }
         public DbSet<Persona> Personas { get; set; }
         public DbSet<Obligacion> Obligaciones { get; set; }
         public DbSet<Cobro> Cobros { get; set; }
