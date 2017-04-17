@@ -8,11 +8,29 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
-
+using Entities;
 namespace DAL.Infrastructure
 {
     public class ApplicationUser : IdentityUser
     {
+        /// <summary>
+        /// Este metodo convierte un DTO a DAL
+        /// </summary>
+        /// <param name="DTO">Parametro DTO</param>
+        /// <returns>Objeto tipo DAL</returns>
+        public static ApplicationUser Mapeo(ApplicationUserDTO DTO)
+        {
+            ApplicationUser c = new ApplicationUser();
+            c.Email = DTO.Email;
+            c.FirstName = DTO.FirstName;
+            c.LastName = DTO.LastName;
+            if (DTO.Persona != null)
+            {
+                c.Persona = Persona.MapeoDTOToDAL(DTO.Persona);
+            }
+            c.UserName = DTO.Username;
+            return c;
+        }
         public ApplicationUser()
         {
             Cobros = new List<Cobro>();
@@ -30,7 +48,7 @@ namespace DAL.Infrastructure
 
         [Required]
         public DateTime JoinDate { get; set; }
-
+        
         public virtual Persona Persona { get; set; }
 
         public virtual List<Cobro> Cobros { get; set; }

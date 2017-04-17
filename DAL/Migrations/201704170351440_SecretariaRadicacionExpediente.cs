@@ -15,14 +15,14 @@ namespace DAL.Migrations
                         Nombre = c.String(),
                         UpdateAt = c.DateTime(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
+                        TipoCobroId = c.Int(nullable: false),
                         UsuarioId = c.String(nullable: false, maxLength: 128),
-                        TipoCobro_TipoCobroId = c.Int(),
                     })
                 .PrimaryKey(t => t.CobroId)
-                .ForeignKey("dbo.TipoCobroes", t => t.TipoCobro_TipoCobroId)
+                .ForeignKey("dbo.TipoCobroes", t => t.TipoCobroId, cascadeDelete: true)
                 .ForeignKey("dbo.AspNetUsers", t => t.UsuarioId, cascadeDelete: true)
-                .Index(t => t.UsuarioId)
-                .Index(t => t.TipoCobro_TipoCobroId);
+                .Index(t => t.TipoCobroId)
+                .Index(t => t.UsuarioId);
             
             CreateTable(
                 "dbo.Obligacions",
@@ -33,13 +33,14 @@ namespace DAL.Migrations
                         Dueda = c.Single(nullable: false),
                         FechaPreinscripcion = c.DateTime(nullable: false),
                         Estado = c.String(),
+                        ExpedienteId = c.Int(nullable: false),
+                        PersonaId = c.Int(nullable: false),
                         UpdateAt = c.DateTime(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
-                        Persona_PersonaId = c.Int(),
                     })
                 .PrimaryKey(t => t.ObligacionId)
-                .ForeignKey("dbo.Personas", t => t.Persona_PersonaId)
-                .Index(t => t.Persona_PersonaId);
+                .ForeignKey("dbo.Personas", t => t.PersonaId, cascadeDelete: true)
+                .Index(t => t.PersonaId);
             
             CreateTable(
                 "dbo.Expedientes",
@@ -53,9 +54,12 @@ namespace DAL.Migrations
                         Cuantia = c.Single(nullable: false),
                         NaturalezaObligacion = c.String(),
                         DireccionTituloEjecutivo = c.String(),
+                        Descripcion = c.String(),
+                        UbicacionExpediente = c.String(),
                         FechaRadicacion = c.DateTime(nullable: false),
                         UpdateAt = c.DateTime(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
+                        ObligacionId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ExpedienteId)
                 .ForeignKey("dbo.Obligacions", t => t.ExpedienteId)
@@ -74,16 +78,18 @@ namespace DAL.Migrations
                         FechaEntrega = c.DateTime(nullable: false),
                         FuncionarioRecibe = c.String(),
                         FechaRadicacion = c.DateTime(nullable: false),
+                        RutaDocumento = c.String(),
+                        TipoArchivo = c.String(),
+                        TipoDocumentoId = c.Int(nullable: false),
                         UpdateAt = c.DateTime(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
-                        Expediente_ExpedienteId = c.Int(),
-                        TipoDocumento_TipoDocumentoId = c.Int(),
+                        ExpedienteId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.DocumentoId)
-                .ForeignKey("dbo.Expedientes", t => t.Expediente_ExpedienteId)
-                .ForeignKey("dbo.TipoDocumentoes", t => t.TipoDocumento_TipoDocumentoId)
-                .Index(t => t.Expediente_ExpedienteId)
-                .Index(t => t.TipoDocumento_TipoDocumentoId);
+                .ForeignKey("dbo.Expedientes", t => t.ExpedienteId, cascadeDelete: true)
+                .ForeignKey("dbo.TipoDocumentoes", t => t.TipoDocumentoId, cascadeDelete: true)
+                .Index(t => t.TipoDocumentoId)
+                .Index(t => t.ExpedienteId);
             
             CreateTable(
                 "dbo.TipoDocumentoes",
@@ -95,6 +101,21 @@ namespace DAL.Migrations
                         CreatedAt = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.TipoDocumentoId);
+            
+            CreateTable(
+                "dbo.Personas",
+                c => new
+                    {
+                        PersonaId = c.Int(nullable: false, identity: true),
+                        Identificacion = c.String(nullable: false, maxLength: 15),
+                        Nombres = c.String(nullable: false, maxLength: 35),
+                        Apellidos = c.String(nullable: false, maxLength: 35),
+                        Sexo = c.String(nullable: false),
+                        Telefono = c.Int(nullable: false),
+                        Direccion = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.PersonaId)
+                .Index(t => t.Identificacion, unique: true);
             
             CreateTable(
                 "dbo.TipoCobroes",
@@ -160,20 +181,6 @@ namespace DAL.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.Personas",
-                c => new
-                    {
-                        PersonaId = c.Int(nullable: false, identity: true),
-                        Identificacion = c.String(),
-                        Nombres = c.String(nullable: false, maxLength: 35),
-                        Apellidos = c.String(),
-                        Sexo = c.String(),
-                        Telefono = c.Int(nullable: false),
-                        Direccion = c.String(),
-                    })
-                .PrimaryKey(t => t.PersonaId);
-            
-            CreateTable(
                 "dbo.AspNetUserRoles",
                 c => new
                     {
@@ -217,13 +224,13 @@ namespace DAL.Migrations
             DropForeignKey("dbo.Cobroes", "UsuarioId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUsers", "Persona_PersonaId", "dbo.Personas");
-            DropForeignKey("dbo.Obligacions", "Persona_PersonaId", "dbo.Personas");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Cobroes", "TipoCobro_TipoCobroId", "dbo.TipoCobroes");
+            DropForeignKey("dbo.Cobroes", "TipoCobroId", "dbo.TipoCobroes");
+            DropForeignKey("dbo.Obligacions", "PersonaId", "dbo.Personas");
             DropForeignKey("dbo.Expedientes", "ExpedienteId", "dbo.Obligacions");
-            DropForeignKey("dbo.Documentoes", "TipoDocumento_TipoDocumentoId", "dbo.TipoDocumentoes");
-            DropForeignKey("dbo.Documentoes", "Expediente_ExpedienteId", "dbo.Expedientes");
+            DropForeignKey("dbo.Documentoes", "TipoDocumentoId", "dbo.TipoDocumentoes");
+            DropForeignKey("dbo.Documentoes", "ExpedienteId", "dbo.Expedientes");
             DropForeignKey("dbo.ObligacionCobroes", "Cobro_CobroId", "dbo.Cobroes");
             DropForeignKey("dbo.ObligacionCobroes", "Obligacion_ObligacionId", "dbo.Obligacions");
             DropIndex("dbo.ObligacionCobroes", new[] { "Cobro_CobroId" });
@@ -235,20 +242,21 @@ namespace DAL.Migrations
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", new[] { "Persona_PersonaId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Documentoes", new[] { "TipoDocumento_TipoDocumentoId" });
-            DropIndex("dbo.Documentoes", new[] { "Expediente_ExpedienteId" });
+            DropIndex("dbo.Personas", new[] { "Identificacion" });
+            DropIndex("dbo.Documentoes", new[] { "ExpedienteId" });
+            DropIndex("dbo.Documentoes", new[] { "TipoDocumentoId" });
             DropIndex("dbo.Expedientes", new[] { "ExpedienteId" });
-            DropIndex("dbo.Obligacions", new[] { "Persona_PersonaId" });
-            DropIndex("dbo.Cobroes", new[] { "TipoCobro_TipoCobroId" });
+            DropIndex("dbo.Obligacions", new[] { "PersonaId" });
             DropIndex("dbo.Cobroes", new[] { "UsuarioId" });
+            DropIndex("dbo.Cobroes", new[] { "TipoCobroId" });
             DropTable("dbo.ObligacionCobroes");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.Personas");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.TipoCobroes");
+            DropTable("dbo.Personas");
             DropTable("dbo.TipoDocumentoes");
             DropTable("dbo.Documentoes");
             DropTable("dbo.Expedientes");

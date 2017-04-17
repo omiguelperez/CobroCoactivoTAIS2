@@ -22,7 +22,7 @@ namespace DAL.Migrations
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
-
+        
             var user = new ApplicationUser()
             {
                 UserName = "lider",
@@ -48,6 +48,8 @@ namespace DAL.Migrations
             var adminUser = manager.FindByName("lider");
 
             manager.AddToRoles(adminUser.Id, new string[] { "Lider" });
+                   
+             
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

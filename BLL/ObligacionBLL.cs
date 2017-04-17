@@ -9,24 +9,19 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class PersonaBLL
+    public class ObligacionBLL
     {
         Respuesta respuesta = new Respuesta();
         ApplicationDbContext db = new ApplicationDbContext();
 
-        public Respuesta Insertar(PersonaDTO cliente)
+        public Respuesta Insertar(ObligacionDTO cliente)
         {
             using (db = new ApplicationDbContext())
             {
                 try
                 {
                     // preparar el cliente para guardar
-                    Persona c = Persona.MapeoDTOToDAL(cliente);
-                    if (cliente.Obligaciones.Count > 0)
-                    {
-                        c.Obligaciones = Obligacion.ConvertList(cliente.Obligaciones);
-                    }
-                    db.Personas.Add(c);
+                    db.Obligaciones.Add(Obligacion.Mapeo(cliente));
 
                     // preparar la respuesta
                     respuesta.FilasAfectadas = db.SaveChanges();
@@ -49,13 +44,8 @@ namespace BLL
                 return respuesta;
             }
         }
-        public PersonaDTO FindByIdentificacion(String Identificacion)
-        {
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                PersonaDTO persona =Persona.MapeoDALToDTO(db.Personas.FirstOrDefault(t => t.Identificacion.Equals(Identificacion))); // Busca por llave primaria
-                return persona;
-            }
-        }
+        
+
+
     }
 }

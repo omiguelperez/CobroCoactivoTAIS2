@@ -12,22 +12,67 @@ namespace PPTConsola
     {
         static void Main(string[] args)
         {
-            //PersonaDTO para guardar
-           // PersonaDTO cliente1 = new PersonaDTO
-           // {
-           //     Identificacion=1065827940,
-           //     Nombres = "Miguel",
-           //     Direccion = "Alamos 1",
-           //     Telefono = 311329837,
-           //     Apellidos = "Jjdnjdn",
-           //     Sexo = "M",
-           // };
+            // PersonaDTO para guardar
+            //PersonaDTO cliente2 = new PersonaDTO
+            //{
+            //    Identificacion = "123456",
+            //    Nombres = "nojoda  ",
+            //    Direccion = "asdasd 1",
+            //    Telefono = 311329837,
+            //    Apellidos = "sjsjsjsjsj",
+            //    Sexo = "M",
+            //};
 
-           //// Guardar el cliente
-           // PersonaBLL clienteBLL = new PersonaBLL();
-           // Respuesta respuesta = clienteBLL.Insertar(cliente1);
-           // Console.WriteLine(respuesta.Mensaje + ", Filas afactadas: " + respuesta.FilasAfectadas);
-           // Console.ReadKey();
+            ////Guardar el cliente
+            //PersonaBLL clienteBLL1 = new PersonaBLL();
+            //Respuesta respuesta = clienteBLL1.Insertar(cliente2);
+            //Console.WriteLine(respuesta.Mensaje + ", Filas afactadas PErsonas: " + respuesta.FilasAfectadas);
+            //Console.ReadKey();
+
+
+            ////PersonaDTO para guardar
+            ObligacionDTO cliente1 = new ObligacionDTO();
+            cliente1.Cuantia = 5000;
+            cliente1.Dueda = 5000;
+            cliente1.Estado = "Normal";
+            cliente1.FechaPreinscripcion = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 0, 0, 0);
+            //PersonaBLL objjj = new PersonaBLL();
+            //cliente1.Persona = objjj.FindByIdentificacion("123456");
+            // Guardar el cliente
+            //PersonaDTO person = objjj.FindByIdentificacion("123456");
+            //ObligacionDTO objjjjj = new ObligacionDTO
+            //{
+            //    Cuantia = 15151,
+            //    Dueda = 2515,
+            //    Estado = "Nodfadfsd",
+            //    FechaPreinscripcion = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 0, 0, 0),
+            //    Persona = person
+            //};
+            cliente1.PersonaId = 1;
+            ObligacionBLL kkk = new ObligacionBLL();
+            Respuesta respuesta = kkk.Insertar(cliente1);
+            Console.WriteLine(respuesta.Mensaje + ", Filas afactadas: " + respuesta.FilasAfectadas);
+            Console.ReadKey();
+
+
+
+
+            //PersonaDTO para guardar
+            // PersonaDTO cliente1 = new PersonaDTO
+            // {
+            //     Identificacion=1065827940,
+            //     Nombres = "Miguel",
+            //     Direccion = "Alamos 1",
+            //     Telefono = 311329837,
+            //     Apellidos = "Jjdnjdn",
+            //     Sexo = "M",
+            // };
+
+            //// Guardar el cliente
+            // PersonaBLL clienteBLL = new PersonaBLL();
+            // Respuesta respuesta = clienteBLL.Insertar(cliente1);
+            // Console.WriteLine(respuesta.Mensaje + ", Filas afactadas: " + respuesta.FilasAfectadas);
+            // Console.ReadKey();
 
             //Cliente para guardar
             //ClienteDTO cliente1 = new ClienteDTO

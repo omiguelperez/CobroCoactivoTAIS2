@@ -39,15 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClienteDTO.cs" />
-    <Compile Include="FacturaDTO.cs" />
-    <Compile Include="ItemFacturaDTO.cs" />
+    <Compile Include="ApplicationUserDTO.cs" />
+    <Compile Include="CobroDTO.cs" />
+    <Compile Include="DocumentoDTO.cs" />
+    <Compile Include="ExpedienteDTO.cs" />
     <Compile Include="ObligacionDTO.cs" />
     <Compile Include="PersonaDTO.cs" />
-    <Compile Include="ProgramacionPagoDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProyectoDTO.cs" />
     <Compile Include="Respuesta.cs" />
+    <Compile Include="TipoCobroDTO.cs" />
+    <Compile Include="TipoDocumentoDTO.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

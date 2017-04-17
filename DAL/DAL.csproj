@@ -96,17 +96,9 @@
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\ExtendedClaimsProvider.cs" />
     <Compile Include="Infrastructure\RolesFromClaims.cs" />
-    <Compile Include="Migrations\201704120321241_CobroUsuario.cs" />
-    <Compile Include="Migrations\201704120321241_CobroUsuario.Designer.cs">
-      <DependentUpon>201704120321241_CobroUsuario.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704131518584_ObligacionesCobro.cs" />
-    <Compile Include="Migrations\201704131518584_ObligacionesCobro.Designer.cs">
-      <DependentUpon>201704131518584_ObligacionesCobro.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704141650295_SecretariaRadicacionExpediente.cs" />
-    <Compile Include="Migrations\201704141650295_SecretariaRadicacionExpediente.Designer.cs">
-      <DependentUpon>201704141650295_SecretariaRadicacionExpediente.cs</DependentUpon>
+    <Compile Include="Migrations\201704170351440_SecretariaRadicacionExpediente.cs" />
+    <Compile Include="Migrations\201704170351440_SecretariaRadicacionExpediente.Designer.cs">
+      <DependentUpon>201704170351440_SecretariaRadicacionExpediente.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Configuration_1.cs" />
@@ -124,20 +116,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{4D766990-0806-4997-AF9D-C1A1D7195D7B}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServicesProviders\ServicesProviders.csproj">
       <Project>{70141ae7-ba85-400d-940d-2b1728122d75}</Project>
       <Name>ServicesProviders</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201704120321241_CobroUsuario.resx">
-      <DependentUpon>201704120321241_CobroUsuario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704131518584_ObligacionesCobro.resx">
-      <DependentUpon>201704131518584_ObligacionesCobro.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704141650295_SecretariaRadicacionExpediente.resx">
-      <DependentUpon>201704141650295_SecretariaRadicacionExpediente.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704170351440_SecretariaRadicacionExpediente.resx">
+      <DependentUpon>201704170351440_SecretariaRadicacionExpediente.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

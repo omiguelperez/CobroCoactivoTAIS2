@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
 
@@ -23,6 +24,9 @@ namespace DAL.Infrastructure
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+           // modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();//esto es para solucionar este error:
+            // may cause cycles or multiple cascade paths. Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or modify other FOREIGN KEY constraints.
+            //Could not create constraint or index. See previous errors.
             modelBuilder.Entity<Cobro>()
               .HasRequired<ApplicationUser>(cobro => cobro.Usuario);
 
@@ -32,6 +36,9 @@ namespace DAL.Infrastructure
         public DbSet<Obligacion> Obligaciones { get; set; }
         public DbSet<Cobro> Cobros { get; set; }
         public DbSet<TipoCobro> TiposCobros { get; set; }
+        public DbSet<TipoDocumento> TiposDocumentos { get; set; }
+        public DbSet<Documento> Documentos { get; set; }
+        public DbSet<Expediente> Expedientes { get; set; }
 
     }
 }
