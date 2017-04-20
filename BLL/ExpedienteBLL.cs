@@ -9,19 +9,29 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class ObligacionBLL
+    public class ExpedienteBLL
     {
         Respuesta respuesta = new Respuesta();
         ApplicationDbContext db = new ApplicationDbContext();
 
-        public Respuesta Insertar(ObligacionDTO cliente)
+        public Respuesta Insertar(ExpedienteDTO expediente)
         {
             using (db = new ApplicationDbContext())
             {
                 try
                 {
                     // preparar el cliente para guardar
-                    db.Obligaciones.Add(Obligacion.MapeoDTOToDAL(cliente));
+                    Expediente c = Expediente.MapeoDTOToDAL(expediente);
+                    PersonaDTO persona = new PersonaBLL().FindByIdentificacion(c.Obligacion.Persona.Identificacion);
+                    if (persona != null) {//QUIERE DECIR QUE LA PERSONA YA EXISTE
+                        c.Obligacion.PersonaId = persona.PersonaId;
+                        c.Obligacion.Persona = null;
+                    }
+                    if (expediente.Documentos.Count > 0)
+                    {
+                        c.Documentos = Documento.ConvertList(expediente.Documentos);
+                    }
+                    db.Expedientes.Add(c);
 
                     // preparar la respuesta
                     respuesta.FilasAfectadas = db.SaveChanges();
@@ -44,8 +54,13 @@ namespace BLL
                 return respuesta;
             }
         }
-        
-
-
+        public ExpedienteDTO FindById(int ExpedienteId)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                ExpedienteDTO expediente = Expediente.MapeoDALToDTO(db.Expedientes.FirstOrDefault(t => t.ExpedienteId.Equals(ExpedienteId))); // Busca por llave primaria
+                return expediente;
+            }
+        }
     }
 }

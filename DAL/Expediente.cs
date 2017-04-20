@@ -16,25 +16,51 @@ namespace DAL
         /// </summary>
         /// <param name="DTO">Parametro DTO</param>
         /// <returns>Objeto tipo DAL</returns>
-        public static Expediente Mapeo(ExpedienteDTO item)
+        public static Expediente MapeoDTOToDAL(ExpedienteDTO DTO)
         {
-            Expediente obligacion = new Expediente();
-            obligacion.ExpedienteId = item.ExpedienteId;
-            obligacion.UpdateAt = item.UpdateAt;
-            obligacion.CreatedAt = item.CreatedAt;
-            obligacion.Cuantia = item.Cuantia;
-            obligacion.Descripcion = item.Descripcion;
-            obligacion.DireccionEjecutado = item.DireccionEjecutado;
-            obligacion.DireccionTituloEjecutivo = item.DireccionTituloEjecutivo;
-            obligacion.EntidadEncargada = item.EntidadEncargada;
-            obligacion.FechaRadicacion = item.FechaRadicacion;
-            obligacion.Identificacion = item.Identificacion;
-            obligacion.NaturalezaObligacion = item.NaturalezaObligacion;
-            obligacion.Nombre = item.Nombre;
-            obligacion.Obligacion = Obligacion.Mapeo(item.Obligacion);
-            obligacion.UbicacionExpediente = item.UbicacionExpediente;
-            obligacion.ObligacionId = item.ObligacionId;
-            return obligacion;
+            Expediente expediente = new Expediente();
+            expediente.ExpedienteId = DTO.ExpedienteId;
+            expediente.UpdateAt = DTO.UpdateAt;
+            expediente.CreatedAt = DTO.CreatedAt;
+            expediente.Cuantia = DTO.Cuantia;
+            expediente.Descripcion = DTO.Descripcion;
+            expediente.DireccionEjecutado = DTO.DireccionEjecutado;
+            expediente.DireccionTituloEjecutivo = DTO.DireccionTituloEjecutivo;
+            expediente.EntidadEncargada = DTO.EntidadEncargada;
+            expediente.FechaRadicacion = DTO.FechaRadicacion;
+            expediente.Identificacion = DTO.Identificacion;
+            expediente.NaturalezaObligacion = DTO.NaturalezaObligacion;
+            expediente.Nombre = DTO.Nombre;
+            expediente.Obligacion = Obligacion.MapeoDTOToDAL(DTO.Obligacion);
+            expediente.UbicacionExpediente = DTO.UbicacionExpediente;
+            expediente.ObligacionId = DTO.ObligacionId;
+            return expediente;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="DAL"></param>
+        /// <returns></returns>
+        public static ExpedienteDTO MapeoDALToDTO(Expediente DAL)
+        {
+            ExpedienteDTO expediente = new ExpedienteDTO();
+            expediente.ExpedienteId = DAL.ExpedienteId;
+            expediente.UpdateAt = DAL.UpdateAt;
+            expediente.CreatedAt = DAL.CreatedAt;
+            expediente.Cuantia = DAL.Cuantia;
+            expediente.Descripcion = DAL.Descripcion;
+            expediente.DireccionEjecutado = DAL.DireccionEjecutado;
+            expediente.DireccionTituloEjecutivo = DAL.DireccionTituloEjecutivo;
+            expediente.EntidadEncargada = DAL.EntidadEncargada;
+            expediente.FechaRadicacion = DAL.FechaRadicacion;
+            expediente.Identificacion = DAL.Identificacion;
+            expediente.NaturalezaObligacion = DAL.NaturalezaObligacion;
+            expediente.Nombre = DAL.Nombre;
+            expediente.Obligacion = Obligacion.MapeoDALToDTO(DAL.Obligacion);
+            expediente.UbicacionExpediente = DAL.UbicacionExpediente;
+            expediente.ObligacionId = DAL.ObligacionId;
+            return expediente;
         }
 
         public Expediente()

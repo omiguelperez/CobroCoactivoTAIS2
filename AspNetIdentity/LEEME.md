@@ -21,68 +21,33 @@ Crear un usuario para obtener un Token:
 }
 ```
 
-### Antes de guardar una factura debo tener un cliente:
-
-```
+### Historia de usuario N° 1, Para el Registro de los datos de los deudores
 {
-  "Direccion": "Calle 30 No. 30-17",
-  "Nombre": "Duvan Palmera",
-  "Telefono": "3003432858"
-}
-```
-
-### Crear una factura (sin Items):
-
-```
-{
-  "Fecha": "2016-11-24",
-  "NumeroFactura": "723",
-  "ClienteId": 
-}
-```
-
-### Guardar una factura con los item incluidos desde el cliente REST
-
-```
-{
-  "Fecha": 1480002326532,
-  "NumeroFactura": "324",
-  "ClienteId": 1,
-  "ItemFacturas": [
-    {
-      "Descripcion": "Computador Lenovo i3",
-      "Valor": 1050000,
-      "Cantidad": 2,
-      "Iva": 336000
-    },
-    {
-      "Descripcion": "Disco Duro Externo TOSHIBA 1TB",
-      "Valor": 232000,
-      "Cantidad": 3,
-      "Iva": 111360
-    },
-  ]
-}
-```
-
-Para guardar un proyecto:
-
-```
-{ 
-  "ClienteId": 4009, 
-  "Nombre": "anibaljoseguerraz@gmail.com", 
-  "Valor":"23", 
-  "FechaInicio": "2016-11-10", 
-  "Plazo": "2", 
-  "Estado": "Pendiente",
-  "Lista":[{
-    "FechaPago":"2016-11-11",
-    "Valor":"23",
-    "Estado":"LISTO",
-    "FacturaId":"1"
-  }]
-}
-```
+  "Cuantia": 525000,
+  "Descripcion": "Esto es una descripcion",
+  "DireccionEjecutado": "Esto es una direccion",
+  "DireccionTituloEjecutivo": "Esto es una direcciond e titulo ejecutivo",
+  "EntidadEncargada": "Entidad encargada es maira",
+  "FechaRadicacion": "2017-03-19",
+  "Identificacion": "1065824563",
+  "NaturalezaObligacion": "Naturaleza es algo",
+  "Nombre": "Maira mindiola",
+  "Obligacion": {
+    "Cuantia": 525000,
+    "Dueda": 525000,
+    "Estado":"Por autorizar",
+    "FechaPreinscripcion": "2017-03-09",
+    "Persona":{
+      "Apellidos": "Mindiola",
+      "Direccion": "Carrera 13 # 36 - 111",
+      "Identificacion": "1065824563",
+      "Nombres": "Maira mindiola",
+      "Sexo": "F",
+      "Telefono": 3186875411,
+    }
+  },
+  "UbicacionExpediente": "Esta en el lote tal",
+  }
 
 ## Comandos:
 

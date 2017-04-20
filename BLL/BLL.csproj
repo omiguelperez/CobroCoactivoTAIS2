@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Calculadora.cs" />
     <Compile Include="ClienteBLL.cs" />
+    <Compile Include="ExpedienteBLL.cs" />
     <Compile Include="FacturaBLL.cs" />
     <Compile Include="ItemFacturaBLL.cs" />
     <Compile Include="ObligacionBLL.cs" />

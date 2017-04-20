@@ -22,7 +22,7 @@ namespace DAL
             documento.CreatedAt = item.CreatedAt;
             if (item.Expediente != null)
             {
-                documento.Expediente = Expediente.Mapeo(item.Expediente);
+                documento.Expediente = Expediente.MapeoDTOToDAL(item.Expediente);
             }
             documento.ExpedienteId = item.ExpedienteId;
             documento.FechaDocumento = item.FechaDocumento;

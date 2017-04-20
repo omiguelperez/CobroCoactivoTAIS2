@@ -15,26 +15,54 @@ namespace DAL
         /// </summary>
         /// <param name="DTO">Parametro DTO</param>
         /// <returns>Objeto tipo DAL</returns>
-        public static Obligacion Mapeo(ObligacionDTO item)
+        public static Obligacion MapeoDTOToDAL(ObligacionDTO DTO)
         {
             Obligacion obligacion = new Obligacion();
-            obligacion.ObligacionId = item.ObligacionId;
-            obligacion.UpdateAt = item.UpdateAt;
-            obligacion.CreatedAt = item.CreatedAt;
-            obligacion.Cuantia = item.Cuantia;
-            obligacion.Dueda = item.Dueda;
-            obligacion.Estado = item.Estado;
-            if (item.Expediente != null)
+            obligacion.ObligacionId = DTO.ObligacionId;
+            obligacion.UpdateAt = DTO.UpdateAt;
+            obligacion.CreatedAt = DTO.CreatedAt;
+            obligacion.Cuantia = DTO.Cuantia;
+            obligacion.Dueda = DTO.Dueda;
+            obligacion.Estado = DTO.Estado;
+            if (DTO.Expediente != null)
             {
-                obligacion.Expediente = Expediente.Mapeo(item.Expediente);
+                obligacion.Expediente = Expediente.MapeoDTOToDAL(DTO.Expediente);
             }
-            if (item.Persona != null)
+            if (DTO.Persona != null)
             {
-                obligacion.Persona = Persona.MapeoDTOToDAL(item.Persona);
+                obligacion.Persona = Persona.MapeoDTOToDAL(DTO.Persona);
             }
-            obligacion.FechaPreinscripcion = item.FechaPreinscripcion;
-            obligacion.PersonaId = item.PersonaId;
-            obligacion.ExpedienteId = item.ExpedienteId;
+            obligacion.FechaPreinscripcion = DTO.FechaPreinscripcion;
+            obligacion.PersonaId = DTO.PersonaId;
+            obligacion.ExpedienteId = DTO.ExpedienteId;
+            return obligacion;
+        }
+
+        /// <summary>
+        /// Este metodo convierte un DTO a DAL
+        /// </summary>
+        /// <param name="DAL">Parametro DAL</param>
+        /// <returns>Objeto tipo DAL</returns>
+        public static ObligacionDTO MapeoDALToDTO(Obligacion DAL)
+        {
+            ObligacionDTO obligacion = new ObligacionDTO();
+            obligacion.ObligacionId = DAL.ObligacionId;
+            obligacion.UpdateAt = DAL.UpdateAt;
+            obligacion.CreatedAt = DAL.CreatedAt;
+            obligacion.Cuantia = DAL.Cuantia;
+            obligacion.Dueda = DAL.Dueda;
+            obligacion.Estado = DAL.Estado;
+            if (DAL.Expediente != null)
+            {
+                obligacion.Expediente = Expediente.MapeoDALToDTO(DAL.Expediente);
+            }
+            if (DAL.Persona != null)
+            {
+                obligacion.Persona = Persona.MapeoDALToDTO(DAL.Persona);
+            }
+            obligacion.FechaPreinscripcion = DAL.FechaPreinscripcion;
+            obligacion.PersonaId = DAL.PersonaId;
+            obligacion.ExpedienteId = DAL.ExpedienteId;
             return obligacion;
         }
 
@@ -48,7 +76,7 @@ namespace DAL
             List<Obligacion> Obligaciones = new List<Obligacion>();
             foreach (ObligacionDTO item in ListaDTO)
             {
-                Obligaciones.Add(Mapeo(item));
+                Obligaciones.Add(MapeoDTOToDAL(item));
             }
             return Obligaciones;
         }
