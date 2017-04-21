@@ -53,7 +53,12 @@ namespace BLL
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                PersonaDTO persona =Persona.MapeoDALToDTO(db.Personas.FirstOrDefault(t => t.Identificacion.Equals(Identificacion))); // Busca por llave primaria
+                Persona person = db.Personas.FirstOrDefault(t => t.Identificacion.Equals(Identificacion));// Busca por llave primaria
+                PersonaDTO persona=null;
+                if (person!=null)
+                {
+                     persona= Persona.MapeoDALToDTO(person); 
+                }
                 return persona;
             }
         }

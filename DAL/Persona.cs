@@ -26,6 +26,8 @@ namespace DAL
             c.PersonaId = DTO.PersonaId;
             c.Sexo = DTO.Sexo;
             c.Telefono = DTO.Telefono;
+            c.UpdateAt = DTO.UpdateAt;
+            c.CreatedAt = DTO.CreatedAt;
             return c;
         }
 
@@ -44,6 +46,8 @@ namespace DAL
             c.PersonaId = DAL.PersonaId;
             c.Sexo = DAL.Sexo;
             c.Telefono = DAL.Telefono;
+            c.UpdateAt = DAL.UpdateAt;
+            c.CreatedAt = DAL.CreatedAt;
             return c;
         }
         public Persona()
@@ -72,5 +76,9 @@ namespace DAL
         [Required]
         public string Direccion { get; set; }
         public virtual List<Obligacion> Obligaciones { get; set; }
+        private DateTime _updateAt;
+        public DateTime UpdateAt { get { return _updateAt; } set { _updateAt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second); } }
+        private DateTime _createdAt;
+        public DateTime CreatedAt { get { return _createdAt; } set { _createdAt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second); } }
     }
 }

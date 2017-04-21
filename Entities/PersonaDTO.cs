@@ -20,5 +20,9 @@ namespace Entities
         public int Telefono { get; set; }
         public string Direccion { get; set; }
         public virtual List<ObligacionDTO> Obligaciones { get; set; }
+        private DateTime _updateAt;
+        public DateTime UpdateAt { get { return _updateAt; } set { _updateAt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second); } }
+        private DateTime _createdAt;
+        public DateTime CreatedAt { get { return _createdAt; } set { _createdAt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second); } }
     }
 }

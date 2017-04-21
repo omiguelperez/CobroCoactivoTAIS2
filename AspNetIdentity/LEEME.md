@@ -37,6 +37,7 @@ Crear un usuario para obtener un Token:
     "Dueda": 525000,
     "Estado":"Por autorizar",
     "FechaPreinscripcion": "2017-03-09",
+    "TipoObligacionId":1,
     "Persona":{
       "Apellidos": "Mindiola",
       "Direccion": "Carrera 13 # 36 - 111",
@@ -44,7 +45,7 @@ Crear un usuario para obtener un Token:
       "Nombres": "Maira mindiola",
       "Sexo": "F",
       "Telefono": 3186875411,
-    }
+    },
   },
   "UbicacionExpediente": "Esta en el lote tal",
   }

@@ -17,6 +17,8 @@ namespace Entities
         public List<CobroDTO> Cobros { get; set; }
         public int ExpedienteId { get; set; }
         public ExpedienteDTO Expediente { get; set; }
+        public int TipoObligacionId { get; set; }
+        public TipoObligacionDTO TipoObligacion { get; set; }
         public int PersonaId { get; set; }
         public PersonaDTO Persona { get; set; }
         private DateTime _updateAt;

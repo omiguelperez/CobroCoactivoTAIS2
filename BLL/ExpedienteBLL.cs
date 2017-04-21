@@ -22,6 +22,7 @@ namespace BLL
                 {
                     // preparar el cliente para guardar
                     Expediente c = Expediente.MapeoDTOToDAL(expediente);
+                    c.Obligacion.Expediente = c;
                     PersonaDTO persona = new PersonaBLL().FindByIdentificacion(c.Obligacion.Persona.Identificacion);
                     if (persona != null) {//QUIERE DECIR QUE LA PERSONA YA EXISTE
                         c.Obligacion.PersonaId = persona.PersonaId;
@@ -54,6 +55,18 @@ namespace BLL
                 return respuesta;
             }
         }
+
+        public List<ExpedienteDTO> GetRecords()
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                return db.Expedientes
+                    .Select(t =>
+                        Expediente.MapeoDALToDTO(t)
+                    ).ToList();
+            }
+        }
+
         public ExpedienteDTO FindById(int ExpedienteId)
         {
             using (ApplicationDbContext db = new ApplicationDbContext())

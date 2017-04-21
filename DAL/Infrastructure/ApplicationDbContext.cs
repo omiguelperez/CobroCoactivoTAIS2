@@ -37,6 +37,7 @@ namespace DAL.Infrastructure
         public DbSet<Cobro> Cobros { get; set; }
         public DbSet<TipoCobro> TiposCobros { get; set; }
         public DbSet<TipoDocumento> TiposDocumentos { get; set; }
+        public DbSet<TipoObligacion> TiposObligaciones { get; set; }
         public DbSet<Documento> Documentos { get; set; }
         public DbSet<Expediente> Expedientes { get; set; }
 

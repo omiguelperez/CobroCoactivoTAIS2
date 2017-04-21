@@ -32,9 +32,14 @@ namespace DAL
             {
                 obligacion.Persona = Persona.MapeoDTOToDAL(DTO.Persona);
             }
+            if (DTO.TipoObligacion != null)
+            {
+                obligacion.TipoObligacion = TipoObligacion.MapeoDTOToDAL(DTO.TipoObligacion);
+            }
             obligacion.FechaPreinscripcion = DTO.FechaPreinscripcion;
             obligacion.PersonaId = DTO.PersonaId;
             obligacion.ExpedienteId = DTO.ExpedienteId;
+            obligacion.TipoObligacionId = DTO.TipoObligacionId;
             return obligacion;
         }
 
@@ -60,9 +65,14 @@ namespace DAL
             {
                 obligacion.Persona = Persona.MapeoDALToDTO(DAL.Persona);
             }
+            if (DAL.TipoObligacion!=null)
+            {
+                obligacion.TipoObligacion = TipoObligacion.MapeoDALToDTO(DAL.TipoObligacion);
+            }
             obligacion.FechaPreinscripcion = DAL.FechaPreinscripcion;
             obligacion.PersonaId = DAL.PersonaId;
             obligacion.ExpedienteId = DAL.ExpedienteId;
+            obligacion.TipoObligacionId = DAL.TipoObligacionId;
             return obligacion;
         }
 
@@ -88,11 +98,13 @@ namespace DAL
         public virtual List<Cobro> Cobros { get; set; }
         public int ExpedienteId { get; set; }
         public virtual Expediente Expediente { get; set; }
+        public int TipoObligacionId { get; set; }
+        public virtual TipoObligacion TipoObligacion { get; set; }
         public int PersonaId { get; set; }
         public virtual Persona Persona { get; set; }
         private DateTime _updateAt;
-        public DateTime UpdateAt { get { return _updateAt; } set { _updateAt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 0, 0, 0); } }
+        public DateTime UpdateAt { get { return _updateAt; } set { _updateAt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second); } }
         private DateTime _createdAt;
-        public DateTime CreatedAt { get { return _createdAt; } set { _createdAt =new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 0, 0, 0); } }
+        public DateTime CreatedAt { get { return _createdAt; } set { _createdAt =new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second); } }
     }
 }

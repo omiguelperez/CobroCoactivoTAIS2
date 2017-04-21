@@ -30,12 +30,12 @@ namespace AspNetIdentity.Controllers
             return response;
         }
         //[Authorize]
-        //[Route("")]
-        //public List<ExpedienteDTO> GetProyectos()
-        //{
-        //    ExpedienteBLL expediente = new ExpedienteBLL();
-        //    return expediente.GetRecords();
-        //}
+        [Route("")]
+        public List<ExpedienteDTO> GetProyectos()
+        {
+            ExpedienteBLL expediente = new ExpedienteBLL();
+            return expediente.GetRecords();
+        }
         //[Authorize]
         //[Route("")]
         //public Respuesta PutProyecto(ExpedienteDTO ExpedienteDTO)

@@ -44,8 +44,29 @@ namespace BLL
                 return respuesta;
             }
         }
-        
 
+        public List<ObligacionDTO> GetRecords()
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                return db.Obligaciones
+                    .Select(t =>
+                        new ObligacionDTO
+                        {
+                            ObligacionId = t.ObligacionId,
+                            UpdateAt = t.UpdateAt,
+                            CreatedAt = t.CreatedAt,
+                            Cuantia = t.Cuantia,
+                            Dueda = t.Dueda,
+                            Estado = t.Estado,
+                            FechaPreinscripcion = t.FechaPreinscripcion,
+                            PersonaId = t.PersonaId,
+                            ExpedienteId = t.ExpedienteId,
+                            TipoObligacionId = t.TipoObligacionId,
+                        }
+                    ).ToList();
+            }
+        }
 
     }
 }

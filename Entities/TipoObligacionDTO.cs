@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class TipoDocumentoDTO{
-        public TipoDocumentoDTO()
+    public class TipoObligacionDTO{
+        public TipoObligacionDTO()
         {
-            Documentos = new List<DocumentoDTO>();
+            Obligaciones = new List<ObligacionDTO>();
         }
-        public int TipoDocumentoId { get; set; }
+
+        public int TipoObligacionId { get; set; }
         public string Nombre { get; set; }
-        public virtual List<DocumentoDTO> Documentos { get; set; }
+        public virtual List<ObligacionDTO> Obligaciones { get; set; }
         private DateTime _updateAt;
         public DateTime UpdateAt { get { return _updateAt; } set { _updateAt = new DateTime(); } }
         private DateTime _createdAt;
