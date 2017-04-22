@@ -24,7 +24,7 @@ namespace DAL
             cobro.CreatedAt = item.CreatedAt;
             cobro.Nombre = item.Nombre;
             if (item.TipoCobro != null) { 
-                cobro.TipoCobro = TipoCobro.Mapeo(item.TipoCobro);
+                cobro.TipoCobro = TipoCobro.MapeoDTOToDAL(item.TipoCobro);
             }
             cobro.UpdateAt = item.UpdateAt;
             cobro.UsuarioId = item.UsuarioId;

@@ -54,6 +54,10 @@
     <Compile Include="ExpedienteBLL.cs" />
     <Compile Include="FacturaBLL.cs" />
     <Compile Include="ItemFacturaBLL.cs" />
+    <Compile Include="DocumentoBLL.cs" />
+    <Compile Include="TipoDocumentoBLL.cs" />
+    <Compile Include="TipoCobroBLL.cs" />
+    <Compile Include="TipoObligacionBLL.cs" />
     <Compile Include="ObligacionBLL.cs" />
     <Compile Include="PersonaBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

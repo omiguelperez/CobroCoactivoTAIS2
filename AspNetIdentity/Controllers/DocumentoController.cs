@@ -16,6 +16,10 @@ namespace AspNetIdentity.Controllers
     [RoutePrefix("api/documentos")]
     public class DocumentoController : ApiController
     {
+        IList<string> AllowedFileExtensionsImages = new List<string> { ".jpg", ".gif", ".png", ".JPG", ".jpeg" };
+        IList<string> AllowedFileExtensionsFiles = new List<string> {  ".xls", ".pdf", ".doc", ".docx", ".ppt", ".pptx", ".txt" };
+        private string PathImages ="/Files/Images/";
+        private string PathDocuments = "/Files/Documents/";
         //[Authorize] para cuestion de pruebas esta api puede ser accedida sin estar autenticado
         //[Route("create")]
         //public Respuesta PostProyecto(DocumentoDTO DocumentoDTO)
@@ -87,16 +91,42 @@ namespace AspNetIdentity.Controllers
         //    }
         //    return result;
         //}
-        [Route("test")]
+        [Route("{id}")]
         [HttpGet]
-        public HttpResponseMessage Test(string archivo)
+        public HttpResponseMessage Test(int id)
         {
-            var path = @""+HttpContext.Current.Server.MapPath("~/Documentos/" + archivo);
-            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-            var stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-            result.Content = new StreamContent(stream);
-            result.Content.Headers.ContentType =
-                  new MediaTypeHeaderValue("image/jpg");
+            var path = "";
+            DocumentoDTO document = new DocumentoBLL().FindById(id);
+            HttpResponseMessage result;
+            if (document != null)
+            {
+                path = GetPathFromRuta(document.RutaDocumento);
+                result = new HttpResponseMessage(HttpStatusCode.OK);
+                var stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                result.Content = new StreamContent(stream);
+                if (AllowedFileExtensionsImages.Contains(document.TipoArchivo))//es imagen
+                {
+                    string auxxx = "image/" + document.TipoArchivo.Replace(".","");
+                    result.Content.Headers.ContentType =
+                      new MediaTypeHeaderValue(auxxx);
+                }else if (AllowedFileExtensionsFiles.Contains(document.TipoArchivo))
+                {
+                    if (document.TipoArchivo.Equals(".pdf")){
+                        result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
+                    }else if (document.TipoArchivo.Equals(".doc") || document.TipoArchivo.Equals(".docx")){
+                        result.Content.Headers.ContentType =new MediaTypeHeaderValue("application/msword");
+                    }else{
+                        result.Content.Headers.ContentType =new MediaTypeHeaderValue("application/octet-stream");
+                    }
+                }else
+                {
+                    result.Content.Headers.ContentType =new MediaTypeHeaderValue("application/octet-stream");
+                }
+            }else
+            {
+                result = new HttpResponseMessage(HttpStatusCode.NotFound);
+                //result.Content.Headers.Add("Error","No Existe");
+            }
             return result;
         }
         //public IHttpActionResult Test()
@@ -118,7 +148,7 @@ namespace AspNetIdentity.Controllers
         //    return response;
         //}
 
-
+    
         [Route("Create")]
         [AllowAnonymous]
         public async Task<HttpResponseMessage> Create()
@@ -134,25 +164,25 @@ namespace AspNetIdentity.Controllers
                     HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
 
                     var postedFile = httpRequest.Files[file];
+                    string RutadocumentoDatabase = "";
+                    string TipoArchivoExtension = "";
                     if (postedFile != null && postedFile.ContentLength > 0)
                     {
 
                         int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB  
 
-                        IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png" };
                         var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
                         var extension = ext.ToLower();
-                        if (!AllowedFileExtensions.Contains(extension))
+                        if (!AllowedFileExtensionsImages.Contains(extension) && !AllowedFileExtensionsFiles.Contains(extension))
                         {
 
-                            var message = string.Format("Please Upload image of type .jpg,.gif,.png.");
+                            var message = string.Format("Please Upload image of type  .jpg, .gif, .png ,.jpeg,.xls,.pdf,.doc, .docx,.ppt,.pptx,.txt");
 
                             dict.Add("error", message);
                             return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
                         }
                         else if (postedFile.ContentLength > MaxContentLength)
                         {
-
                             var message = string.Format("Please Upload a file upto 1 mb.");
 
                             dict.Add("error", message);
@@ -160,18 +190,58 @@ namespace AspNetIdentity.Controllers
                         }
                         else
                         {
+                            var filePath ="";
+                            TipoArchivoExtension = extension;
+                            string Nombrefile = DateTime.Now.Year +""+ DateTime.Now.Month +""+ DateTime.Now.Day +""+ DateTime.Now.Hour +""+ DateTime.Now.Minute +""+ DateTime.Now.Second +""+ DateTime.Now.Millisecond+""+ extension;
+                            if (AllowedFileExtensionsImages.Contains(extension))
+                            {
+                                filePath = GetPathFromRuta(PathImages + Nombrefile);//postedFile.FileName);
+                                RutadocumentoDatabase = PathImages+ Nombrefile;
+                            }
+                            else
+                            {
+                                 filePath = GetPathFromRuta(PathDocuments + Nombrefile);//postedFile.FileName);
+                                RutadocumentoDatabase = PathDocuments+ Nombrefile;
+                            }
 
-
-
-                            var filePath = HttpContext.Current.Server.MapPath("~/Documentos/" + postedFile.FileName + extension);
 
                             postedFile.SaveAs(filePath);
 
                         }
                     }
+                    DocumentoDTO documento = new DocumentoDTO();
+                    documento.ExpedienteId= Int32.Parse(httpRequest.Form["ExpedienteId"]);
+                    documento.TipoDocumentoId = Int32.Parse(httpRequest.Form["TipoDocumentoId"]);
+                    documento.FechaRecepcion= DateTime.Parse(httpRequest.Form["FechaRecepcion"]);
+                    documento.FechaDocumento = DateTime.Parse(httpRequest.Form["FechaDocumento"]);
+                    documento.OficinaOrigen = httpRequest.Form["OficinaOrigen"];
+                    documento.Remitente = httpRequest.Form["Remitente"];
+                    documento.FuncionarioRecibe = httpRequest.Form["FuncionarioRecibe"];
+                    documento.FuncionarioEntrega = httpRequest.Form["FuncionarioEntrega"];
+                    documento.FechaEntrega = DateTime.Parse(httpRequest.Form["FechaEntrega"]);
+                    documento.FechaRadicacion = DateTime.Parse(httpRequest.Form["FechaRadicacion"]);
+                    documento.RutaDocumento = RutadocumentoDatabase;
+                    documento.Estado = "Por Validar";
+                    documento.TipoArchivo = TipoArchivoExtension;
 
-                    var message1 = string.Format("Image Updated Successfully.");
-                    return Request.CreateErrorResponse(HttpStatusCode.Created, message1); ;
+                    Respuesta respuesta = new DocumentoBLL().Insertar(documento);
+                    //var message1 = string.Format("File Updated Successfully.");
+                    dict.Add("Respuesta", respuesta);
+                    if (respuesta!=null)
+                    {
+                        if (!respuesta.Error)
+                        {
+                            return Request.CreateResponse(HttpStatusCode.Created, dict);
+                        }else
+                        {
+                            return Request.CreateResponse(HttpStatusCode.InternalServerError, dict);
+                        }
+                    }
+                    else
+                    {
+                        dict.Add("Respuesta", "Sucedio algun error en el BLL de Documento");
+                        return Request.CreateResponse(HttpStatusCode.InternalServerError, dict);
+                    }
                 }
                 var res = string.Format("Please Upload a image.");
                 dict.Add("error", res);
@@ -185,28 +255,9 @@ namespace AspNetIdentity.Controllers
             }
         }
 
-
-
-        //[Authorize]
-        //[Route("")]
-        //public List<DocumentoDTO> GetDocumentoes()
-        //{
-        //    DocumentoBLL Documento = new DocumentoBLL();
-        //    return Documento.GetRecords();
-        //}
-        //[Authorize]
-        //[Route("")]
-        //public Respuesta PutProyecto(DocumentoDTO DocumentoDTO)
-        //{
-        //    DocumentoBLL Documento = new DocumentoBLL();
-        //    return Documento.PutProyecto(DocumentoDTO);
-        //}
-        //[Authorize]
-        //[Route("")]
-        //public Respuesta DeleteProyecto(DocumentoDTO DocumentoDTO)
-        //{
-        //    DocumentoBLL Documento = new DocumentoBLL();
-        //    return Documento.DeleteProyecto(DocumentoDTO);
-        //}
+        private string GetPathFromRuta(string PrePath)
+        {
+            return HttpContext.Current.Server.MapPath("~" + PrePath);
+        }
     }
 }

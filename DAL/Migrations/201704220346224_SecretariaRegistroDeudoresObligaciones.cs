@@ -83,6 +83,7 @@ namespace DAL.Migrations
                         FechaRadicacion = c.DateTime(nullable: false),
                         RutaDocumento = c.String(),
                         TipoArchivo = c.String(),
+                        Estado = c.String(),
                         TipoDocumentoId = c.Int(nullable: false),
                         UpdateAt = c.DateTime(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),

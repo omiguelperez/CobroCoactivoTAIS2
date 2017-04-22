@@ -9,7 +9,7 @@
 *.userosscache
 *.sln.docstates
 *.vcxproj.filters
-AspNetIdentity/Documentos/
+AspNetIdentity/Files/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

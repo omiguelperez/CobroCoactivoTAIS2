@@ -14,6 +14,7 @@ namespace Entities
         public DateTime FechaRadicacion { get; set; }
         public string RutaDocumento { get; set; }
         public string TipoArchivo { get; set; }
+        public string Estado { get; set; }
         public int TipoDocumentoId { get; set; }
         public TipoDocumentoDTO TipoDocumento { get; set; }
         private DateTime _updateAt;

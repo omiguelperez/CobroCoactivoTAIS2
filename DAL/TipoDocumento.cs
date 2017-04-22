@@ -17,7 +17,7 @@ namespace DAL
         /// </summary>
         /// <param name="DTO">Parametro DTO</param>
         /// <returns>Objeto tipo DAL</returns>
-        public static TipoDocumento Mapeo(TipoDocumentoDTO DTO)
+        public static TipoDocumento MapeoDTOToDAL(TipoDocumentoDTO DTO)
         {
             TipoDocumento c = new TipoDocumento();
             c.CreatedAt = DTO.CreatedAt;
@@ -26,6 +26,23 @@ namespace DAL
             c.TipoDocumentoId = DTO.TipoDocumentoId;
             return c;
         }
+
+        /// <summary>
+        /// Este metodo convierte un DAL a DTO
+        /// </summary>
+        /// <param name="DAL">Parametro DAL</param>
+        /// <returns>Objeto tipo DTO</returns>
+        public static TipoDocumentoDTO MapeoDALToDTO(TipoDocumento DAL)
+        {
+            TipoDocumentoDTO c = new TipoDocumentoDTO();
+            c.CreatedAt = DAL.CreatedAt;
+            c.Nombre = DAL.Nombre;
+            c.UpdateAt = DAL.UpdateAt;
+            c.TipoDocumentoId = DAL.TipoDocumentoId;
+            return c;
+        }
+
+
         public int TipoDocumentoId { get; set; }
         public string Nombre { get; set; }
         public virtual List<Documento> Documentos { get; set; }

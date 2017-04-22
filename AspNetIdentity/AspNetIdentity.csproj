@@ -178,6 +178,9 @@
     <Compile Include="Controllers\ClaimsController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\DocumentoController.cs" />
+    <Compile Include="Controllers\TipoDocumentoController.cs" />
+    <Compile Include="Controllers\TipoCobroController.cs" />
+    <Compile Include="Controllers\TipoObligacionController.cs" />
     <Compile Include="Controllers\ObligacionController.cs" />
     <Compile Include="Controllers\ExpedienteController.cs" />
     <Compile Include="Controllers\FacturaController.cs" />
@@ -218,7 +221,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Documentos\" />
+    <Folder Include="Files\Documents\" />
+    <Folder Include="Files\Images\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

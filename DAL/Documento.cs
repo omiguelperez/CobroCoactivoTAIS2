@@ -14,7 +14,7 @@ namespace DAL
         /// </summary>
         /// <param name="DTO">Parametro DTO</param>
         /// <returns>Objeto tipo DAL</returns>
-        public static Documento Mapeo(DocumentoDTO item)
+        public static Documento MapeoDTOToDAL(DocumentoDTO item)
         {
             Documento documento = new Documento();
             documento.DocumentoId = item.DocumentoId;
@@ -35,13 +35,50 @@ namespace DAL
             documento.Remitente = item.Remitente;
             documento.RutaDocumento = item.RutaDocumento;
             documento.TipoArchivo = item.TipoArchivo;
+            documento.Estado = item.Estado;
             if (item.TipoDocumento != null)
             {
-                documento.TipoDocumento = TipoDocumento.Mapeo(item.TipoDocumento);
+                documento.TipoDocumento = TipoDocumento.MapeoDTOToDAL(item.TipoDocumento);
             }
             documento.TipoDocumentoId = item.TipoDocumentoId;
             return documento;
         }
+
+        /// <summary>
+        /// Este metodo convierte un DAL a DTO
+        /// </summary>
+        /// <param name="DAL">Parametro DAL</param>
+        /// <returns>Objeto tipo DTO</returns>
+        public static DocumentoDTO MapeoDALToDTO(Documento DAL)
+        {
+            DocumentoDTO documento = new DocumentoDTO();
+            documento.DocumentoId = DAL.DocumentoId;
+            documento.UpdateAt = DAL.UpdateAt;
+            documento.CreatedAt = DAL.CreatedAt;
+            if (DAL.Expediente != null)
+            {
+                documento.Expediente = Expediente.MapeoDALToDTO(DAL.Expediente);
+            }
+            documento.ExpedienteId = DAL.ExpedienteId;
+            documento.FechaDocumento = DAL.FechaDocumento;
+            documento.FechaEntrega = DAL.FechaEntrega;
+            documento.FechaRadicacion = DAL.FechaRadicacion;
+            documento.FechaRecepcion = DAL.FechaRecepcion;
+            documento.FuncionarioEntrega = DAL.FuncionarioEntrega;
+            documento.FuncionarioRecibe = DAL.FuncionarioRecibe;
+            documento.OficinaOrigen = DAL.OficinaOrigen;
+            documento.Remitente = DAL.Remitente;
+            documento.RutaDocumento = DAL.RutaDocumento;
+            documento.TipoArchivo = DAL.TipoArchivo;
+            documento.Estado = DAL.Estado;
+            if (DAL.TipoDocumento != null)
+            {
+                documento.TipoDocumento = TipoDocumento.MapeoDALToDTO(DAL.TipoDocumento);
+            }
+            documento.TipoDocumentoId = DAL.TipoDocumentoId;
+            return documento;
+        }
+
 
         /// <summary>
         /// Este metodo Convierte una Lista DTO de Cobros a DAL, Recuerde que Para Mapear Una SubLista desde el controlador lo puede hacer
@@ -53,7 +90,7 @@ namespace DAL
             List<Documento> Obligaciones = new List<Documento>();
             foreach (DocumentoDTO item in ListaDTO)
             {
-                Obligaciones.Add(Mapeo(item));
+                Obligaciones.Add(MapeoDTOToDAL(item));
             }
             return Obligaciones;
         }
@@ -68,6 +105,7 @@ namespace DAL
         public DateTime FechaRadicacion { get; set; }
         public string RutaDocumento { get; set; }
         public string TipoArchivo { get; set; }
+        public string Estado { get; set; }
         public int TipoDocumentoId { get; set; }
         public virtual TipoDocumento TipoDocumento { get; set; }
         private DateTime _updateAt;

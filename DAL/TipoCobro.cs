@@ -13,7 +13,7 @@ namespace DAL
         /// </summary>
         /// <param name="DTO">Parametro DTO</param>
         /// <returns>Objeto tipo DAL</returns>
-        public static TipoCobro Mapeo(TipoCobroDTO DTO)
+        public static TipoCobro MapeoDTOToDAL(TipoCobroDTO DTO)
         {
             TipoCobro c = new TipoCobro();
             c.CreatedAt = DTO.CreatedAt;
