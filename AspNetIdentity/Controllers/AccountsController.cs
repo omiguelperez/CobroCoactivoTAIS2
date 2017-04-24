@@ -126,6 +126,9 @@ namespace AspNetIdentity.Controllers
                 return GetErrorResult(addUserResult);
             }
 
+            var createdUser = await this.AppUserManager.FindByNameAsync(createUserModel.Username);
+
+            await this.AppUserManager.AddToRoleAsync(createdUser.Id, createUserModel.RoleName);
 
             string code = await this.AppUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
 
