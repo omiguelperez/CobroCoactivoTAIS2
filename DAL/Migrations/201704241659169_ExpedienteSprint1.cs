@@ -3,7 +3,7 @@ namespace DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class SecretariaRegistroDeudoresObligaciones : DbMigration
+    public partial class ExpedienteSprint1 : DbMigration
     {
         public override void Up()
         {
