@@ -8,16 +8,33 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
+using Newtonsoft.Json;
+
 
 namespace AspNetIdentity.Providers
 {
     public class CustomOAuthProvider : OAuthAuthorizationServerProvider
     {
+        ApplicationUser user;
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
             context.Validated();
             return Task.FromResult<object>(null);
+        }
+
+        public override Task TokenEndpoint(OAuthTokenEndpointContext context)
+        {
+            var _applicationDbContext = new ApplicationDbContext();
+
+            var userRolesId = from role in user.Roles select role.RoleId;
+            var roles = from role in _applicationDbContext.Roles.OrderBy(r => r.Name)
+                        where userRolesId.Contains(role.Id)
+                        select role.Name;
+
+            context.AdditionalResponseParameters.Add("roles", String.Join(";", String.Join(";", roles.ToList())));
+
+            return Task.FromResult(0);
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
@@ -29,7 +46,9 @@ namespace AspNetIdentity.Providers
 
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            user = await userManager.FindAsync(context.UserName, context.Password);
+
+            var _applicationDbContext = new ApplicationDbContext();
 
             if (user == null)
             {
