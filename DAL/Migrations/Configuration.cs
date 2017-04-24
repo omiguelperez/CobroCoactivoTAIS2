@@ -55,6 +55,12 @@ namespace DAL.Migrations
                     new TipoObligacion{TipoObligacionId=3,Nombre = "Tipo Obligacion 3",CreatedAt=new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second),UpdateAt=new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second)},
                     //etc...
                 });
+            context.TiposPersonas.AddOrUpdate(tipo => tipo.TipoPersonaId, new TipoPersona[]
+                {
+                    new TipoPersona{TipoPersonaId=1,Nombre = "Natural",CreatedAt=new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second),UpdateAt=new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second)},
+                    new TipoPersona{TipoPersonaId=2,Nombre = "Juridica",CreatedAt=new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second),UpdateAt=new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second)},
+                    //etc...
+                });
 
             context.TiposCobros.AddOrUpdate(tipo => tipo.TipoCobroId, new TipoCobro[]
                 {

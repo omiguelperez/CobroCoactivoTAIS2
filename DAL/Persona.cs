@@ -28,6 +28,18 @@ namespace DAL
             c.Telefono = DTO.Telefono;
             c.UpdateAt = DTO.UpdateAt;
             c.CreatedAt = DTO.CreatedAt;
+            c.TipoPersonaId = DTO.TipoPersonaId;
+            if (c.TipoPersona != null)
+            {
+                c.TipoPersona = TipoPersona.MapeoDTOToDAL(DTO.TipoPersona);
+            }
+            c.Nacionalidad = DTO.Nacionalidad;
+            c.PaisNacimiento = DTO.PaisNacimiento;
+            c.PaisCorrespondencia = DTO.PaisCorrespondencia;
+            c.Departamento = DTO.Departamento;
+            c.Municipio = DTO.Municipio;
+            c.Email = DTO.Email;
+            c.FechaNacimiento = DTO.FechaNacimiento;
             return c;
         }
 
@@ -48,6 +60,18 @@ namespace DAL
             c.Telefono = DAL.Telefono;
             c.UpdateAt = DAL.UpdateAt;
             c.CreatedAt = DAL.CreatedAt;
+            c.TipoPersonaId = DAL.TipoPersonaId;
+            if (c.TipoPersona!=null)
+            {
+                c.TipoPersona = TipoPersona.MapeoDALToDTO(DAL.TipoPersona);
+            }
+            c.Nacionalidad = DAL.Nacionalidad;
+            c.PaisNacimiento = DAL.PaisNacimiento;
+            c.PaisCorrespondencia = DAL.PaisCorrespondencia;
+            c.Departamento = DAL.Departamento;
+            c.Municipio = DAL.Municipio;
+            c.Email = DAL.Email;
+            c.FechaNacimiento = DAL.FechaNacimiento;
             return c;
         }
         public Persona()
@@ -75,6 +99,15 @@ namespace DAL
         public int Telefono { get; set; }
         [Required]
         public string Direccion { get; set; }
+        public int TipoPersonaId { get; set; }
+        public virtual TipoPersona TipoPersona { get; set; }
+        public string Nacionalidad { get; set; }
+        public string PaisNacimiento { get; set; }
+        public string PaisCorrespondencia { get; set; }
+        public string Departamento { get; set; }
+        public string Municipio { get; set; }
+        public string Email { get; set; }
+        public DateTime FechaNacimiento { get; set; }
         public virtual List<Obligacion> Obligaciones { get; set; }
         private DateTime _updateAt;
         public DateTime UpdateAt { get { return _updateAt; } set { _updateAt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second); } }

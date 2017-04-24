@@ -13,7 +13,7 @@ namespace DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201704220346224_SecretariaRegistroDeudoresObligaciones"; }
+            get { return "201704240227577_SecretariaRegistroDeudoresObligaciones"; }
         }
         
         string IMigrationMetadata.Source
