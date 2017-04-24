@@ -1,7 +1,5 @@
 # ProyectoCapas
 
-Este es el proyecto que estamos haciendo en clase
+## Clonar el repositorio
 
-Requerimientos:
-
-- Estoy usando Visual Studio 2013 (no sé exactamente cuál es la versión de .NET que uso).
+- Ejecutar este comando en consola/terminal `git clone https://gitlab.com/omiguelperez/CoactivoServer`.
