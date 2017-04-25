@@ -22,6 +22,7 @@ namespace BLL
                 {
                     // preparar el cliente para guardar
                     Expediente c = Expediente.MapeoDTOToDAL(expediente);
+                    c.Obligacion = Obligacion.MapeoDTOToDAL(expediente.Obligacion);
                     c.Obligacion.Expediente = c;
                     PersonaDTO persona = new PersonaBLL().FindByIdentificacion(c.Obligacion.Persona.Identificacion);
                     if (persona != null) {//QUIERE DECIR QUE LA PERSONA YA EXISTE
@@ -32,7 +33,8 @@ namespace BLL
                     {
                         c.Documentos = Documento.ConvertList(expediente.Documentos);
                     }
-                    db.Expedientes.Add(c);
+                    // db.Expedientes.Add(c);
+                    db.Obligaciones.Add(c.Obligacion);
 
                     // preparar la respuesta
                     respuesta.FilasAfectadas = db.SaveChanges();
@@ -71,7 +73,8 @@ namespace BLL
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                ExpedienteDTO expediente = Expediente.MapeoDALToDTO(db.Expedientes.FirstOrDefault(t => t.ExpedienteId.Equals(ExpedienteId))); // Busca por llave primaria
+                var exped = db.Expedientes.Find(ExpedienteId);
+                ExpedienteDTO expediente = Expediente.MapeoDALToDTO(exped); // Busca por llave primaria
                 return expediente;
             }
         }

@@ -31,9 +31,9 @@ namespace DAL
             expediente.Identificacion = DTO.Identificacion;
             expediente.NaturalezaObligacion = DTO.NaturalezaObligacion;
             expediente.Nombre = DTO.Nombre;
-            expediente.Obligacion = Obligacion.MapeoDTOToDAL(DTO.Obligacion);
+            
             expediente.UbicacionExpediente = DTO.UbicacionExpediente;
-            expediente.ObligacionId = DTO.ObligacionId;
+            //expediente.ObligacionId = DTO.ObligacionId;
             return expediente;
         }
 

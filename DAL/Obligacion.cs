@@ -24,10 +24,10 @@ namespace DAL
             obligacion.Cuantia = DTO.Cuantia;
             obligacion.Dueda = DTO.Dueda;
             obligacion.Estado = DTO.Estado;
-            if (DTO.Expediente != null)
-            {
-                obligacion.Expediente = Expediente.MapeoDTOToDAL(DTO.Expediente);
-            }
+            //if (DTO.Expediente != null)
+            //{
+            //    obligacion.Expediente = Expediente.MapeoDTOToDAL(DTO.Expediente);
+            //}
             if (DTO.Persona != null)
             {
                 obligacion.Persona = Persona.MapeoDTOToDAL(DTO.Persona);
@@ -95,9 +95,14 @@ namespace DAL
         public float Dueda { get; set; }
         public DateTime FechaPreinscripcion { get; set; }
         public string Estado { get; set; }
+
         public virtual List<Cobro> Cobros { get; set; }
+
+
         public int ExpedienteId { get; set; }
         public virtual Expediente Expediente { get; set; }
+
+
         public int TipoObligacionId { get; set; }
         public virtual TipoObligacion TipoObligacion { get; set; }
         public int PersonaId { get; set; }
