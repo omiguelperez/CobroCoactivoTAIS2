@@ -13,7 +13,7 @@ namespace BLL.Tests
     public class ObligacionBLLTests
     {
         [TestMethod()]
-        public void GetRecordsTest()
+        public void FindByIdTest()
         {
             ObligacionBLL bll = new ObligacionBLL();
             var response = bll.FindById(1);
@@ -65,6 +65,15 @@ namespace BLL.Tests
             ObligacionBLL bll = new ObligacionBLL();
             var response = bll.Insertar(Obligacion);
             Assert.AreEqual(false, response.Error);
+        }
+
+        [TestMethod()]
+        public void GetRecordsTest()
+        {
+            ObligacionBLL bll = new ObligacionBLL();
+            var response = bll.GetRecords();
+            //Assert.AreNotEqual(19, response.ExpedienteId );
+            Assert.IsNotNull(response);
         }
     }
 }

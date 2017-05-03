@@ -69,6 +69,22 @@ namespace BLL
                             PersonaId = t.PersonaId,
                             ExpedienteId = t.ExpedienteId,
                             TipoObligacionId = t.TipoObligacionId,
+                            Expediente= db.Expedientes.Select(s => new ExpedienteDTO
+                            {
+                                EntidadEncargada=s.EntidadEncargada,
+                                Descripcion=s.Descripcion,
+                                Cuantia=s.Cuantia,
+                                Identificacion=s.Identificacion,
+                                DireccionEjecutado=s.DireccionEjecutado,
+                                FechaRadicacion=s.FechaRadicacion,
+                                NaturalezaObligacion=s.NaturalezaObligacion,
+                                ExpedienteId=s.ExpedienteId,
+                                UbicacionExpediente=s.UbicacionExpediente,
+                                Nombre=s.Nombre,
+                                CreatedAt=s.CreatedAt,
+                                UpdateAt=s.UpdateAt,
+                                DireccionTituloEjecutivo=s.DireccionTituloEjecutivo
+                            }).Where(r => r.ExpedienteId.Equals(t.ExpedienteId)).FirstOrDefault()
                         }
                     ).ToList();
             }
