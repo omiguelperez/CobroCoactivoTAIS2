@@ -6,24 +6,8 @@ using System.Threading.Tasks;
 using Entities;
 namespace DAL
 {
-    public class TipoCobro
+    public partial class TipoCobro
     {
-        /// <summary>
-        /// Este metodo convierte un DTO a DAL
-        /// </summary>
-        /// <param name="DTO">Parametro DTO</param>
-        /// <returns>Objeto tipo DAL</returns>
-        public static TipoCobro MapeoDTOToDAL(TipoCobroDTO DTO)
-        {
-            TipoCobro c = new TipoCobro();
-            c.CreatedAt = DTO.CreatedAt;
-            c.Nombre = DTO.Nombre;
-            c.TipoCobroId = DTO.TipoCobroId;
-            c.UpdateAt = DTO.UpdateAt;
-            
-            //No mapeo los cobros porque despues Habria un Bucle
-            return c;
-        }
         public TipoCobro()
         {
             Cobros = new List<Cobro>();

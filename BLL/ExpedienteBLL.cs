@@ -62,10 +62,13 @@ namespace BLL
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                return db.Expedientes
-                    .Select(t =>
-                        Expediente.MapeoDALToDTO(t)
-                    ).ToList();
+                List<Expediente> lista= db.Expedientes.ToList();
+                List<ExpedienteDTO> response = new List<ExpedienteDTO>();
+                foreach (Expediente a in lista)
+                {
+                    response.Add(Expediente.MapeoDALToDTO(a));
+                }
+                return response;
             }
         }
 

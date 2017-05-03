@@ -74,5 +74,15 @@ namespace BLL
             }
         }
 
+        public ObligacionDTO FindById(int ObligacionId)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var obliga = db.Obligaciones.Find(ObligacionId);
+                ObligacionDTO expediente = Obligacion.MapeoDALToDTO(obliga); // Busca por llave primaria
+                return expediente;
+            }
+        }
+
     }
 }

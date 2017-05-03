@@ -9,71 +9,8 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class Persona
+    public partial class Persona
     {
-        /// <summary>
-        /// Este metodo convierte un DTO a DAL
-        /// </summary>
-        /// <param name="DTO">Parametro DTO</param>
-        /// <returns>Objeto tipo DAL</returns>
-        public static Persona MapeoDTOToDAL(PersonaDTO DTO)
-        {
-            Persona c = new Persona();
-            c.Apellidos = DTO.Apellidos;
-            c.Direccion = DTO.Direccion;
-            c.Identificacion = DTO.Identificacion;
-            c.Nombres = DTO.Nombres;
-            c.PersonaId = DTO.PersonaId;
-            c.Sexo = DTO.Sexo;
-            c.Telefono = DTO.Telefono;
-            c.UpdateAt = DTO.UpdateAt;
-            c.CreatedAt = DTO.CreatedAt;
-            c.TipoPersonaId = DTO.TipoPersonaId;
-            if (c.TipoPersona != null)
-            {
-                c.TipoPersona = TipoPersona.MapeoDTOToDAL(DTO.TipoPersona);
-            }
-            c.Nacionalidad = DTO.Nacionalidad;
-            c.PaisNacimiento = DTO.PaisNacimiento;
-            c.PaisCorrespondencia = DTO.PaisCorrespondencia;
-            c.Departamento = DTO.Departamento;
-            c.Municipio = DTO.Municipio;
-            c.Email = DTO.Email;
-            c.FechaNacimiento = DTO.FechaNacimiento;
-            return c;
-        }
-
-        /// <summary>
-        /// Este metodo convierte un DAL a DTO
-        /// </summary>
-        /// <param name="DAL">Parametro DTO</param>
-        /// <returns>Objeto tipo DAL</returns>
-        public static PersonaDTO MapeoDALToDTO(Persona DAL)
-        {
-            PersonaDTO c = new PersonaDTO();
-            c.Apellidos = DAL.Apellidos;
-            c.Direccion = DAL.Direccion;
-            c.Identificacion = DAL.Identificacion;
-            c.Nombres = DAL.Nombres;
-            c.PersonaId = DAL.PersonaId;
-            c.Sexo = DAL.Sexo;
-            c.Telefono = DAL.Telefono;
-            c.UpdateAt = DAL.UpdateAt;
-            c.CreatedAt = DAL.CreatedAt;
-            c.TipoPersonaId = DAL.TipoPersonaId;
-            if (c.TipoPersona!=null)
-            {
-                c.TipoPersona = TipoPersona.MapeoDALToDTO(DAL.TipoPersona);
-            }
-            c.Nacionalidad = DAL.Nacionalidad;
-            c.PaisNacimiento = DAL.PaisNacimiento;
-            c.PaisCorrespondencia = DAL.PaisCorrespondencia;
-            c.Departamento = DAL.Departamento;
-            c.Municipio = DAL.Municipio;
-            c.Email = DAL.Email;
-            c.FechaNacimiento = DAL.FechaNacimiento;
-            return c;
-        }
         public Persona()
         {
             Obligaciones = new List<Obligacion>();

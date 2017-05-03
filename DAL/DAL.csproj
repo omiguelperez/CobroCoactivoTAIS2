@@ -96,13 +96,22 @@
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\ExtendedClaimsProvider.cs" />
     <Compile Include="Infrastructure\RolesFromClaims.cs" />
-    <Compile Include="Migrations\201705022338046_ExpedienteSprint2.cs" />
-    <Compile Include="Migrations\201705022338046_ExpedienteSprint2.Designer.cs">
-      <DependentUpon>201705022338046_ExpedienteSprint2.cs</DependentUpon>
+    <Compile Include="Migrations\201705030234118_ObligacionExpedienteSprint2.cs" />
+    <Compile Include="Migrations\201705030234118_ObligacionExpedienteSprint2.Designer.cs">
+      <DependentUpon>201705030234118_ObligacionExpedienteSprint2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Configuration_1.cs" />
     <Compile Include="Obligacion.cs" />
+    <Compile Include="Partials\Cobro.cs" />
+    <Compile Include="Partials\Documento.cs" />
+    <Compile Include="Partials\Expediente.cs" />
+    <Compile Include="Partials\Obligacion.cs" />
+    <Compile Include="Partials\Persona.cs" />
+    <Compile Include="Partials\TipoDocumento.cs" />
+    <Compile Include="Partials\TipoObligacion.cs" />
+    <Compile Include="Partials\TipoCobro.cs" />
+    <Compile Include="Partials\TipoPersona.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleBindingModels.cs" />
@@ -128,10 +137,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705022338046_ExpedienteSprint2.resx">
-      <DependentUpon>201705022338046_ExpedienteSprint2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705030234118_ObligacionExpedienteSprint2.resx">
+      <DependentUpon>201705030234118_ObligacionExpedienteSprint2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
