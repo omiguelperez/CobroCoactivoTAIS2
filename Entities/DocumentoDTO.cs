@@ -15,6 +15,7 @@ namespace Entities
         public string RutaDocumento { get; set; }
         public string TipoArchivo { get; set; }
         public string Estado { get; set; }
+        public string PathUrl { get; set; }
         public int TipoDocumentoId { get; set; }
         public TipoDocumentoDTO TipoDocumento { get; set; }
         private DateTime _updateAt;

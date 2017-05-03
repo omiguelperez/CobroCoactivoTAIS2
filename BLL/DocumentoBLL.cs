@@ -45,6 +45,22 @@ namespace BLL
             }
         }
 
+        public List<DocumentoDTO> GetDocumentsByExpediente(string PathUrl,int ExpedienteId)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                List<Documento> lista = db.Documentos.Where(t => t.ExpedienteId.Equals(ExpedienteId)).ToList();
+                List<DocumentoDTO> response = new List<DocumentoDTO>();
+                foreach (Documento a in lista)
+                {
+                    DocumentoDTO obj = Documento.MapeoDALToDTO(a);
+                    obj.PathUrl = PathUrl + obj.DocumentoId + "";
+                    response.Add(obj);
+                }
+                return response;
+            }
+        }
+
         public DocumentoDTO FindById(int Id)
         {
             using (ApplicationDbContext db = new ApplicationDbContext())

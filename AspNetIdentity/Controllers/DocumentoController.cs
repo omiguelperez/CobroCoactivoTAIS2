@@ -13,84 +13,27 @@ using System.Web.Http;
 
 namespace AspNetIdentity.Controllers
 {
+    
     [RoutePrefix("api/documentos")]
     public class DocumentoController : ApiController
     {
+        string Prefix = "api/documentos";// si cambian el prefix trambien cambien esto
+
         IList<string> AllowedFileExtensionsImages = new List<string> { ".jpg", ".gif", ".png", ".JPG", ".jpeg" };
         IList<string> AllowedFileExtensionsFiles = new List<string> {  ".xls", ".pdf", ".doc", ".docx", ".ppt", ".pptx", ".txt" };
         private string PathImages ="/Files/Images/";
         private string PathDocuments = "/Files/Documents/";
-        //[Authorize] para cuestion de pruebas esta api puede ser accedida sin estar autenticado
-        //[Route("create")]
-        //public Respuesta PostProyecto(DocumentoDTO DocumentoDTO)
-        //{
-        //    Respuesta response = new Respuesta();
-        //    if (DocumentoDTO.Identificacion.Equals(DocumentoDTO.Documento.Persona.Identificacion))
-        //    {
-        //        DocumentoBLL Documento = new DocumentoBLL();
-        //        response = Documento.Insertar(DocumentoDTO);
-        //    }
-        //    else
-        //    {
-        //        response.Mensaje = "La Identificacion del Documento no Coincide con la Identificacion de la Persona.";
-        //        response.Error = true;
-        //        response.FilasAfectadas = 0;
-        //    }
-        //    return response;
-        //}
-        //[Route("create")]
-        //public Task<HttpResponseMessage> PostFile()
-        //{
-        //    HttpRequestMessage request = this.Request;
-        //    if (!request.Content.IsMimeMultipartContent())
-        //    {
-        //        throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
-        //    }
 
-        //    string root = System.Web.HttpContext.Current.Server.MapPath("~/App_Data/uploads");
-        //    var provider = new MultipartFormDataStreamProvider(root);
+        [Route("expediente/{id}")]
+        public List<DocumentoDTO> GetDocumentosByExpediente(int id)
+        {
+            string pathQuery = HttpContext.Current.Request.Url.PathAndQuery;
+            string hostName = HttpContext.Current.Request.Url.ToString().Replace(pathQuery, "");
+            hostName += "/"+Prefix + "/";
+            DocumentoBLL blldocument = new DocumentoBLL();
+            return blldocument.GetDocumentsByExpediente(hostName, id);
+        }
 
-        //    var task = request.Content.ReadAsMultipartAsync(provider).
-        //        ContinueWith<HttpResponseMessage>(o =>
-        //        {
-
-        //            //string file1 = provider.BodyPartFileNames.First().Value;
-        //    // this is the file name on the server where the file was saved 
-
-        //    return new HttpResponseMessage()
-        //            {
-        //                Content = new StringContent("File uploaded.")
-        //            };
-        //        }
-        //    );
-        //    return task;
-        //}
-
-
-        //[Route("create")]
-        //public HttpResponseMessage Post()
-        //{
-        //    HttpResponseMessage result = null;
-        //    var httpRequest = HttpContext.Current.Request;
-        //    if (httpRequest.Files.Count > 0)
-        //    {
-        //        var docfiles = new List<string>();
-        //        foreach (string file in httpRequest.Files)
-        //        {
-        //            var postedFile = httpRequest.Files[file];
-        //            var filePath = HttpContext.Current.Server.MapPath("~/Documentos/" + postedFile.FileName);
-        //            postedFile.SaveAs(filePath);
-
-        //            docfiles.Add(filePath);
-        //        }
-        //        result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
-        //    }
-        //    else
-        //    {
-        //        result = Request.CreateResponse(HttpStatusCode.BadRequest);
-        //    }
-        //    return result;
-        //}
         [Route("{id}")]
         [HttpGet]
         public HttpResponseMessage Test(int id)
@@ -129,25 +72,7 @@ namespace AspNetIdentity.Controllers
             }
             return result;
         }
-        //public IHttpActionResult Test()
-        //{
-        //    var stream = new MemoryStream();
-
-        //    var result = new HttpResponseMessage(HttpStatusCode.OK)
-        //    {
-        //        Content = new ByteArrayContent(stream.GetBuffer())
-        //    };
-        //    result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
-        //    {
-        //        FileName = "Captura.PNG"
-        //    };
-        //    result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-
-        //    var response = ResponseMessage(result);
-
-        //    return response;
-        //}
-
+        
     
         [Route("Create")]
         [AllowAnonymous]
