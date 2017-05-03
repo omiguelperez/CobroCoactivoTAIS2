@@ -3,7 +3,7 @@ namespace DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ExpedienteSprint1 : DbMigration
+    public partial class ExpedienteSprint2 : DbMigration
     {
         public override void Up()
         {
@@ -40,8 +40,10 @@ namespace DAL.Migrations
                         CreatedAt = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ObligacionId)
+                .ForeignKey("dbo.Expedientes", t => t.ExpedienteId, cascadeDelete: true)
                 .ForeignKey("dbo.Personas", t => t.PersonaId, cascadeDelete: true)
                 .ForeignKey("dbo.TipoObligacions", t => t.TipoObligacionId, cascadeDelete: true)
+                .Index(t => t.ExpedienteId)
                 .Index(t => t.TipoObligacionId)
                 .Index(t => t.PersonaId);
             
@@ -49,7 +51,7 @@ namespace DAL.Migrations
                 "dbo.Expedientes",
                 c => new
                     {
-                        ExpedienteId = c.Int(nullable: false),
+                        ExpedienteId = c.Int(nullable: false, identity: true),
                         EntidadEncargada = c.String(),
                         Nombre = c.String(),
                         Identificacion = c.String(),
@@ -62,11 +64,8 @@ namespace DAL.Migrations
                         FechaRadicacion = c.DateTime(nullable: false),
                         UpdateAt = c.DateTime(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
-                        ObligacionId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.ExpedienteId)
-                .ForeignKey("dbo.Obligacions", t => t.ExpedienteId)
-                .Index(t => t.ExpedienteId);
+                .PrimaryKey(t => t.ExpedienteId);
             
             CreateTable(
                 "dbo.Documentoes",
@@ -268,7 +267,7 @@ namespace DAL.Migrations
             DropForeignKey("dbo.Obligacions", "TipoObligacionId", "dbo.TipoObligacions");
             DropForeignKey("dbo.Personas", "TipoPersonaId", "dbo.TipoPersonas");
             DropForeignKey("dbo.Obligacions", "PersonaId", "dbo.Personas");
-            DropForeignKey("dbo.Expedientes", "ExpedienteId", "dbo.Obligacions");
+            DropForeignKey("dbo.Obligacions", "ExpedienteId", "dbo.Expedientes");
             DropForeignKey("dbo.Documentoes", "TipoDocumentoId", "dbo.TipoDocumentoes");
             DropForeignKey("dbo.Documentoes", "ExpedienteId", "dbo.Expedientes");
             DropForeignKey("dbo.ObligacionCobroes", "Cobro_CobroId", "dbo.Cobroes");
@@ -286,9 +285,9 @@ namespace DAL.Migrations
             DropIndex("dbo.Personas", new[] { "Identificacion" });
             DropIndex("dbo.Documentoes", new[] { "ExpedienteId" });
             DropIndex("dbo.Documentoes", new[] { "TipoDocumentoId" });
-            DropIndex("dbo.Expedientes", new[] { "ExpedienteId" });
             DropIndex("dbo.Obligacions", new[] { "PersonaId" });
             DropIndex("dbo.Obligacions", new[] { "TipoObligacionId" });
+            DropIndex("dbo.Obligacions", new[] { "ExpedienteId" });
             DropIndex("dbo.Cobroes", new[] { "UsuarioId" });
             DropIndex("dbo.Cobroes", new[] { "TipoCobroId" });
             DropTable("dbo.ObligacionCobroes");

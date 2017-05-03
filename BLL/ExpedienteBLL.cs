@@ -22,19 +22,19 @@ namespace BLL
                 {
                     // preparar el cliente para guardar
                     Expediente c = Expediente.MapeoDTOToDAL(expediente);
-                    c.Obligacion = Obligacion.MapeoDTOToDAL(expediente.Obligacion);
-                    c.Obligacion.Expediente = c;
-                    PersonaDTO persona = new PersonaBLL().FindByIdentificacion(c.Obligacion.Persona.Identificacion);
-                    if (persona != null) {//QUIERE DECIR QUE LA PERSONA YA EXISTE
-                        c.Obligacion.PersonaId = persona.PersonaId;
-                        c.Obligacion.Persona = null;
-                    }
+                   // c.Obligacion = Obligacion.MapeoDTOToDAL(expediente.Obligacion);
+                   // c.Obligacion.Expediente = c;
+                    //PersonaDTO persona = new PersonaBLL().FindByIdentificacion(c.Obligacion.Persona.Identificacion);
+                    //if (persona != null) {//QUIERE DECIR QUE LA PERSONA YA EXISTE
+                    //    c.Obligacion.PersonaId = persona.PersonaId;
+                    //    c.Obligacion.Persona = null;
+                    //}
                     if (expediente.Documentos.Count > 0)
                     {
                         c.Documentos = Documento.ConvertList(expediente.Documentos);
                     }
                     // db.Expedientes.Add(c);
-                    db.Obligaciones.Add(c.Obligacion);
+                    //db.Obligaciones.Add(c.Obligacion);
 
                     // preparar la respuesta
                     respuesta.FilasAfectadas = db.SaveChanges();

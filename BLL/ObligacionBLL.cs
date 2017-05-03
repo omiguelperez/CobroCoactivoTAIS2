@@ -14,14 +14,20 @@ namespace BLL
         Respuesta respuesta = new Respuesta();
         ApplicationDbContext db = new ApplicationDbContext();
 
-        public Respuesta Insertar(ObligacionDTO cliente)
+        public Respuesta Insertar(ObligacionDTO obligacion)
         {
             using (db = new ApplicationDbContext())
             {
                 try
                 {
+                    PersonaDTO persona = new PersonaBLL().FindByIdentificacion(obligacion.Persona.Identificacion);
+                    if (persona != null)
+                    {//QUIERE DECIR QUE LA PERSONA YA EXISTE
+                        obligacion.PersonaId = persona.PersonaId;
+                        obligacion.Persona = null;
+                    }
                     // preparar el cliente para guardar
-                    db.Obligaciones.Add(Obligacion.MapeoDTOToDAL(cliente));
+                    db.Obligaciones.Add(Obligacion.MapeoDTOToDAL(obligacion));
 
                     // preparar la respuesta
                     respuesta.FilasAfectadas = db.SaveChanges();

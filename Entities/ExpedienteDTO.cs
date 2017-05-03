@@ -24,8 +24,8 @@ namespace Entities
         public DateTime UpdateAt { get { return _updateAt; } set { _updateAt = new DateTime(); } }
         private DateTime _createdAt;
         public DateTime CreatedAt { get { return _createdAt; } set { _createdAt = new DateTime(); } }
-        public int ObligacionId { get; set; }
-        public ObligacionDTO Obligacion { get; set; }
+       // public int ObligacionId { get; set; }
+       // public ObligacionDTO Obligacion { get; set; }
         public List<DocumentoDTO> Documentos { get; set; }
     }
 }

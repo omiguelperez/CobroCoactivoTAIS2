@@ -57,9 +57,9 @@ namespace DAL
             expediente.Identificacion = DAL.Identificacion;
             expediente.NaturalezaObligacion = DAL.NaturalezaObligacion;
             expediente.Nombre = DAL.Nombre;
-            expediente.Obligacion = Obligacion.MapeoDALToDTO(DAL.Obligacion);
+            //expediente.Obligacion = Obligacion.MapeoDALToDTO(DAL.Obligacion);
             expediente.UbicacionExpediente = DAL.UbicacionExpediente;
-            expediente.ObligacionId = DAL.ObligacionId;
+           // expediente.ObligacionId = DAL.ObligacionId;
             return expediente;
         }
 
@@ -82,9 +82,9 @@ namespace DAL
         public DateTime UpdateAt { get { return _updateAt; } set { _updateAt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second); } }
         private DateTime _createdAt;
         public DateTime CreatedAt { get { return _createdAt; } set { _createdAt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second); } }
-        public int ObligacionId { get; set; }
-        [Required]
-        public virtual Obligacion Obligacion { get; set; }
+        //public int ObligacionId { get; set; }
+        //[Required]
+        //public virtual Obligacion Obligacion { get; set; }
         public virtual List<Documento> Documentos { get; set; }
     }
 }

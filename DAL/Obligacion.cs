@@ -24,10 +24,10 @@ namespace DAL
             obligacion.Cuantia = DTO.Cuantia;
             obligacion.Dueda = DTO.Dueda;
             obligacion.Estado = DTO.Estado;
-            //if (DTO.Expediente != null)
-            //{
-            //    obligacion.Expediente = Expediente.MapeoDTOToDAL(DTO.Expediente);
-            //}
+            if (DTO.Expediente != null)
+            {
+                obligacion.Expediente = Expediente.MapeoDTOToDAL(DTO.Expediente);
+            }
             if (DTO.Persona != null)
             {
                 obligacion.Persona = Persona.MapeoDTOToDAL(DTO.Persona);

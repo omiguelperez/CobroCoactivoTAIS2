@@ -16,25 +16,26 @@ namespace BLL.Tests
         public void GetRecordsTest()
         {
             ExpedienteBLL bll = new ExpedienteBLL();
-            var response = bll.FindById(20);
-            Assert.AreNotEqual(19, response.ExpedienteId );
+            var response = bll.FindById(1);
+            //Assert.AreNotEqual(19, response.ExpedienteId );
+            Assert.IsNotNull(response);
         }
         [TestMethod()]
         public void InsertarTest()
         {
 
-            ExpedienteDTO obj = new ExpedienteDTO();
-            obj.Cuantia=525000;
-            obj.Descripcion = "Esto es una descripcion";
-            obj.DireccionEjecutado = "Esto es una direccion";
-            obj.DireccionTituloEjecutivo = "Esto es una direcciond e titulo ejecutivo";
-            obj.EntidadEncargada = "Entidad encargada es maira";
-            obj.FechaRadicacion = new DateTime(2017, 03, 19);
-            obj.Identificacion = "1065824563";
-            obj.NaturalezaObligacion = "Naturaleza es algo";
-            obj.Nombre = "Maira mindiola";
-            obj.UbicacionExpediente = "Esta en el lote tal";
-            obj.Obligacion = new ObligacionDTO
+            //ExpedienteDTO obj = new ExpedienteDTO();
+            //obj.Cuantia=525000;
+            //obj.Descripcion = "Esto es una descripcion";
+            //obj.DireccionEjecutado = "Esto es una direccion";
+            //obj.DireccionTituloEjecutivo = "Esto es una direcciond e titulo ejecutivo";
+            //obj.EntidadEncargada = "Entidad encargada es maira";
+            //obj.FechaRadicacion = new DateTime(2017, 03, 19);
+            //obj.Identificacion = "1065824563";
+            //obj.NaturalezaObligacion = "Naturaleza es algo";
+            //obj.Nombre = "Maira mindiola";
+            //obj.UbicacionExpediente = "Esta en el lote tal";
+            ObligacionDTO Obligacion = new ObligacionDTO
             {
                 Cuantia = 525000,
                 Dueda = 525000,
@@ -56,10 +57,24 @@ namespace BLL.Tests
                     FechaNacimiento = new DateTime(1996,07,30),
                     TipoPersonaId =1,
                     Telefono = 31868754
-                    }
+                    },
+                Expediente= new ExpedienteDTO()
+                {
+                    Cuantia = 525000,
+                    Descripcion = "Esto es una descripcion",
+                    DireccionEjecutado = "Esto es una direccion",
+                    DireccionTituloEjecutivo = "Esto es una direcciond e titulo ejecutivo",
+                    EntidadEncargada = "Entidad encargada es maira",
+                    FechaRadicacion = new DateTime(2017, 03, 19),
+                    Identificacion = "1065824563",
+                    NaturalezaObligacion = "Naturaleza es algo",
+                    Nombre = "Maira mindiola",
+                    UbicacionExpediente = "Esta en el lote tal",
+                }
             };
-            ExpedienteBLL bll = new ExpedienteBLL();
-            var response = bll.Insertar(obj);
+            // ExpedienteBLL bll = new ExpedienteBLL();
+            ObligacionBLL bll = new ObligacionBLL();
+            var response = bll.Insertar(Obligacion);
             Assert.AreEqual(false, response.Error);
         }
     }
