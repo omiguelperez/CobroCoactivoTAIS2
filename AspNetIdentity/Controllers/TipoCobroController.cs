@@ -17,7 +17,7 @@ namespace AspNetIdentity.Controllers
         public List<TipoCobroDTO> GetTipoCobros()
         {
             TipoCobroBLL tipoCobroes = new TipoCobroBLL();
-            return tipoCobroes.GetRecords();
+            return tipoCobroes.GetTiposCobros();
         }
     }
 }

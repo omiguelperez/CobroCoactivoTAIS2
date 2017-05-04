@@ -14,13 +14,13 @@ namespace BLL
         Respuesta respuesta = new Respuesta();
         ApplicationDbContext db = new ApplicationDbContext();
 
-        public Respuesta Insertar(ObligacionDTO obligacion)
+        public Respuesta InsertarObligacion(ObligacionDTO obligacion)
         {
             using (db = new ApplicationDbContext())
             {
                 try
                 {
-                    PersonaDTO persona = new PersonaBLL().FindByIdentificacion(obligacion.Persona.Identificacion);
+                    PersonaDTO persona = new PersonaBLL().FindPersonaByIdentificacion(obligacion.Persona.Identificacion);
                     if (persona != null)
                     {//QUIERE DECIR QUE LA PERSONA YA EXISTE
                         obligacion.PersonaId = persona.PersonaId;
@@ -51,10 +51,21 @@ namespace BLL
             }
         }
 
-        public List<ObligacionDTO> GetRecords()
+        public List<ObligacionDTO> GetObligaciones()
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
+                //IQuereable
+                //var query = db.Obligaciones.Where(t => t.Cuantia > 0);
+                //if (..)
+                //{
+                //    query = query.Where(t => t.Dueda > 0);
+                //}
+                //else {
+                //    query = query.Where(t => t.Dueda < 100000);
+                //}
+                //var result = query.ToList();
+
                 return db.Obligaciones
                     .Select(t =>
                         new ObligacionDTO
@@ -69,28 +80,28 @@ namespace BLL
                             PersonaId = t.PersonaId,
                             ExpedienteId = t.ExpedienteId,
                             TipoObligacionId = t.TipoObligacionId,
-                            Expediente= db.Expedientes.Select(s => new ExpedienteDTO
+                            Expediente = new ExpedienteDTO
                             {
-                                EntidadEncargada=s.EntidadEncargada,
-                                Descripcion=s.Descripcion,
-                                Cuantia=s.Cuantia,
-                                Identificacion=s.Identificacion,
-                                DireccionEjecutado=s.DireccionEjecutado,
-                                FechaRadicacion=s.FechaRadicacion,
-                                NaturalezaObligacion=s.NaturalezaObligacion,
-                                ExpedienteId=s.ExpedienteId,
-                                UbicacionExpediente=s.UbicacionExpediente,
-                                Nombre=s.Nombre,
-                                CreatedAt=s.CreatedAt,
-                                UpdateAt=s.UpdateAt,
-                                DireccionTituloEjecutivo=s.DireccionTituloEjecutivo
-                            }).Where(r => r.ExpedienteId.Equals(t.ExpedienteId)).FirstOrDefault()
+                                EntidadEncargada = t.Expediente.EntidadEncargada,
+                                Descripcion = t.Expediente.Descripcion,
+                                Cuantia = t.Expediente.Cuantia,
+                                Identificacion = t.Expediente.Identificacion,
+                                DireccionEjecutado = t.Expediente.DireccionEjecutado,
+                                FechaRadicacion = t.Expediente.FechaRadicacion,
+                                NaturalezaObligacion = t.Expediente.NaturalezaObligacion,
+                                ExpedienteId = t.Expediente.ExpedienteId,
+                                UbicacionExpediente = t.Expediente.UbicacionExpediente,
+                                Nombre = t.Expediente.Nombre,
+                                CreatedAt = t.Expediente.CreatedAt,
+                                UpdateAt = t.Expediente.UpdateAt,
+                                DireccionTituloEjecutivo = t.Expediente.DireccionTituloEjecutivo
+                            }
                         }
                     ).ToList();
             }
         }
 
-        public ObligacionDTO FindById(int ObligacionId)
+        public ObligacionDTO FindObligacionById(int ObligacionId)
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {

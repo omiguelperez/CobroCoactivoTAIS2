@@ -149,7 +149,7 @@ namespace AspNetIdentity.Controllers
                     documento.Estado = "Por Validar";
                     documento.TipoArchivo = TipoArchivoExtension;
 
-                    Respuesta respuesta = new DocumentoBLL().Insertar(documento);
+                    Respuesta respuesta = new DocumentoBLL().InsertarDocumento(documento);
                     //var message1 = string.Format("File Updated Successfully.");
                     dict.Add("Respuesta", respuesta);
                     if (respuesta!=null)

@@ -50,7 +50,7 @@ namespace PPTConsola
             //};
             cliente1.PersonaId = 1;
             ObligacionBLL kkk = new ObligacionBLL();
-            Respuesta respuesta = kkk.Insertar(cliente1);
+            Respuesta respuesta = kkk.InsertarObligacion(cliente1);
             Console.WriteLine(respuesta.Mensaje + ", Filas afactadas: " + respuesta.FilasAfectadas);
             Console.ReadKey();
 

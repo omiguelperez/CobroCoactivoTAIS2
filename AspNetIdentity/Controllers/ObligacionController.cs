@@ -19,7 +19,7 @@ namespace AspNetIdentity.Controllers
             if (ObligacionDTO.Expediente.Identificacion.Equals(ObligacionDTO.Persona.Identificacion))
             {
                 ObligacionBLL Obligacion = new ObligacionBLL();
-                response = Obligacion.Insertar(ObligacionDTO);
+                response = Obligacion.InsertarObligacion(ObligacionDTO);
             }
             else
             {
@@ -34,7 +34,7 @@ namespace AspNetIdentity.Controllers
         public List<ObligacionDTO> GetObligaciones()
         {
             ObligacionBLL Obligacion = new ObligacionBLL();
-            return Obligacion.GetRecords();
+            return Obligacion.GetObligaciones();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace BLL
         Respuesta respuesta = new Respuesta();
         ApplicationDbContext db = new ApplicationDbContext();
 
-        public Respuesta Insertar(PersonaDTO cliente)
+        public Respuesta InsertarPersona(PersonaDTO cliente)
         {
             using (db = new ApplicationDbContext())
             {
@@ -49,7 +49,7 @@ namespace BLL
                 return respuesta;
             }
         }
-        public PersonaDTO FindByIdentificacion(String Identificacion)
+        public PersonaDTO FindPersonaByIdentificacion(String Identificacion)
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {

@@ -17,7 +17,7 @@ namespace AspNetIdentity.Controllers
         public List<TipoDocumentoDTO> GetTipoDocumentos()
         {
             TipoDocumentoBLL tipodocumento = new TipoDocumentoBLL();
-            return tipodocumento.GetRecords();
+            return tipodocumento.GetTipoDocumentos();
         }
     }
 }

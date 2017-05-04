@@ -17,7 +17,7 @@ namespace AspNetIdentity.Controllers
         public List<TipoObligacionDTO> GetTipoObligaciones()
         {
             TipoObligacionBLL tipoobligaciones = new TipoObligacionBLL();
-            return tipoobligaciones.GetRecords();
+            return tipoobligaciones.GetTipoObligaciones();
         }
     }
 }

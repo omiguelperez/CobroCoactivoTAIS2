@@ -14,7 +14,7 @@ namespace BLL
         Respuesta respuesta = new Respuesta();
         ApplicationDbContext db = new ApplicationDbContext();
 
-        public Respuesta Insertar(DocumentoDTO cliente)
+        public Respuesta InsertarDocumento(DocumentoDTO cliente)
         {
             using (db = new ApplicationDbContext())
             {

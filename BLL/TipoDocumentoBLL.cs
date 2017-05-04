@@ -14,38 +14,7 @@ namespace BLL
         Respuesta respuesta = new Respuesta();
         ApplicationDbContext db = new ApplicationDbContext();
 
-        public Respuesta Insertar(TipoDocumentoDTO cliente)
-        {
-            using (db = new ApplicationDbContext())
-            {
-                try
-                {
-                    // preparar el cliente para guardar
-                    db.TiposDocumentos.Add(TipoDocumento.MapeoDTOToDAL(cliente));
-
-                    // preparar la respuesta
-                    respuesta.FilasAfectadas = db.SaveChanges();
-                    respuesta.Mensaje = "Se realizó la operación satisfactoriamente";
-                    respuesta.Error = false;
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
-                {
-                    respuesta.Mensaje = ex.Message;
-                    respuesta.FilasAfectadas = 0;
-                    respuesta.Error = true;
-                }
-                catch (Exception ex)
-                {
-                    respuesta.Mensaje = ex.Message;
-                    respuesta.FilasAfectadas = 0;
-                    respuesta.Error = true;
-                }
-
-                return respuesta;
-            }
-        }
-
-        public List<TipoDocumentoDTO> GetRecords()
+        public List<TipoDocumentoDTO> GetTipoDocumentos()
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
