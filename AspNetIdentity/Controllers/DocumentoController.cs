@@ -38,37 +38,43 @@ namespace AspNetIdentity.Controllers
         [HttpGet]
         public HttpResponseMessage Test(int id)
         {
-            var path = "";
-            DocumentoDTO document = new DocumentoBLL().FindById(id);
             HttpResponseMessage result;
-            if (document != null)
+            try
             {
-                path = GetPathFromRuta(document.RutaDocumento);
-                result = new HttpResponseMessage(HttpStatusCode.OK);
-                var stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-                result.Content = new StreamContent(stream);
-                if (AllowedFileExtensionsImages.Contains(document.TipoArchivo))//es imagen
+                var path = "";
+                DocumentoDTO document = new DocumentoBLL().FindById(id);
+                if (document != null)
                 {
-                    string auxxx = "image/" + document.TipoArchivo.Replace(".","");
-                    result.Content.Headers.ContentType =
-                      new MediaTypeHeaderValue(auxxx);
-                }else if (AllowedFileExtensionsFiles.Contains(document.TipoArchivo))
-                {
-                    if (document.TipoArchivo.Equals(".pdf")){
-                        result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
-                    }else if (document.TipoArchivo.Equals(".doc") || document.TipoArchivo.Equals(".docx")){
-                        result.Content.Headers.ContentType =new MediaTypeHeaderValue("application/msword");
-                    }else{
+                    path = GetPathFromRuta(document.RutaDocumento);
+                    result = new HttpResponseMessage(HttpStatusCode.OK);
+                    var stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                    result.Content = new StreamContent(stream);
+                    if (AllowedFileExtensionsImages.Contains(document.TipoArchivo))//es imagen
+                    {
+                        string auxxx = "image/" + document.TipoArchivo.Replace(".","");
+                        result.Content.Headers.ContentType =
+                          new MediaTypeHeaderValue(auxxx);
+                    }else if (AllowedFileExtensionsFiles.Contains(document.TipoArchivo))
+                    {
+                        if (document.TipoArchivo.Equals(".pdf")){
+                            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
+                        }else if (document.TipoArchivo.Equals(".doc") || document.TipoArchivo.Equals(".docx")){
+                            result.Content.Headers.ContentType =new MediaTypeHeaderValue("application/msword");
+                        }else{
+                            result.Content.Headers.ContentType =new MediaTypeHeaderValue("application/octet-stream");
+                        }
+                    }else
+                    {
                         result.Content.Headers.ContentType =new MediaTypeHeaderValue("application/octet-stream");
                     }
                 }else
                 {
-                    result.Content.Headers.ContentType =new MediaTypeHeaderValue("application/octet-stream");
+                    result = new HttpResponseMessage(HttpStatusCode.NotFound);
+                    //result.Content.Headers.Add("Error","No Existe");
                 }
-            }else
+            }catch(Exception e)
             {
-                result = new HttpResponseMessage(HttpStatusCode.NotFound);
-                //result.Content.Headers.Add("Error","No Existe");
+                result  = new HttpResponseMessage(HttpStatusCode.NotFound);
             }
             return result;
         }
@@ -134,38 +140,56 @@ namespace AspNetIdentity.Controllers
 
                         }
                     }
-                    DocumentoDTO documento = new DocumentoDTO();
-                    documento.ExpedienteId= Int32.Parse(httpRequest.Form["ExpedienteId"]);
-                    documento.TipoDocumentoId = Int32.Parse(httpRequest.Form["TipoDocumentoId"]);
-                    documento.FechaRecepcion= DateTime.Parse(httpRequest.Form["FechaRecepcion"]);
-                    documento.FechaDocumento = DateTime.Parse(httpRequest.Form["FechaDocumento"]);
-                    documento.OficinaOrigen = httpRequest.Form["OficinaOrigen"];
-                    documento.Remitente = httpRequest.Form["Remitente"];
-                    documento.FuncionarioRecibe = httpRequest.Form["FuncionarioRecibe"];
-                    documento.FuncionarioEntrega = httpRequest.Form["FuncionarioEntrega"];
-                    documento.FechaEntrega = DateTime.Parse(httpRequest.Form["FechaEntrega"]);
-                    documento.FechaRadicacion = DateTime.Parse(httpRequest.Form["FechaRadicacion"]);
-                    documento.RutaDocumento = RutadocumentoDatabase;
-                    documento.Estado = "Por Validar";
-                    documento.TipoArchivo = TipoArchivoExtension;
-
-                    Respuesta respuesta = new DocumentoBLL().InsertarDocumento(documento);
-                    //var message1 = string.Format("File Updated Successfully.");
-                    dict.Add("Respuesta", respuesta);
-                    if (respuesta!=null)
+                    if (httpRequest.Form["ExpedienteId"].ToString().Equals("")
+                        || httpRequest.Form["TipoDocumentoId"].ToString().Equals("")
+                        || httpRequest.Form["FechaRecepcion"].ToString().Equals("")
+                        || httpRequest.Form["FechaDocumento"].ToString().Equals("")
+                        || httpRequest.Form["OficinaOrigen"].ToString().Equals("")
+                        || httpRequest.Form["Remitente"].ToString().Equals("")
+                        || httpRequest.Form["FuncionarioRecibe"].ToString().Equals("")
+                        || httpRequest.Form["FuncionarioEntrega"].ToString().Equals("")
+                        || httpRequest.Form["FechaEntrega"].ToString().Equals("")
+                        || httpRequest.Form["FechaRadicacion"].ToString().Equals(""))
                     {
-                        if (!respuesta.Error)
-                        {
-                            return Request.CreateResponse(HttpStatusCode.Created, dict);
-                        }else
-                        {
-                            return Request.CreateResponse(HttpStatusCode.InternalServerError, dict);
-                        }
+                        dict.Add("Respuesta", "Verifique Datos, Falta algun Argumento(s) Argumento(s) por Enviar");
+                        return Request.CreateResponse(HttpStatusCode.InternalServerError, dict);
                     }
                     else
                     {
-                        dict.Add("Respuesta", "Sucedio algun error en el BLL de Documento");
-                        return Request.CreateResponse(HttpStatusCode.InternalServerError, dict);
+                        DocumentoDTO documento = new DocumentoDTO();
+                        documento.ExpedienteId = Int32.Parse(httpRequest.Form["ExpedienteId"]);
+                        documento.TipoDocumentoId = Int32.Parse(httpRequest.Form["TipoDocumentoId"]);
+                        documento.FechaRecepcion = DateTime.Parse(httpRequest.Form["FechaRecepcion"]);
+                        documento.FechaDocumento = DateTime.Parse(httpRequest.Form["FechaDocumento"]);
+                        documento.OficinaOrigen = httpRequest.Form["OficinaOrigen"];
+                        documento.Remitente = httpRequest.Form["Remitente"];
+                        documento.FuncionarioRecibe = httpRequest.Form["FuncionarioRecibe"];
+                        documento.FuncionarioEntrega = httpRequest.Form["FuncionarioEntrega"];
+                        documento.FechaEntrega = DateTime.Parse(httpRequest.Form["FechaEntrega"]);
+                        documento.FechaRadicacion = DateTime.Parse(httpRequest.Form["FechaRadicacion"]);
+                        documento.RutaDocumento = RutadocumentoDatabase;
+                        documento.Estado = "Por Validar";
+                        documento.TipoArchivo = TipoArchivoExtension;
+
+                        Respuesta respuesta = new DocumentoBLL().InsertarDocumento(documento);
+                        //var message1 = string.Format("File Updated Successfully.");
+                        dict.Add("Respuesta", respuesta);
+                        if (respuesta != null)
+                        {
+                            if (!respuesta.Error)
+                            {
+                                return Request.CreateResponse(HttpStatusCode.Created, dict);
+                            }
+                            else
+                            {
+                                return Request.CreateResponse(HttpStatusCode.InternalServerError, dict);
+                            }
+                        }
+                        else
+                        {
+                            dict.Add("Respuesta", "Sucedio algun error en el BLL de Documento");
+                            return Request.CreateResponse(HttpStatusCode.InternalServerError, dict);
+                        }
                     }
                 }
                 var res = string.Format("Please Upload a image.");
@@ -174,7 +198,7 @@ namespace AspNetIdentity.Controllers
             }
             catch (Exception ex)
             {
-                var res = string.Format("some Message");
+                var res = string.Format(ex.Message);
                 dict.Add("error", res);
                 return Request.CreateResponse(HttpStatusCode.NotFound, dict);
             }

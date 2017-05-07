@@ -35,7 +35,7 @@ namespace BLL.Tests
                 FuncionarioRecibe="Miguel",
                 OficinaOrigen="UPC",
                 Remitente="Anibal",
-                RutaDocumento="File/Images/algunaimagen.jpg",
+                RutaDocumento="Files/Images/algunaimagen.jpg",
                 TipoArchivo="Imagen",
                 TipoDocumentoId=1,
             };

@@ -33,7 +33,20 @@ namespace DAL.Migrations
                 JoinDate = DateTime.Now.AddYears(-3)
             };
 
+            var secretaria = new ApplicationUser()
+            {
+                UserName = "secretaria",
+                Email = "secretaria@gmail.com",
+                EmailConfirmed = true,
+                FirstName = "secretaria",
+                LastName = "secretaria",
+                Level = 1,
+                JoinDate = DateTime.Now.AddYears(-3)
+            };
+
             manager.Create(user, "passwordlider1*");
+
+            manager.Create(secretaria, "secretaria1*");
 
             if (roleManager.Roles.Count() == 0)
             {
@@ -45,8 +58,11 @@ namespace DAL.Migrations
             }
 
             var adminUser = manager.FindByName("lider");
+            var secretariaUser = manager.FindByName("secretaria");
 
             manager.AddToRoles(adminUser.Id, new string[] { "Lider" });
+
+            manager.AddToRoles(secretariaUser.Id, new string[] { "Secretaria" });
 
             context.TiposObligaciones.AddOrUpdate(tipo => tipo.TipoObligacionId, new TipoObligacion[]
                 {
