@@ -24,11 +24,25 @@ namespace DAL.Infrastructure
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-           // modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();//esto es para solucionar este error:
+            // modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();//esto es para solucionar este error:
             // may cause cycles or multiple cascade paths. Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or modify other FOREIGN KEY constraints.
             //Could not create constraint or index. See previous errors.
             modelBuilder.Entity<Cobro>()
               .HasRequired<ApplicationUser>(cobro => cobro.Usuario);
+            //PARA SOLUCIONAR ERROR:
+            //Introducing FOREIGN KEY constraint 'FK_dbo.ObligacionesCobros_dbo.Cobroes_CobroId' on table 'ObligacionesCobros' may cause cycles or multiple cascade paths.Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or modify other FOREIGN KEY constraints.
+            //Could not create constraint or index. See previous errors.
+            modelBuilder.Entity<Obligacion>()
+                         .HasMany(x => x.Cobros)
+                         .WithMany(x => x.Obligaciones)
+                         .Map(x =>
+                         {
+                             x.ToTable("ObligacionesCobros"); // third table is named Cookbooks
+                            x.MapLeftKey("ObligacionId");
+                             x.MapRightKey("CobroId");
+                         });
+
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
             base.OnModelCreating(modelBuilder);
         }

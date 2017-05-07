@@ -31,8 +31,10 @@ namespace AspNetIdentity.Providers
             var roles = from role in _applicationDbContext.Roles.OrderBy(r => r.Name)
                         where userRolesId.Contains(role.Id)
                         select role.Name;
-
+            var Persona = _applicationDbContext.Personas.Find(user.PersonaId);
             context.AdditionalResponseParameters.Add("roles", String.Join(";", String.Join(";", roles.ToList())));
+            context.AdditionalResponseParameters.Add("persona", JsonConvert.SerializeObject(Persona));
+            //context.AdditionalResponseParameters.Add("usuario", JsonConvert.SerializeObject(user));
 
             return Task.FromResult(0);
         }
