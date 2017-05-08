@@ -104,8 +104,8 @@ namespace AspNetIdentity.Controllers
 
         }
 
+       // [AllowAnonymous]
         [Authorize(Roles = "Lider")]
-        [AllowAnonymous]
         [Route("create")]
         public async Task<IHttpActionResult> CreateUser(JObject jsonData)
         {
