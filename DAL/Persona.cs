@@ -33,7 +33,7 @@ namespace DAL
         public string Apellidos { get; set; }
         [Required]
         public string Sexo { get; set; }
-        public int Telefono { get; set; }
+        public string Telefono { get; set; }
         [Required]
         public string Direccion { get; set; }
         public int TipoPersonaId { get; set; }

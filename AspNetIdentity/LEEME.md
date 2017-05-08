@@ -11,13 +11,29 @@ Cuenta HotMail del cliente SMTP para el envío de correos:
 Crear un usuario para obtener un Token:
 
 ```
-{ 
-  "Email": "mr.elliotalderson@hotmail.com", 
-  "Username":"3lliot@ld3rs0n", 
-  "Password": "unDiaSol3@do.", 
-  "ConfirmPassword": "unDiaSol3@do.", 
-  "FirstName": "Elliot", 
-  "LastName": "Alderson"
+{
+  "CreateUserBindingModel":{ 
+    "UserName":"anibal1", 
+    "Password": "Anibal11*", 
+    "ConfirmPassword": "Anibal11*", 
+    "RoleName":"Abogado"
+  },
+  "Persona":{
+    "Apellidos":"Mindiola",
+    "Direccion":"Carrera 13 # 36 - 111",
+    "Identificacion":"1065824563",
+    "Nombres":"Maira mindiola",
+    "Sexo":"F",
+    "Email":"anibaljose.15@hotmail.com",
+    "Nacionalidad":"Colombia",
+    "PaisNacimiento":"Colombia",
+    "PaisCorrespondencia":"Colombia",
+    "Departamento":"Cesar",
+    "Municipio":"Pueblo Bello",
+    "FechaNacimiento":"1996-07-30",
+    "TipoPersonaId":1,
+    "Telefono":"3215843514"
+  }
 }
 ```
 

@@ -45,7 +45,7 @@ namespace BLL.Tests
                     Municipio = "Pueblo Bello",
                     FechaNacimiento = new DateTime(1996, 07, 30),
                     TipoPersonaId = 1,
-                    Telefono = 31868754
+                    Telefono = "31868754"
                 },
                 Expediente = new ExpedienteDTO()
                 {

@@ -17,7 +17,7 @@ namespace Entities
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
         public string Sexo { get; set; }
-        public int Telefono { get; set; }
+        public string Telefono { get; set; }
         public string Direccion { get; set; }
         public int TipoPersonaId { get; set; }
         public virtual TipoPersonaDTO TipoPersona { get; set; }

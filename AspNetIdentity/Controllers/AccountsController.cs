@@ -12,6 +12,10 @@ using AspNetIdentity.Models;
 using System.Security.Claims;
 using AspNetIdentity.WebApi.Controllers;
 using DAL;
+using Entities;
+using Newtonsoft.Json.Linq;
+using BLL;
+using System.Net;
 
 namespace AspNetIdentity.Controllers
 {
@@ -100,24 +104,43 @@ namespace AspNetIdentity.Controllers
 
         }
 
-        [AllowAnonymous]
+       // [AllowAnonymous]
+        [Authorize(Roles = "Lider")]
         [Route("create")]
-        public async Task<IHttpActionResult> CreateUser(CreateUserBindingModel createUserModel)
+        public async Task<IHttpActionResult> CreateUser(JObject jsonData)
         {
+            dynamic json = jsonData;
+            JObject jalbum = json.CreateUserBindingModel;
+            JObject juser = json.Persona;
+
+            var createUserModel = jalbum.ToObject<CreateUserBindingModel>();
+            var person = juser.ToObject<PersonaDTO>();
+            createUserModel.FirstName = person.Nombres;
+            createUserModel.LastName = person.Apellidos;
+            createUserModel.Email = person.Email;
+            var existepersona = new PersonaBLL().FindPersonaByIdentificacion(person.Identificacion);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            var user = new ApplicationUser()
+            var user = new ApplicationUser();
+            user.UserName = createUserModel.Username;
+            user.Email = createUserModel.Email;
+            user.FirstName = createUserModel.FirstName;
+            user.LastName = createUserModel.LastName;
+            user.Level = 3;
+            user.JoinDate = DateTime.Now.Date;
+            if (existepersona == null)
+            {//QUIERE DECIR QUE LA PERSONA YA EXISTE
+                user.Persona = Persona.MapeoDTOToDAL(person);
+            }
+            else
             {
-                UserName = createUserModel.Username,
-                Email = createUserModel.Email,
-                FirstName = createUserModel.FirstName,
-                LastName = createUserModel.LastName,
-                Level = 3,
-                JoinDate = DateTime.Now.Date,
-            };
+                //user.PersonaId = existepersona.PersonaId; este deberia ser el codigo para que aqui se le agregue un nuevo rol
+                return Content(HttpStatusCode.Conflict, person);
+            }
+
+            
 
             IdentityResult addUserResult = await this.AppUserManager.CreateAsync(user, createUserModel.Password);
 
