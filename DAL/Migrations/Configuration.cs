@@ -4,9 +4,11 @@ namespace DAL.Migrations
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using System.Text.RegularExpressions;
 
     internal sealed class Configuration : DbMigrationsConfiguration<DAL.Infrastructure.ApplicationDbContext>
     {
@@ -46,6 +48,75 @@ namespace DAL.Migrations
                     new TipoDocumento{TipoDocumentoId=3,Nombre = "Tipo Documento 3",CreatedAt=tiempoactual,UpdateAt=tiempoactual},
                     //etc...
                 });
+            context.Paises.AddOrUpdate(tipo => tipo.PaisId, new Pais[]
+                {
+                    new Pais{PaisId=1,Nombre = "Colombia"},
+                    //etc...
+                });
+            context.SaveChanges();
+            //Cargando Ciudades
+            Departamento[] DepartamentosVector = new Departamento[32];
+            int counter = 0;
+            string line;
+            String prepath = AppDomain.CurrentDomain.BaseDirectory;
+            prepath = Regex.Split(prepath, "DAL")[0] + "DAL";
+            System.IO.StreamReader file =
+                new System.IO.StreamReader(prepath + "/Migrations/departamentoscolombiacsv.txt");
+            while ((line = file.ReadLine()) != null)
+            {
+
+                string[] departamentos = Regex.Split(line, ",");
+                DepartamentosVector[counter] = new Departamento()
+                {
+                    Nombre = departamentos[1],
+                    DepartamentoId = Int32.Parse(departamentos[0]),
+                    PaisId = 1
+                };
+                //System.Console.WriteLine(departamentos[0] + " - " + departamentos[1] + " - " + departamentos[2] + " - " + departamentos[3]);
+                counter++;
+
+
+            }
+
+            file.Close();
+
+            context.Departamentos.AddOrUpdate(tipo => tipo.DepartamentoId, DepartamentosVector);
+
+            context.SaveChanges();
+
+            Municipio[] Ciudadesvector = new Municipio[1102];
+             counter = 0;
+            line="";
+            prepath = AppDomain.CurrentDomain.BaseDirectory;
+            prepath = Regex.Split(prepath, "DAL")[0] + "DAL";
+            file =
+                new System.IO.StreamReader(prepath + "/Migrations/ciudadescolombiacsv.txt");
+            while ((line = file.ReadLine()) != null)
+            {
+
+                if (counter < 1102)
+                {
+                    string[] ciudades = Regex.Split(line, ",");
+                    Ciudadesvector[counter] = new Municipio()
+                    {
+                        Nombre = ciudades[1],
+                        DepartamentoId = Int32.Parse(ciudades[2]),
+                        MunicipioId = Int32.Parse(ciudades[0])
+                    };
+                    //System.Console.WriteLine(departamentos[0] + " - " + departamentos[1] + " - " + departamentos[2] + " - " + departamentos[3]);
+                    counter++;
+                }
+                else
+                {
+                    break;
+                }
+
+
+            }
+
+            context.Municipios.AddOrUpdate(tipo => tipo.MunicipioId, Ciudadesvector);
+
+            file.Close();
             context.SaveChanges();
             //  This method will be called after migrating to the latest version.
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
@@ -66,7 +137,8 @@ namespace DAL.Migrations
                 PaisNacimiento = "Colombia",
                 PaisCorrespondencia = "Colombia",
                 Departamento = "Cesar",
-                Municipio = "Pueblo Bello",
+                MunicipioId = 68020,
+                PaisId=1,
                 FechaNacimiento = new DateTime(1996, 07, 30),
                 TipoPersonaId = 1,
                 Telefono = "31868754",
@@ -98,7 +170,8 @@ namespace DAL.Migrations
                 PaisNacimiento = "Colombia",
                 PaisCorrespondencia = "Colombia",
                 Departamento = "Cesar",
-                Municipio = "Valledupar",
+                MunicipioId = 20001,
+                PaisId=1,
                 FechaNacimiento = new DateTime(1996, 07, 30),
                 TipoPersonaId = 1,
                 Telefono = "31500212",

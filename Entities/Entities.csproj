@@ -53,9 +53,12 @@
   <ItemGroup>
     <Compile Include="ApplicationUserDTO.cs" />
     <Compile Include="CobroDTO.cs" />
+    <Compile Include="DepartamentoDTO.cs" />
     <Compile Include="DocumentoDTO.cs" />
     <Compile Include="ExpedienteDTO.cs" />
+    <Compile Include="MunicipioDTO.cs" />
     <Compile Include="ObligacionDTO.cs" />
+    <Compile Include="PaisDTO.cs" />
     <Compile Include="PersonaDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Respuesta.cs" />

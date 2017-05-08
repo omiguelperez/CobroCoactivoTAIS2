@@ -23,9 +23,13 @@ namespace Entities
         public virtual TipoPersonaDTO TipoPersona { get; set; }
         public string Nacionalidad { get; set; }
         public string PaisNacimiento { get; set; }
+        public int PaisId { get; set; }
+        public virtual PaisDTO Pais { get; set; }
         public string PaisCorrespondencia { get; set; }
         public string Departamento { get; set; }
-        public string Municipio { get; set; }
+        public int MunicipioId { get; set; }
+        public virtual MunicipioDTO Municipio { get; set; }
+        //public string Municipio { get; set; }
         public string Email { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public virtual List<ObligacionDTO> Obligaciones { get; set; }

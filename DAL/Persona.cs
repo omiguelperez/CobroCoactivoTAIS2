@@ -40,9 +40,13 @@ namespace DAL
         public virtual TipoPersona TipoPersona { get; set; }
         public string Nacionalidad { get; set; }
         public string PaisNacimiento { get; set; }
+        public int PaisId { get; set; }
+        public virtual Pais Pais { get; set; }
         public string PaisCorrespondencia { get; set; }
         public string Departamento { get; set; }
-        public string Municipio { get; set; }
+        public int MunicipioId { get; set; }
+        public virtual Municipio Municipio { get; set; }
+        //public string Municipio { get; set; }
         public string Email { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public virtual List<Obligacion> Obligaciones { get; set; }
