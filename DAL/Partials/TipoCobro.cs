@@ -27,7 +27,7 @@ namespace DAL
                 //No mapeo los cobros porque despues Habria un Bucle
                 return c;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }

@@ -45,7 +45,7 @@ namespace DAL
                 documento.TipoDocumentoId = item.TipoDocumentoId;
                 return documento;
 
-            }catch(Exception e)
+            }catch(Exception)
             {
                 return null;
             }
@@ -87,7 +87,7 @@ namespace DAL
                 documento.TipoDocumentoId = DAL.TipoDocumentoId;
                 return documento;
 
-            }catch(Exception e)
+            }catch(Exception)
             {
                 return null;
             }
@@ -109,7 +109,7 @@ namespace DAL
                     Obligaciones.Add(MapeoDTOToDAL(item));
                 }
                 return Obligaciones;
-            }catch(Exception e)
+            }catch(Exception)
             {
                 return null;
             }

@@ -72,7 +72,7 @@ namespace AspNetIdentity.Controllers
                     result = new HttpResponseMessage(HttpStatusCode.NotFound);
                     //result.Content.Headers.Add("Error","No Existe");
                 }
-            }catch(Exception e)
+            }catch(Exception)
             {
                 result  = new HttpResponseMessage(HttpStatusCode.NotFound);
             }

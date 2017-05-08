@@ -25,7 +25,7 @@ namespace DAL
                 c.TipoDocumentoId = DTO.TipoDocumentoId;
                 return c;
 
-            }catch(Exception e)
+            }catch(Exception)
             {
                 return null;
             }
@@ -48,7 +48,7 @@ namespace DAL
                 c.TipoDocumentoId = DAL.TipoDocumentoId;
                 return c;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }

@@ -25,7 +25,7 @@ namespace DAL
                 c.TipoObligacionId = DTO.TipoObligacionId;
                 return c;
 
-            }catch(Exception e)
+            }catch(Exception)
             {
                 return null;
             }
@@ -48,7 +48,7 @@ namespace DAL
                 return c;
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }

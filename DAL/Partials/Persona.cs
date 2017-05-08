@@ -43,7 +43,7 @@ namespace DAL
                 return c;
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
@@ -83,7 +83,7 @@ namespace DAL
                 c.FechaNacimiento = DAL.FechaNacimiento;
                 return c;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }

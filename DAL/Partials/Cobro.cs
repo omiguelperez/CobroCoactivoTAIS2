@@ -36,7 +36,7 @@ namespace DAL
                 }
                 cobro.TipoCobroId = item.TipoCobroId;
                 return cobro;
-            }catch(Exception e)
+            }catch(Exception)
             {
                 return null;
             }
@@ -58,7 +58,7 @@ namespace DAL
                 }
                 return Cobros;
 
-            }catch(Exception e)
+            }catch(Exception)
             {
                 return null;
             }

@@ -36,7 +36,7 @@ namespace DAL
                 //expediente.ObligacionId = DTO.ObligacionId;
                 return expediente;
 
-            }catch(Exception e)
+            }catch(Exception)
             {
                 return null;
             }
@@ -70,7 +70,7 @@ namespace DAL
                 return expediente;
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
