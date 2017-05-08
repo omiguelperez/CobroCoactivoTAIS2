@@ -16,7 +16,7 @@ namespace BLL.Tests
         public void FindPersonaByIdentificacionTest()
         {
             PersonaBLL bllpersona = new PersonaBLL();
-            Assert.IsNotNull(bllpersona.FindPersonaByIdentificacion("1065824563"));
+            Assert.IsNotNull(bllpersona.FindPersonaByIdentificacion("10253652141"));
         }
 
         [TestMethod()]
@@ -24,21 +24,21 @@ namespace BLL.Tests
         {
             PersonaDTO persona = new PersonaDTO()
             {
-                Apellidos = "Lider Proyecto",
+                Apellidos = "Mindiola",
                 Direccion = "Carrera 13 # 36 - 111",
-                Identificacion = "10253652141",
-                Nombres = "Soy",
+                Identificacion = "1065824563",
+                Nombres = "Maira mindiola",
                 Sexo = "F",
-                Email = "soyellider.14@hotmail.com",
+                Email = "anibaljose.14@hotmail.com",
                 Nacionalidad = "Colombia",
                 PaisNacimiento = "Colombia",
                 PaisCorrespondencia = "Colombia",
                 Departamento = "Cesar",
-                MunicipioId = 68020,
+                MunicipioId = 20001,
                 PaisId = 1,
                 FechaNacimiento = new DateTime(1996, 07, 30),
                 TipoPersonaId = 1,
-                Telefono = "31868754",
+                Telefono = "31868754"
             };
             PersonaBLL personbll = new PersonaBLL();
             Assert.AreEqual(false, personbll.InsertarPersona(persona).Error);

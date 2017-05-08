@@ -21,17 +21,25 @@ namespace BLL
                 try
                 {
                     // preparar el cliente para guardar
-                    Persona c = Persona.MapeoDTOToDAL(cliente);
-                    if (cliente.Obligaciones.Count > 0)
-                    {
-                        c.Obligaciones = Obligacion.ConvertList(cliente.Obligaciones);
+                    PersonaDTO persona = new PersonaBLL().FindPersonaByIdentificacion(cliente.Identificacion);
+                    if (persona != null)
+                    {//QUIERE DECIR QUE LA PERSONA YA EXISTE
+                        respuesta.Mensaje = "Ya Existe la PErsona";
+                        respuesta.Error = true;
                     }
-                    db.Personas.Add(c);
+                    else {
+                        Persona c = Persona.MapeoDTOToDAL(cliente);
+                        if (cliente.Obligaciones.Count > 0)
+                        {
+                            c.Obligaciones = Obligacion.ConvertList(cliente.Obligaciones);
+                        }
+                        db.Personas.Add(c);
+                        respuesta.Error = false;
+                    }
 
                     // preparar la respuesta
                     respuesta.FilasAfectadas = db.SaveChanges();
                     respuesta.Mensaje = "Se realizó la operación satisfactoriamente";
-                    respuesta.Error = false;
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException ex)
                 {
