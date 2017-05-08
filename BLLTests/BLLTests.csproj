@@ -71,11 +71,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DepartamentoBLLTests.cs" />
     <Compile Include="DocumentoBLLTests.cs" />
+    <Compile Include="ExpedienteBLLTests.cs" />
+    <Compile Include="MunicipioBLLTests.cs" />
     <Compile Include="ObligacionBLLTests.cs" />
+    <Compile Include="PaisBLLTests.cs" />
+    <Compile Include="PersonaBLLTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoCobroBLLTests.cs" />
     <Compile Include="TipoDocumentoBLLTests.cs" />
+    <Compile Include="TipoObligacionBLLTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

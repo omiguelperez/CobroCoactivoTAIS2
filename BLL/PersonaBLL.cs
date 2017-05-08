@@ -62,5 +62,49 @@ namespace BLL
                 return persona;
             }
         }
+        public PersonaDTO FindPersonaById(int PersonaId)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                return db.Personas
+                            .Select(t =>
+                                new PersonaDTO
+                                {
+                                    PersonaId = t.PersonaId,
+                                    UpdateAt = t.UpdateAt,
+                                    CreatedAt = t.CreatedAt,
+                                    Pais = new PaisDTO
+                                    {
+                                        PaisId = t.Pais.PaisId,
+                                        Nombre = t.Pais.Nombre
+                                    },
+                                    Nacionalidad=t.Nacionalidad,
+                                    MunicipioId=t.MunicipioId,
+                                    Municipio=new MunicipioDTO
+                                    {
+                                        MunicipioId = t.Municipio.MunicipioId,
+                                        Nombre = t.Municipio.Nombre
+                                    },
+                                    Identificacion=t.Identificacion,
+                                    FechaNacimiento=t.FechaNacimiento,
+                                    Email=t.Email,
+                                    Apellidos=t.Apellidos,
+                                    Departamento=t.Departamento,
+                                    Nombres=t.Nombres,
+                                    Direccion=t.Direccion,
+                                    PaisCorrespondencia=t.PaisCorrespondencia,
+                                    PaisId=t.PaisId,
+                                    PaisNacimiento=t.PaisNacimiento,
+                                    Sexo=t.Sexo,
+                                    Telefono=t.Telefono,
+                                    TipoPersonaId=t.TipoPersonaId,
+                                    TipoPersona=new TipoPersonaDTO
+                                    {
+                                        Nombre=t.TipoPersona.Nombre,
+                                    }
+                                }
+                            ).Where(t=>t.PersonaId.Equals(PersonaId)).FirstOrDefault();
+            }
+        }
     }
 }

@@ -117,7 +117,6 @@
       <DependentUpon>201705081618387_PaisDepartamentoMunicipioSprint3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Migrations\Configuration_1.cs" />
     <Compile Include="Obligacion.cs" />
     <Compile Include="Departamento.cs" />
     <Compile Include="Municipio.cs" />
