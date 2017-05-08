@@ -7,13 +7,13 @@ namespace DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class UsersPersonaIDSprint3 : IMigrationMetadata
+    public sealed partial class ApiCrearUsuariosSprint3 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UsersPersonaIDSprint3));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ApiCrearUsuariosSprint3));
         
         string IMigrationMetadata.Id
         {
-            get { return "201705072147430_UsersPersonaIDSprint3"; }
+            get { return "201705080044473_ApiCrearUsuariosSprint3"; }
         }
         
         string IMigrationMetadata.Source

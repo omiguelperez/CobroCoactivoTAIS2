@@ -54,13 +54,13 @@ namespace AspNetIdentity.Providers
 
             if (user == null)
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect."+context.UserName+" - "+context.Password );
+                context.SetError("invalid_grant", "Usuario o Contraseña Incorrecta");//+context.UserName+" - "+context.Password );
                 return;
             }
 
             if (!user.EmailConfirmed)
             {
-                context.SetError("invalid_grant", "User did not confirm email.");
+                context.SetError("invalid_grant", "Usted no ha Confirmado el Correo");
                 return;
             }
 

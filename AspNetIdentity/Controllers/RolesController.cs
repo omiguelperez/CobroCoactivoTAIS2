@@ -12,7 +12,7 @@ using DAL;
 
 namespace AspNetIdentity.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Lider")]
     [RoutePrefix("api/roles")]
     public class RolesController : BaseApiController
     {

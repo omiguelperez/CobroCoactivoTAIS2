@@ -96,13 +96,9 @@
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\ExtendedClaimsProvider.cs" />
     <Compile Include="Infrastructure\RolesFromClaims.cs" />
-    <Compile Include="Migrations\201705030234118_ObligacionExpedienteSprint2.cs" />
-    <Compile Include="Migrations\201705030234118_ObligacionExpedienteSprint2.Designer.cs">
-      <DependentUpon>201705030234118_ObligacionExpedienteSprint2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705072147430_UsersPersonaIDSprint3.cs" />
-    <Compile Include="Migrations\201705072147430_UsersPersonaIDSprint3.Designer.cs">
-      <DependentUpon>201705072147430_UsersPersonaIDSprint3.cs</DependentUpon>
+    <Compile Include="Migrations\201705080044473_ApiCrearUsuariosSprint3.cs" />
+    <Compile Include="Migrations\201705080044473_ApiCrearUsuariosSprint3.Designer.cs">
+      <DependentUpon>201705080044473_ApiCrearUsuariosSprint3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Configuration_1.cs" />
@@ -141,11 +137,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705030234118_ObligacionExpedienteSprint2.resx">
-      <DependentUpon>201705030234118_ObligacionExpedienteSprint2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705072147430_UsersPersonaIDSprint3.resx">
-      <DependentUpon>201705072147430_UsersPersonaIDSprint3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705080044473_ApiCrearUsuariosSprint3.resx">
+      <DependentUpon>201705080044473_ApiCrearUsuariosSprint3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

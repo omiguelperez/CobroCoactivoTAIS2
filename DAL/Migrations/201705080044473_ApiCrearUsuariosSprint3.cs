@@ -3,7 +3,7 @@ namespace DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class UsersPersonaIDSprint3 : DbMigration
+    public partial class ApiCrearUsuariosSprint3 : DbMigration
     {
         public override void Up()
         {
@@ -114,7 +114,7 @@ namespace DAL.Migrations
                         Nombres = c.String(nullable: false, maxLength: 35),
                         Apellidos = c.String(nullable: false, maxLength: 35),
                         Sexo = c.String(nullable: false),
-                        Telefono = c.Int(nullable: false),
+                        Telefono = c.String(),
                         Direccion = c.String(nullable: false),
                         TipoPersonaId = c.Int(nullable: false),
                         Nacionalidad = c.String(),
