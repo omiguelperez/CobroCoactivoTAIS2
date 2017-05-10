@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace PPTConsola
 {
@@ -12,6 +13,40 @@ namespace PPTConsola
     {
         static void Main(string[] args)
         {
+            int counter = 0;
+            string line;
+
+            // Read the file and display it line by line.  
+            String prepath = AppDomain.CurrentDomain.BaseDirectory;
+            prepath = Regex.Split(prepath, "PPTConsola")[0] + "DAL";
+            System.IO.StreamReader file =
+                new System.IO.StreamReader(prepath + "/Migrations/departamentoscolombiacsv.txt");
+            while ((line = file.ReadLine()) != null)
+            {
+                if (counter<=20)
+                {
+                    string[] ciudades = Regex.Split(line, ",");
+                System.Console.WriteLine(ciudades[0]+" - "+ ciudades[1]+" - "+ ciudades[2]+" - "+ ciudades[3]);
+                counter++;
+
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            file.Close();
+            System.Console.WriteLine("There were {0} lines.", counter);
+            // Suspend the screen.  
+            System.Console.ReadLine();
+
+
+
+
+
+
+
             // PersonaDTO para guardar
             //PersonaDTO cliente2 = new PersonaDTO
             //{
@@ -31,28 +66,28 @@ namespace PPTConsola
 
 
             ////PersonaDTO para guardar
-            ObligacionDTO cliente1 = new ObligacionDTO();
-            cliente1.Cuantia = 5000;
-            cliente1.Dueda = 5000;
-            cliente1.Estado = "Normal";
-            cliente1.FechaPreinscripcion = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 0, 0, 0);
-            //PersonaBLL objjj = new PersonaBLL();
-            //cliente1.Persona = objjj.FindByIdentificacion("123456");
-            // Guardar el cliente
-            //PersonaDTO person = objjj.FindByIdentificacion("123456");
-            //ObligacionDTO objjjjj = new ObligacionDTO
-            //{
-            //    Cuantia = 15151,
-            //    Dueda = 2515,
-            //    Estado = "Nodfadfsd",
-            //    FechaPreinscripcion = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 0, 0, 0),
-            //    Persona = person
-            //};
-            cliente1.PersonaId = 1;
-            ObligacionBLL kkk = new ObligacionBLL();
-            Respuesta respuesta = kkk.InsertarObligacion(cliente1);
-            Console.WriteLine(respuesta.Mensaje + ", Filas afactadas: " + respuesta.FilasAfectadas);
-            Console.ReadKey();
+            //ObligacionDTO cliente1 = new ObligacionDTO();
+            //cliente1.Cuantia = 5000;
+            //cliente1.Dueda = 5000;
+            //cliente1.Estado = "Normal";
+            //cliente1.FechaPreinscripcion = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 0, 0, 0);
+            ////PersonaBLL objjj = new PersonaBLL();
+            ////cliente1.Persona = objjj.FindByIdentificacion("123456");
+            //// Guardar el cliente
+            ////PersonaDTO person = objjj.FindByIdentificacion("123456");
+            ////ObligacionDTO objjjjj = new ObligacionDTO
+            ////{
+            ////    Cuantia = 15151,
+            ////    Dueda = 2515,
+            ////    Estado = "Nodfadfsd",
+            ////    FechaPreinscripcion = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 0, 0, 0),
+            ////    Persona = person
+            ////};
+            //cliente1.PersonaId = 1;
+            //ObligacionBLL kkk = new ObligacionBLL();
+            //Respuesta respuesta = kkk.InsertarObligacion(cliente1);
+            //Console.WriteLine(respuesta.Mensaje + ", Filas afactadas: " + respuesta.FilasAfectadas);
+            //Console.ReadKey();
 
 
 

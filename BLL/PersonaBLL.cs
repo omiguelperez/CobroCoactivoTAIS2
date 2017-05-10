@@ -21,17 +21,25 @@ namespace BLL
                 try
                 {
                     // preparar el cliente para guardar
-                    Persona c = Persona.MapeoDTOToDAL(cliente);
-                    if (cliente.Obligaciones.Count > 0)
-                    {
-                        c.Obligaciones = Obligacion.ConvertList(cliente.Obligaciones);
+                    PersonaDTO persona = new PersonaBLL().FindPersonaByIdentificacion(cliente.Identificacion);
+                    if (persona != null)
+                    {//QUIERE DECIR QUE LA PERSONA YA EXISTE
+                        respuesta.Mensaje = "Ya Existe la PErsona";
+                        respuesta.Error = true;
                     }
-                    db.Personas.Add(c);
+                    else {
+                        Persona c = Persona.MapeoDTOToDAL(cliente);
+                        if (cliente.Obligaciones.Count > 0)
+                        {
+                            c.Obligaciones = Obligacion.ConvertList(cliente.Obligaciones);
+                        }
+                        db.Personas.Add(c);
+                        respuesta.Error = false;
+                    }
 
                     // preparar la respuesta
                     respuesta.FilasAfectadas = db.SaveChanges();
                     respuesta.Mensaje = "Se realizó la operación satisfactoriamente";
-                    respuesta.Error = false;
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException ex)
                 {
@@ -60,6 +68,50 @@ namespace BLL
                      persona= Persona.MapeoDALToDTO(person); 
                 }
                 return persona;
+            }
+        }
+        public PersonaDTO FindPersonaById(int PersonaId)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                return db.Personas
+                            .Select(t =>
+                                new PersonaDTO
+                                {
+                                    PersonaId = t.PersonaId,
+                                    UpdateAt = t.UpdateAt,
+                                    CreatedAt = t.CreatedAt,
+                                    Pais = new PaisDTO
+                                    {
+                                        PaisId = t.Pais.PaisId,
+                                        Nombre = t.Pais.Nombre
+                                    },
+                                    Nacionalidad=t.Nacionalidad,
+                                    MunicipioId=t.MunicipioId,
+                                    Municipio=new MunicipioDTO
+                                    {
+                                        MunicipioId = t.Municipio.MunicipioId,
+                                        Nombre = t.Municipio.Nombre
+                                    },
+                                    Identificacion=t.Identificacion,
+                                    FechaNacimiento=t.FechaNacimiento,
+                                    Email=t.Email,
+                                    Apellidos=t.Apellidos,
+                                    Departamento=t.Departamento,
+                                    Nombres=t.Nombres,
+                                    Direccion=t.Direccion,
+                                    PaisCorrespondencia=t.PaisCorrespondencia,
+                                    PaisId=t.PaisId,
+                                    PaisNacimiento=t.PaisNacimiento,
+                                    Sexo=t.Sexo,
+                                    Telefono=t.Telefono,
+                                    TipoPersonaId=t.TipoPersonaId,
+                                    TipoPersona=new TipoPersonaDTO
+                                    {
+                                        Nombre=t.TipoPersona.Nombre,
+                                    }
+                                }
+                            ).Where(t=>t.PersonaId.Equals(PersonaId)).FirstOrDefault();
             }
         }
     }

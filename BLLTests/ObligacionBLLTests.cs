@@ -42,7 +42,8 @@ namespace BLL.Tests
                     PaisNacimiento = "Colombia",
                     PaisCorrespondencia = "Colombia",
                     Departamento = "Cesar",
-                    Municipio = "Pueblo Bello",
+                    MunicipioId=20001,
+                    PaisId=1,
                     FechaNacimiento = new DateTime(1996, 07, 30),
                     TipoPersonaId = 1,
                     Telefono = "31868754"

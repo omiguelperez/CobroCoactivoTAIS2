@@ -189,9 +189,12 @@
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\ClaimsController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\MunicipioController.cs" />
     <Compile Include="Controllers\DocumentoController.cs" />
+    <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\TipoDocumentoController.cs" />
     <Compile Include="Controllers\TipoCobroController.cs" />
+    <Compile Include="Controllers\PaisController.cs" />
     <Compile Include="Controllers\TipoObligacionController.cs" />
     <Compile Include="Controllers\ObligacionController.cs" />
     <Compile Include="Controllers\ExpedienteController.cs" />

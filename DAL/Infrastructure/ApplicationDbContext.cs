@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
@@ -44,6 +45,15 @@ namespace DAL.Infrastructure
 
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
+            //Para Registrar Departamento Ciudades Etc
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+            modelBuilder.Entity <Departamento> ().Property(m => m.DepartamentoId)
+             .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            modelBuilder.Entity<Municipio>().Property(m => m.MunicipioId)
+             .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            modelBuilder.Entity<Pais>().Property(m => m.PaisId)
+             .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Persona> Personas { get; set; }
@@ -55,6 +65,9 @@ namespace DAL.Infrastructure
         public DbSet<TipoPersona> TiposPersonas { get; set; }
         public DbSet<Documento> Documentos { get; set; }
         public DbSet<Expediente> Expedientes { get; set; }
+        public DbSet<Pais> Paises { get; set; }
+        public DbSet<Departamento> Departamentos { get; set; }
+        public DbSet<Municipio> Municipios { get; set; }
 
     }
 }

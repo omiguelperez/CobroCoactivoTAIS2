@@ -37,7 +37,16 @@ namespace DAL
                 c.PaisNacimiento = DTO.PaisNacimiento;
                 c.PaisCorrespondencia = DTO.PaisCorrespondencia;
                 c.Departamento = DTO.Departamento;
-                c.Municipio = DTO.Municipio;
+                if (DTO.Municipio!=null)
+                {
+                    c.Municipio = Municipio.MapeoDTOToDAL(DTO.Municipio);
+                }
+                if (DTO.Pais != null)
+                {
+                    c.Pais = Pais.MapeoDTOToDAL(DTO.Pais);
+                }
+                c.MunicipioId = DTO.MunicipioId;
+                c.PaisId = DTO.PaisId;
                 c.Email = DTO.Email;
                 c.FechaNacimiento = DTO.FechaNacimiento;
                 return c;
@@ -78,7 +87,16 @@ namespace DAL
                 c.PaisNacimiento = DAL.PaisNacimiento;
                 c.PaisCorrespondencia = DAL.PaisCorrespondencia;
                 c.Departamento = DAL.Departamento;
-                c.Municipio = DAL.Municipio;
+                if (DAL.Municipio != null)
+                {
+                    c.Municipio = Municipio.MapeoDALToDTO(DAL.Municipio);
+                }
+                if (DAL.Pais != null)
+                {
+                    c.Pais = Pais.MapeoDALToDTO(DAL.Pais);
+                }
+                c.MunicipioId = DAL.MunicipioId;
+                c.PaisId = DAL.PaisId;
                 c.Email = DAL.Email;
                 c.FechaNacimiento = DAL.FechaNacimiento;
                 return c;
