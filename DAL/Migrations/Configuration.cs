@@ -16,7 +16,6 @@ namespace DAL.Migrations
         {
             AutomaticMigrationsEnabled = true; // ejecutar las  migracione automaticamente
         }
-
         protected override void Seed(DAL.Infrastructure.ApplicationDbContext context)
         {
             DateTime tiempoactual = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, DateTime.Today.Minute, DateTime.Today.Second);

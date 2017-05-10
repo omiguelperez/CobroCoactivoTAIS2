@@ -17,6 +17,8 @@ namespace DAL.Infrastructure
         {
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;
+            Database.SetInitializer<ApplicationDbContext>(new CreateDatabaseIfNotExists<ApplicationDbContext>());
+            Database.SetInitializer<ApplicationDbContext>(new MigrateDatabaseToLatestVersion<ApplicationDbContext,Migrations.Configuration>());
         }
 
         public static ApplicationDbContext Create()
