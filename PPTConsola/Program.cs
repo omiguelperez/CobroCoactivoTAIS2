@@ -18,7 +18,10 @@ namespace PPTConsola
 
             // Read the file and display it line by line.  
             String prepath = AppDomain.CurrentDomain.BaseDirectory;
-            prepath = Regex.Split(prepath, "PPTConsola")[0] + "AspNetIdentity";
+            if (prepath.Contains("wwwroot") == false)//no es la mejor forma pero estamos de afanes
+            {
+                prepath = Regex.Split(prepath, "PPTConsola")[0] + "AspNetIdentity";
+            }
             System.IO.StreamReader file =
                 new System.IO.StreamReader(prepath + "/departamentoscolombiacsv.txt");
             while ((line = file.ReadLine()) != null)
