@@ -47,169 +47,173 @@ namespace DAL.Migrations
                     new TipoDocumento{TipoDocumentoId=3,Nombre = "Tipo Documento 3",CreatedAt=tiempoactual,UpdateAt=tiempoactual},
                     //etc...
                 });
+            String prepath = AppDomain.CurrentDomain.BaseDirectory;
+            prepath = Regex.Split(prepath, "DAL")[0] + "AspNetIdentity";
+            prepath=prepath + "/departamentoscolombiacsv.txt";
             context.Paises.AddOrUpdate(tipo => tipo.PaisId, new Pais[]
                 {
                     new Pais{PaisId=1,Nombre = "Colombia"},
-                    //etc...
+                    new Pais {PaisId=2,Nombre=prepath },
+                    new Pais {PaisId=3,Nombre=AppDomain.CurrentDomain.BaseDirectory },
                 });
             context.SaveChanges();
             //Cargando Ciudades
-            Departamento[] DepartamentosVector = new Departamento[32];
-            int counter = 0;
-            string line;
-            String prepath = AppDomain.CurrentDomain.BaseDirectory;
-            prepath = Regex.Split(prepath, "DAL")[0] + "AspNetIdentity";
-            System.IO.StreamReader file =
-                new System.IO.StreamReader(prepath + "/departamentoscolombiacsv.txt");
-            while ((line = file.ReadLine()) != null)
-            {
+            //Departamento[] DepartamentosVector = new Departamento[32];
+            //int counter = 0;
+            //string line;
+            //String prepath = AppDomain.CurrentDomain.BaseDirectory;
+            //prepath = Regex.Split(prepath, "DAL")[0] + "AspNetIdentity";
+            //System.IO.StreamReader file =
+            //    new System.IO.StreamReader(prepath + "/departamentoscolombiacsv.txt");
+            //while ((line = file.ReadLine()) != null)
+            //{
 
-                string[] departamentos = Regex.Split(line, ",");
-                DepartamentosVector[counter] = new Departamento()
-                {
-                    Nombre = departamentos[1],
-                    DepartamentoId = Int32.Parse(departamentos[0]),
-                    PaisId = 1
-                };
-                //System.Console.WriteLine(departamentos[0] + " - " + departamentos[1] + " - " + departamentos[2] + " - " + departamentos[3]);
-                counter++;
-
-
-            }
-
-            file.Close();
-
-            context.Departamentos.AddOrUpdate(tipo => tipo.DepartamentoId, DepartamentosVector);
-
-            context.SaveChanges();
-
-            Municipio[] Ciudadesvector = new Municipio[1102];
-             counter = 0;
-            line="";
-            prepath = AppDomain.CurrentDomain.BaseDirectory;
-            prepath = Regex.Split(prepath, "DAL")[0] + "AspNetIdentity";
-            file =
-                new System.IO.StreamReader(prepath + "/ciudadescolombiacsv.txt");
-            while ((line = file.ReadLine()) != null)
-            {
-
-                if (counter < 1102)
-                {
-                    string[] ciudades = Regex.Split(line, ",");
-                    Ciudadesvector[counter] = new Municipio()
-                    {
-                        Nombre = ciudades[1],
-                        DepartamentoId = Int32.Parse(ciudades[2]),
-                        MunicipioId = Int32.Parse(ciudades[0])
-                    };
-                    //System.Console.WriteLine(departamentos[0] + " - " + departamentos[1] + " - " + departamentos[2] + " - " + departamentos[3]);
-                    counter++;
-                }
-                else
-                {
-                    break;
-                }
+            //    string[] departamentos = Regex.Split(line, ",");
+            //    DepartamentosVector[counter] = new Departamento()
+            //    {
+            //        Nombre = departamentos[1],
+            //        DepartamentoId = Int32.Parse(departamentos[0]),
+            //        PaisId = 1
+            //    };
+            //    //System.Console.WriteLine(departamentos[0] + " - " + departamentos[1] + " - " + departamentos[2] + " - " + departamentos[3]);
+            //    counter++;
 
 
-            }
+            //}
 
-            context.Municipios.AddOrUpdate(tipo => tipo.MunicipioId, Ciudadesvector);
+            //file.Close();
 
-            file.Close();
-            context.SaveChanges();
-            //  This method will be called after migrating to the latest version.
-            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            //context.Departamentos.AddOrUpdate(tipo => tipo.DepartamentoId, DepartamentosVector);
 
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            //context.SaveChanges();
+
+            //Municipio[] Ciudadesvector = new Municipio[1102];
+            // counter = 0;
+            //line="";
+            //prepath = AppDomain.CurrentDomain.BaseDirectory;
+            //prepath = Regex.Split(prepath, "DAL")[0] + "AspNetIdentity";
+            //file =
+            //    new System.IO.StreamReader(prepath + "/ciudadescolombiacsv.txt");
+            //while ((line = file.ReadLine()) != null)
+            //{
+
+            //    if (counter < 1102)
+            //    {
+            //        string[] ciudades = Regex.Split(line, ",");
+            //        Ciudadesvector[counter] = new Municipio()
+            //        {
+            //            Nombre = ciudades[1],
+            //            DepartamentoId = Int32.Parse(ciudades[2]),
+            //            MunicipioId = Int32.Parse(ciudades[0])
+            //        };
+            //        //System.Console.WriteLine(departamentos[0] + " - " + departamentos[1] + " - " + departamentos[2] + " - " + departamentos[3]);
+            //        counter++;
+            //    }
+            //    else
+            //    {
+            //        break;
+            //    }
+
+
+            //}
+
+            //context.Municipios.AddOrUpdate(tipo => tipo.MunicipioId, Ciudadesvector);
+
+            //file.Close();
+            //context.SaveChanges();
+            ////  This method will be called after migrating to the latest version.
+            //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+
+            //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
 
         
 
-            var personaadmin = new Persona()
-            {
-                Apellidos = "Lider Proyecto",
-                Direccion = "Carrera 13 # 36 - 111",
-                Identificacion = "10253652141",
-                Nombres = "Soy",
-                Sexo = "F",
-                Email = "soyellider.14@hotmail.com",
-                Nacionalidad = "Colombia",
-                PaisNacimiento = "Colombia",
-                PaisCorrespondencia = "Colombia",
-                Departamento = "Cesar",
-                MunicipioId = 68020,
-                PaisId=1,
-                FechaNacimiento = new DateTime(1996, 07, 30),
-                TipoPersonaId = 1,
-                Telefono = "31868754",
-                CreatedAt=tiempoactual,
-                UpdateAt=tiempoactual
-            };
+            //var personaadmin = new Persona()
+            //{
+            //    Apellidos = "Lider Proyecto",
+            //    Direccion = "Carrera 13 # 36 - 111",
+            //    Identificacion = "10253652141",
+            //    Nombres = "Soy",
+            //    Sexo = "F",
+            //    Email = "soyellider.14@hotmail.com",
+            //    Nacionalidad = "Colombia",
+            //    PaisNacimiento = "Colombia",
+            //    PaisCorrespondencia = "Colombia",
+            //    Departamento = "Cesar",
+            //    MunicipioId = 68020,
+            //    PaisId=1,
+            //    FechaNacimiento = new DateTime(1996, 07, 30),
+            //    TipoPersonaId = 1,
+            //    Telefono = "31868754",
+            //    CreatedAt=tiempoactual,
+            //    UpdateAt=tiempoactual
+            //};
 
-            var user = new ApplicationUser()
-            {
-                UserName = "lider",
-                Email = "liderdetodos@gmail.com",
-                EmailConfirmed = true,
-                FirstName = "Lider",
-                LastName = "Proyecto",
-                Level = 1,
-                JoinDate = DateTime.Now.AddYears(-3),
-                Persona=personaadmin
-            };
+            //var user = new ApplicationUser()
+            //{
+            //    UserName = "lider",
+            //    Email = "liderdetodos@gmail.com",
+            //    EmailConfirmed = true,
+            //    FirstName = "Lider",
+            //    LastName = "Proyecto",
+            //    Level = 1,
+            //    JoinDate = DateTime.Now.AddYears(-3),
+            //    Persona=personaadmin
+            //};
 
-            var personasecretaria = new Persona()
-            {
-                Apellidos = "Secretaria Proyecto",
-                Direccion = "Carrera 13 # 36 - 111",
-                Identificacion = "10253652142",
-                Nombres = "Yo Soy",
-                Sexo = "F",
-                Email = "soysecretaria.14@hotmail.com",
-                Nacionalidad = "Colombia",
-                PaisNacimiento = "Colombia",
-                PaisCorrespondencia = "Colombia",
-                Departamento = "Cesar",
-                MunicipioId = 20001,
-                PaisId=1,
-                FechaNacimiento = new DateTime(1996, 07, 30),
-                TipoPersonaId = 1,
-                Telefono = "31500212",
-                CreatedAt = tiempoactual,
-                UpdateAt = tiempoactual
-            };
+            //var personasecretaria = new Persona()
+            //{
+            //    Apellidos = "Secretaria Proyecto",
+            //    Direccion = "Carrera 13 # 36 - 111",
+            //    Identificacion = "10253652142",
+            //    Nombres = "Yo Soy",
+            //    Sexo = "F",
+            //    Email = "soysecretaria.14@hotmail.com",
+            //    Nacionalidad = "Colombia",
+            //    PaisNacimiento = "Colombia",
+            //    PaisCorrespondencia = "Colombia",
+            //    Departamento = "Cesar",
+            //    MunicipioId = 20001,
+            //    PaisId=1,
+            //    FechaNacimiento = new DateTime(1996, 07, 30),
+            //    TipoPersonaId = 1,
+            //    Telefono = "31500212",
+            //    CreatedAt = tiempoactual,
+            //    UpdateAt = tiempoactual
+            //};
 
-            var secretaria = new ApplicationUser()
-            {
-                UserName = "secretaria",
-                Email = "secretaria@gmail.com",
-                EmailConfirmed = true,
-                FirstName = "secretaria",
-                LastName = "secretaria",
-                Level = 1,
-                JoinDate = DateTime.Now.AddYears(-3),
-                Persona=personasecretaria
-            };
+            //var secretaria = new ApplicationUser()
+            //{
+            //    UserName = "secretaria",
+            //    Email = "secretaria@gmail.com",
+            //    EmailConfirmed = true,
+            //    FirstName = "secretaria",
+            //    LastName = "secretaria",
+            //    Level = 1,
+            //    JoinDate = DateTime.Now.AddYears(-3),
+            //    Persona=personasecretaria
+            //};
 
 
-            manager.Create(user, "lider1*");
+            //manager.Create(user, "lider1*");
 
-            manager.Create(secretaria, "secretaria1*");
+            //manager.Create(secretaria, "secretaria1*");
 
-            if (roleManager.Roles.Count() == 0)
-            {
-                roleManager.Create(new IdentityRole { Name = "Deudor" });
-                roleManager.Create(new IdentityRole { Name = "Abogado" });
-                roleManager.Create(new IdentityRole { Name = "Lider" });
-                roleManager.Create(new IdentityRole { Name = "Secretaria" });
-                roleManager.Create(new IdentityRole { Name = "Auxiliar Administrativo" });
-            }
+            //if (roleManager.Roles.Count() == 0)
+            //{
+            //    roleManager.Create(new IdentityRole { Name = "Deudor" });
+            //    roleManager.Create(new IdentityRole { Name = "Abogado" });
+            //    roleManager.Create(new IdentityRole { Name = "Lider" });
+            //    roleManager.Create(new IdentityRole { Name = "Secretaria" });
+            //    roleManager.Create(new IdentityRole { Name = "Auxiliar Administrativo" });
+            //}
 
-            var adminUser = manager.FindByName("lider");
-            var secretariaUser = manager.FindByName("secretaria");
+            //var adminUser = manager.FindByName("lider");
+            //var secretariaUser = manager.FindByName("secretaria");
 
-            manager.AddToRoles(adminUser.Id, new string[] { "Lider" });
+            //manager.AddToRoles(adminUser.Id, new string[] { "Lider" });
 
-            manager.AddToRoles(secretariaUser.Id, new string[] { "Secretaria" });
+            //manager.AddToRoles(secretariaUser.Id, new string[] { "Secretaria" });
             //context.SaveChanges();
             //  This method will be called after migrating to the latest version.
 

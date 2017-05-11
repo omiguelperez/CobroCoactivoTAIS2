@@ -19,5 +19,10 @@ namespace AspNetIdentity.Controllers
             PaisBLL Paises = new PaisBLL();
             return Paises.GetPaises();
         }
+        [Route("path")]
+        public string getPath()
+        {
+            return HttpContext.Current.Server.MapPath("~")+"    -     "+ AppDomain.CurrentDomain.BaseDirectory;
+        }
     }
 }
