@@ -58,9 +58,9 @@ namespace DAL.Migrations
             int counter = 0;
             string line;
             String prepath = AppDomain.CurrentDomain.BaseDirectory;
-            prepath = Regex.Split(prepath, "DAL")[0] + "DAL";
+            prepath = Regex.Split(prepath, "DAL")[0] + "AspNetIdentity";
             System.IO.StreamReader file =
-                new System.IO.StreamReader(prepath + "/Migrations/departamentoscolombiacsv.txt");
+                new System.IO.StreamReader(prepath + "/departamentoscolombiacsv.txt");
             while ((line = file.ReadLine()) != null)
             {
 
@@ -87,9 +87,9 @@ namespace DAL.Migrations
              counter = 0;
             line="";
             prepath = AppDomain.CurrentDomain.BaseDirectory;
-            prepath = Regex.Split(prepath, "DAL")[0] + "DAL";
+            prepath = Regex.Split(prepath, "DAL")[0] + "AspNetIdentity";
             file =
-                new System.IO.StreamReader(prepath + "/Migrations/ciudadescolombiacsv.txt");
+                new System.IO.StreamReader(prepath + "/ciudadescolombiacsv.txt");
             while ((line = file.ReadLine()) != null)
             {
 
