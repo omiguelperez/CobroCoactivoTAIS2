@@ -122,96 +122,96 @@ namespace DAL.Migrations
             //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
             //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
+            var roleManager = new ApplicationRoleManager(new RoleStore<IdentityRole>(context));
 
-        
+            var personaadmin = new Persona()
+            {
+                Apellidos = "Lider Proyecto",
+                Direccion = "Carrera 13 # 36 - 111",
+                Identificacion = "10253652141",
+                Nombres = "Soy",
+                Sexo = "F",
+                Email = "soyellider.14@hotmail.com",
+                Nacionalidad = "Colombia",
+                PaisNacimiento = "Colombia",
+                PaisCorrespondencia = "Colombia",
+                Departamento = "Cesar",
+                MunicipioId = 68020,
+                PaisId = 1,
+                FechaNacimiento = new DateTime(1996, 07, 30),
+                TipoPersonaId = 1,
+                Telefono = "31868754",
+                CreatedAt = tiempoactual,
+                UpdateAt = tiempoactual
+            };
 
-            //var personaadmin = new Persona()
-            //{
-            //    Apellidos = "Lider Proyecto",
-            //    Direccion = "Carrera 13 # 36 - 111",
-            //    Identificacion = "10253652141",
-            //    Nombres = "Soy",
-            //    Sexo = "F",
-            //    Email = "soyellider.14@hotmail.com",
-            //    Nacionalidad = "Colombia",
-            //    PaisNacimiento = "Colombia",
-            //    PaisCorrespondencia = "Colombia",
-            //    Departamento = "Cesar",
-            //    MunicipioId = 68020,
-            //    PaisId=1,
-            //    FechaNacimiento = new DateTime(1996, 07, 30),
-            //    TipoPersonaId = 1,
-            //    Telefono = "31868754",
-            //    CreatedAt=tiempoactual,
-            //    UpdateAt=tiempoactual
-            //};
+            var user = new ApplicationUser()
+            {
+                UserName = "lider",
+                Email = "liderdetodos@gmail.com",
+                EmailConfirmed = true,
+                FirstName = "Lider",
+                LastName = "Proyecto",
+                Level = 1,
+                JoinDate = DateTime.Now.AddYears(-3),
+                Persona = personaadmin
+            };
 
-            //var user = new ApplicationUser()
-            //{
-            //    UserName = "lider",
-            //    Email = "liderdetodos@gmail.com",
-            //    EmailConfirmed = true,
-            //    FirstName = "Lider",
-            //    LastName = "Proyecto",
-            //    Level = 1,
-            //    JoinDate = DateTime.Now.AddYears(-3),
-            //    Persona=personaadmin
-            //};
+            var personasecretaria = new Persona()
+            {
+                Apellidos = "Secretaria Proyecto",
+                Direccion = "Carrera 13 # 36 - 111",
+                Identificacion = "10253652142",
+                Nombres = "Yo Soy",
+                Sexo = "F",
+                Email = "soysecretaria.14@hotmail.com",
+                Nacionalidad = "Colombia",
+                PaisNacimiento = "Colombia",
+                PaisCorrespondencia = "Colombia",
+                Departamento = "Cesar",
+                MunicipioId = 20001,
+                PaisId = 1,
+                FechaNacimiento = new DateTime(1996, 07, 30),
+                TipoPersonaId = 1,
+                Telefono = "31500212",
+                CreatedAt = tiempoactual,
+                UpdateAt = tiempoactual
+            };
 
-            //var personasecretaria = new Persona()
-            //{
-            //    Apellidos = "Secretaria Proyecto",
-            //    Direccion = "Carrera 13 # 36 - 111",
-            //    Identificacion = "10253652142",
-            //    Nombres = "Yo Soy",
-            //    Sexo = "F",
-            //    Email = "soysecretaria.14@hotmail.com",
-            //    Nacionalidad = "Colombia",
-            //    PaisNacimiento = "Colombia",
-            //    PaisCorrespondencia = "Colombia",
-            //    Departamento = "Cesar",
-            //    MunicipioId = 20001,
-            //    PaisId=1,
-            //    FechaNacimiento = new DateTime(1996, 07, 30),
-            //    TipoPersonaId = 1,
-            //    Telefono = "31500212",
-            //    CreatedAt = tiempoactual,
-            //    UpdateAt = tiempoactual
-            //};
-
-            //var secretaria = new ApplicationUser()
-            //{
-            //    UserName = "secretaria",
-            //    Email = "secretaria@gmail.com",
-            //    EmailConfirmed = true,
-            //    FirstName = "secretaria",
-            //    LastName = "secretaria",
-            //    Level = 1,
-            //    JoinDate = DateTime.Now.AddYears(-3),
-            //    Persona=personasecretaria
-            //};
+            var secretaria = new ApplicationUser()
+            {
+                UserName = "secretaria",
+                Email = "secretaria@gmail.com",
+                EmailConfirmed = true,
+                FirstName = "secretaria",
+                LastName = "secretaria",
+                Level = 1,
+                JoinDate = DateTime.Now.AddYears(-3),
+                Persona = personasecretaria
+            };
 
 
-            //manager.Create(user, "lider1*");
+            manager.Create(user, "lider1*");
 
-            //manager.Create(secretaria, "secretaria1*");
+            manager.Create(secretaria, "secretaria1*");
 
-            //if (roleManager.Roles.Count() == 0)
-            //{
-            //    roleManager.Create(new IdentityRole { Name = "Deudor" });
-            //    roleManager.Create(new IdentityRole { Name = "Abogado" });
-            //    roleManager.Create(new IdentityRole { Name = "Lider" });
-            //    roleManager.Create(new IdentityRole { Name = "Secretaria" });
-            //    roleManager.Create(new IdentityRole { Name = "Auxiliar Administrativo" });
-            //}
+            if (roleManager.Roles.Count() == 0)
+            {
+                roleManager.Create(new IdentityRole { Name = "Deudor" });
+                roleManager.Create(new IdentityRole { Name = "Abogado" });
+                roleManager.Create(new IdentityRole { Name = "Lider" });
+                roleManager.Create(new IdentityRole { Name = "Secretaria" });
+                roleManager.Create(new IdentityRole { Name = "Auxiliar Administrativo" });
+            }
 
-            //var adminUser = manager.FindByName("lider");
-            //var secretariaUser = manager.FindByName("secretaria");
+            var adminUser = manager.FindByName("lider");
+            var secretariaUser = manager.FindByName("secretaria");
 
-            //manager.AddToRoles(adminUser.Id, new string[] { "Lider" });
+            manager.AddToRoles(adminUser.Id, new string[] { "Lider" });
 
-            //manager.AddToRoles(secretariaUser.Id, new string[] { "Secretaria" });
-            //context.SaveChanges();
+            manager.AddToRoles(secretariaUser.Id, new string[] { "Secretaria" });
+            context.SaveChanges();
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
