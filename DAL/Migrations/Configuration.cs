@@ -58,7 +58,7 @@ namespace DAL.Migrations
             int counter = 0;
             string line;
             String prepath = AppDomain.CurrentDomain.BaseDirectory;
-            if (prepath.Contains("wwwroot") == false)//no es la mejor forma pero estamos de afanes
+            if (prepath.Contains("wwwroot") == false && prepath.Contains("AspNetIdentity") == false)//no es la mejor forma pero estamos de afanes
             {
                 prepath = Regex.Split(prepath, "DAL")[0] + "AspNetIdentity";
             }

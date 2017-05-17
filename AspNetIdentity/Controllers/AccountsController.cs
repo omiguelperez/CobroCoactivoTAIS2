@@ -129,6 +129,7 @@ namespace AspNetIdentity.Controllers
             user.FirstName = createUserModel.FirstName;
             user.LastName = createUserModel.LastName;
             user.Level = 3;
+            user.EmailConfirmed = true;
             user.JoinDate = DateTime.Now.Date;
             if (existepersona == null)
             {//QUIERE DECIR QUE LA PERSONA YA EXISTE
@@ -153,11 +154,11 @@ namespace AspNetIdentity.Controllers
 
             await this.AppUserManager.AddToRoleAsync(createdUser.Id, createUserModel.RoleName);
 
-            string code = await this.AppUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            //string code = await this.AppUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
 
-            var callbackUrl = new Uri(Url.Link("ConfirmEmailRoute", new { userId = user.Id, code = code }));
+            //var callbackUrl = new Uri(Url.Link("ConfirmEmailRoute", new { userId = user.Id, code = code }));
 
-            await this.AppUserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+            //await this.AppUserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
             Uri locationHeader = new Uri(Url.Link("GetUserById", new { id = user.Id }));
 
