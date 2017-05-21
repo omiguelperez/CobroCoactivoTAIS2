@@ -60,7 +60,19 @@ namespace DAL.Migrations
             String prepath = AppDomain.CurrentDomain.BaseDirectory;
             if (prepath.Contains("wwwroot") == false && prepath.Contains("AspNetIdentity") == false)//no es la mejor forma pero estamos de afanes
             {
-                prepath = Regex.Split(prepath, "DAL")[0] + "AspNetIdentity";
+                //no es la mejor forma pero por el momento solucionamos el problema
+                string CapaActual = "";
+                if (prepath.Contains("BLLTests"))
+                {
+                    CapaActual = "BLLTests";
+                }else if (prepath.Contains("BDD"))
+                {
+                    CapaActual = "BDD";
+                }else
+                {
+                    CapaActual = "DAL";
+                }
+                prepath = Regex.Split(prepath, CapaActual)[0] + "AspNetIdentity";
             }
             System.IO.StreamReader file =
                 new System.IO.StreamReader(prepath + "/departamentoscolombiacsv.txt");
