@@ -99,7 +99,6 @@
     <Compile Include="AccountBindingModels.cs" />
     <Compile Include="ClaimBindingModel.cs" />
     <Compile Include="Cobro.cs" />
-    <Compile Include="Contexto.cs" />
     <Compile Include="Documento.cs" />
     <Compile Include="Expediente.cs" />
     <Compile Include="Infrastructure\ApplicationDbContext.cs" />

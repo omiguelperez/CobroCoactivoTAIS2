@@ -58,18 +58,18 @@ namespace DAL.Infrastructure
              .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             base.OnModelCreating(modelBuilder);
         }
-        public DbSet<Persona> Personas { get; set; }
-        public DbSet<Obligacion> Obligaciones { get; set; }
-        public DbSet<Cobro> Cobros { get; set; }
-        public DbSet<TipoCobro> TiposCobros { get; set; }
-        public DbSet<TipoDocumento> TiposDocumentos { get; set; }
-        public DbSet<TipoObligacion> TiposObligaciones { get; set; }
-        public DbSet<TipoPersona> TiposPersonas { get; set; }
-        public DbSet<Documento> Documentos { get; set; }
-        public DbSet<Expediente> Expedientes { get; set; }
-        public DbSet<Pais> Paises { get; set; }
-        public DbSet<Departamento> Departamentos { get; set; }
-        public DbSet<Municipio> Municipios { get; set; }
+        public virtual  DbSet<Persona> Personas { get; set; }
+        public virtual  DbSet<Obligacion> Obligaciones { get; set; }
+        public virtual  DbSet<Cobro> Cobros { get; set; }
+        public virtual  DbSet<TipoCobro> TiposCobros { get; set; }
+        public virtual  DbSet<TipoDocumento> TiposDocumentos { get; set; }
+        public virtual  DbSet<TipoObligacion> TiposObligaciones { get; set; }
+        public virtual  DbSet<TipoPersona> TiposPersonas { get; set; }
+        public virtual  DbSet<Documento> Documentos { get; set; }
+        public virtual  DbSet<Expediente> Expedientes { get; set; }
+        public virtual  DbSet<Pais> Paises { get; set; }
+        public virtual  DbSet<Departamento> Departamentos { get; set; }
+        public virtual  DbSet<Municipio> Municipios { get; set; }
 
     }
 }

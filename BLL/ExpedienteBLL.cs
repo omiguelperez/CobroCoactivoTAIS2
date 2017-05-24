@@ -12,11 +12,19 @@ namespace BLL
     public class ExpedienteBLL
     {
         Respuesta respuesta = new Respuesta();
-        ApplicationDbContext db = new ApplicationDbContext();
+        ApplicationDbContext db;
+        public ExpedienteBLL()
+        {
+            db = new ApplicationDbContext();
+        }
+        public ExpedienteBLL(ApplicationDbContext context)
+        {
+            db= context;
+        }
 
         public List<ExpedienteDTO> GetExpedientes()
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            using (db)
             {
                 List<Expediente> lista= db.Expedientes.ToList();
                 List<ExpedienteDTO> response = new List<ExpedienteDTO>();
@@ -30,7 +38,7 @@ namespace BLL
 
         public ExpedienteDTO FindExpedienteById(int ExpedienteId)
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            using (db)
             {
                 var exped = db.Expedientes.Find(ExpedienteId);
                 ExpedienteDTO expediente = Expediente.MapeoDALToDTO(exped); // Busca por llave primaria
