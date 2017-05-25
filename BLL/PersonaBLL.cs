@@ -29,7 +29,7 @@ namespace BLL
                 try
                 {
                     // preparar el cliente para guardar
-                    PersonaDTO persona = new PersonaBLL().FindPersonaByIdentificacion(cliente.Identificacion);
+                    PersonaDTO persona = new PersonaBLL(db).FindPersonaByIdentificacion(cliente.Identificacion);
                     if (persona != null)
                     {//QUIERE DECIR QUE LA PERSONA YA EXISTE
                         respuesta.Mensaje = "Ya Existe la PErsona";

@@ -113,7 +113,7 @@ namespace BLL
         {
             using (db)
             {
-                var obliga = db.Obligaciones.Find(ObligacionId);
+                var obliga = db.Obligaciones.Where(t => t.ObligacionId == ObligacionId).FirstOrDefault();
                 ObligacionDTO expediente = Obligacion.MapeoDALToDTO(obliga); // Busca por llave primaria
                 return expediente;
             }
