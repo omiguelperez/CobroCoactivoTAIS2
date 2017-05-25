@@ -68,11 +68,11 @@ namespace DAL.Migrations
                 }else if (prepath.Contains("BDD"))
                 {
                     CapaActual = "BDD";
-                }else
+                }else if (prepath.Contains("DAL"))
                 {
                     CapaActual = "DAL";
                 }
-                prepath = Regex.Split(prepath, CapaActual)[0] + "AspNetIdentity";
+                prepath = Regex.Split(prepath, CapaActual)[0];//+ "AspNetIdentity";
             }
             System.IO.StreamReader file =
                 new System.IO.StreamReader(prepath + "/departamentoscolombiacsv.txt");

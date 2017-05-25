@@ -12,6 +12,7 @@ namespace BLL.Tests
     [TestClass()]
     public class DocumentoBLLTests
     {
+        [DeploymentItem("Recursos")]
         [TestMethod()]
         public void GetDocumentsByExpedienteTest()
         {

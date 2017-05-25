@@ -112,10 +112,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ciudadescolombiacsv.txt">
+    <Content Include="Recursos\ciudadescolombiacsv.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="departamentoscolombiacsv.txt">
+    <Content Include="Recursos\departamentoscolombiacsv.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
