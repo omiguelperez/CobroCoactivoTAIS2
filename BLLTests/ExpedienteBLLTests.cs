@@ -11,6 +11,7 @@ using DAL.Infrastructure;
 namespace BLL.Tests
 {
     [TestClass()]
+    [DeploymentItem("Recursos")]
     public class ExpedienteBLLTests
     {
         ExpedienteBLL servicio;
@@ -79,6 +80,7 @@ namespace BLL.Tests
         [TestMethod()]
         public void GetExpedientesTest()
         {
+            String prepath = AppDomain.CurrentDomain.BaseDirectory;
             var response = servicio.GetExpedientes();
             Assert.IsNotNull(response);
         }

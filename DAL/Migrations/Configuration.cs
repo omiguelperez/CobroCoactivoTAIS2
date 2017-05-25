@@ -72,7 +72,11 @@ namespace DAL.Migrations
                 {
                     CapaActual = "DAL";
                 }
-                prepath = Regex.Split(prepath, CapaActual)[0];//+ "AspNetIdentity";
+                else
+                {
+                    CapaActual = "TestResults";
+                }
+                prepath = Regex.Split(prepath, CapaActual)[0]+ "AspNetIdentity";
             }
             System.IO.StreamReader file =
                 new System.IO.StreamReader(prepath + "/departamentoscolombiacsv.txt");
