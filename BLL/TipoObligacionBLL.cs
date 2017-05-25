@@ -12,11 +12,19 @@ namespace BLL
     public class TipoObligacionBLL
     {
         Respuesta respuesta = new Respuesta();
-        ApplicationDbContext db = new ApplicationDbContext();
-        
+        ApplicationDbContext db;
+        public TipoObligacionBLL()
+        {
+            db = new ApplicationDbContext();
+        }
+        public TipoObligacionBLL(ApplicationDbContext context)
+        {
+            db = context;
+        }
+
         public List<TipoObligacionDTO> GetTipoObligaciones()
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            using (db)
             {
                 return db.TiposObligaciones
                     .Select(t =>

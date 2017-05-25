@@ -12,11 +12,19 @@ namespace BLL
     public class DepartamentoBLL
     {
         Respuesta respuesta = new Respuesta();
-        ApplicationDbContext db = new ApplicationDbContext();
-        
+        ApplicationDbContext db;
+        public DepartamentoBLL()
+        {
+            db = new ApplicationDbContext();
+        }
+        public DepartamentoBLL(ApplicationDbContext context)
+        {
+            db = context;
+        }
+
         public List<DepartamentoDTO> GetDepartamentosByPaisId(int PaisId)
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            using (db)
             {
                 return db.Departamentos
                     .Where(t => t.PaisId.Equals(PaisId))

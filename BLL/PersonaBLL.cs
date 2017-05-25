@@ -12,11 +12,19 @@ namespace BLL
     public class PersonaBLL
     {
         Respuesta respuesta = new Respuesta();
-        ApplicationDbContext db = new ApplicationDbContext();
+        ApplicationDbContext db;
+        public PersonaBLL()
+        {
+            db = new ApplicationDbContext();
+        }
+        public PersonaBLL(ApplicationDbContext context)
+        {
+            db = context;
+        }
 
         public Respuesta InsertarPersona(PersonaDTO cliente)
         {
-            using (db = new ApplicationDbContext())
+            using (db)
             {
                 try
                 {
@@ -59,7 +67,7 @@ namespace BLL
         }
         public PersonaDTO FindPersonaByIdentificacion(String Identificacion)
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            using (db)
             {
                 Persona person = db.Personas.FirstOrDefault(t => t.Identificacion.Equals(Identificacion));// Busca por llave primaria
                 PersonaDTO persona=null;
@@ -72,7 +80,7 @@ namespace BLL
         }
         public PersonaDTO FindPersonaById(int PersonaId)
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            using (db)
             {
                 return db.Personas
                             .Select(t =>

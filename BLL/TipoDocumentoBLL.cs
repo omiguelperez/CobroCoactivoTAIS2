@@ -12,11 +12,19 @@ namespace BLL
     public class TipoDocumentoBLL
     {
         Respuesta respuesta = new Respuesta();
-        ApplicationDbContext db = new ApplicationDbContext();
+        ApplicationDbContext db;
+        public TipoDocumentoBLL()
+        {
+            db = new ApplicationDbContext();
+        }
+        public TipoDocumentoBLL(ApplicationDbContext context)
+        {
+            db = context;
+        }
 
         public List<TipoDocumentoDTO> GetTipoDocumentos()
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            using (db)
             {
                 return db.TiposDocumentos
                     .Select(t =>

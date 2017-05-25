@@ -12,11 +12,19 @@ namespace BLL
     public class PaisBLL
     {
         Respuesta respuesta = new Respuesta();
-        ApplicationDbContext db = new ApplicationDbContext();
-        
+        ApplicationDbContext db;
+        public PaisBLL()
+        {
+            db = new ApplicationDbContext();
+        }
+        public PaisBLL(ApplicationDbContext context)
+        {
+            db = context;
+        }
+
         public List<PaisDTO> GetPaises()
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            using (db)
             {
                 return db.Paises
                     .Select(t =>

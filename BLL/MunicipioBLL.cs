@@ -12,11 +12,19 @@ namespace BLL
     public class MunicipioBLL
     {
         Respuesta respuesta = new Respuesta();
-        ApplicationDbContext db = new ApplicationDbContext();
-        
+        ApplicationDbContext db;
+        public MunicipioBLL()
+        {
+            db = new ApplicationDbContext();
+        }
+        public MunicipioBLL(ApplicationDbContext context)
+        {
+            db = context;
+        }
+
         public List<MunicipioDTO> GetMunicipiosByDepartamentoId(int DepartamentoId)
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            using (db)
             {
                 var response=db.Municipios
                    .Where(t => t.DepartamentoId == DepartamentoId)

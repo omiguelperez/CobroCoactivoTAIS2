@@ -24,8 +24,7 @@ namespace BLL
 
         public List<ExpedienteDTO> GetExpedientes()
         {
-            using (db)
-            {
+            
                 List<Expediente> lista= db.Expedientes.ToList();
                 List<ExpedienteDTO> response = new List<ExpedienteDTO>();
                 foreach (Expediente a in lista)
@@ -33,17 +32,17 @@ namespace BLL
                     response.Add(Expediente.MapeoDALToDTO(a));
                 }
                 return response;
-            }
+            
         }
 
         public ExpedienteDTO FindExpedienteById(int ExpedienteId)
         {
-            using (db)
-            {
-                var exped = db.Expedientes.Find(ExpedienteId);
+
+            //List<Expediente> lista = db.Expedientes.ToList();
+            var exped = db.Expedientes.Where(t => t.ExpedienteId == ExpedienteId).FirstOrDefault();
                 ExpedienteDTO expediente = Expediente.MapeoDALToDTO(exped); // Busca por llave primaria
                 return expediente;
-            }
+            
         }
     }
 }

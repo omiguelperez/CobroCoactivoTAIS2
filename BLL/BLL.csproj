@@ -61,11 +61,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClienteBLL.cs" />
     <Compile Include="MunicipioBLL.cs" />
     <Compile Include="ExpedienteBLL.cs" />
-    <Compile Include="FacturaBLL.cs" />
-    <Compile Include="ItemFacturaBLL.cs" />
     <Compile Include="DocumentoBLL.cs" />
     <Compile Include="DepartamentoBLL.cs" />
     <Compile Include="TipoDocumentoBLL.cs" />
@@ -75,7 +72,6 @@
     <Compile Include="ObligacionBLL.cs" />
     <Compile Include="PersonaBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProyectoBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

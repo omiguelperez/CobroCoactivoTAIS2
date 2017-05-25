@@ -12,11 +12,19 @@ namespace BLL
     public class DocumentoBLL
     {
         Respuesta respuesta = new Respuesta();
-        ApplicationDbContext db = new ApplicationDbContext();
+        ApplicationDbContext db;
+        public DocumentoBLL()
+        {
+            db = new ApplicationDbContext();
+        }
+        public DocumentoBLL(ApplicationDbContext context)
+        {
+            db = context;
+        }
 
         public Respuesta InsertarDocumento(DocumentoDTO cliente)
         {
-            using (db = new ApplicationDbContext())
+            using (db)
             {
                 try
                 {
@@ -47,7 +55,7 @@ namespace BLL
 
         public List<DocumentoDTO> GetDocumentsByExpediente(string PathUrl,int ExpedienteId)
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            using (db )
             {
                 List<Documento> lista = db.Documentos.Where(t => t.ExpedienteId.Equals(ExpedienteId)).ToList();
                 List<DocumentoDTO> response = new List<DocumentoDTO>();
@@ -63,7 +71,7 @@ namespace BLL
 
         public DocumentoDTO FindById(int Id)
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            using (db)
             {
                 Documento documento = db.Documentos.FirstOrDefault(t => t.DocumentoId.Equals(Id));// Busca por llave primaria
                 DocumentoDTO document = null;

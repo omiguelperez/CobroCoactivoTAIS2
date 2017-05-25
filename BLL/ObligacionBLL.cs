@@ -12,11 +12,19 @@ namespace BLL
     public class ObligacionBLL
     {
         Respuesta respuesta = new Respuesta();
-        ApplicationDbContext db = new ApplicationDbContext();
+        ApplicationDbContext db;
+        public ObligacionBLL()
+        {
+            db = new ApplicationDbContext();
+        }
+        public ObligacionBLL(ApplicationDbContext context)
+        {
+            db = context;
+        }
 
         public Respuesta InsertarObligacion(ObligacionDTO obligacion)
         {
-            using (db = new ApplicationDbContext())
+            using (db)
             {
                 try
                 {
@@ -53,7 +61,7 @@ namespace BLL
 
         public List<ObligacionDTO> GetObligaciones()
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            using (db)
             {
                 //IQuereable
                 //var query = db.Obligaciones.Where(t => t.Cuantia > 0);
@@ -103,7 +111,7 @@ namespace BLL
 
         public ObligacionDTO FindObligacionById(int ObligacionId)
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            using (db)
             {
                 var obliga = db.Obligaciones.Find(ObligacionId);
                 ObligacionDTO expediente = Obligacion.MapeoDALToDTO(obliga); // Busca por llave primaria

@@ -12,11 +12,19 @@ namespace BLL
     public class TipoCobroBLL
     {
         Respuesta respuesta = new Respuesta();
-        ApplicationDbContext db = new ApplicationDbContext();
-        
+        ApplicationDbContext db;
+        public TipoCobroBLL()
+        {
+            db = new ApplicationDbContext();
+        }
+        public TipoCobroBLL(ApplicationDbContext context)
+        {
+            db = context;
+        }
+
         public List<TipoCobroDTO> GetTiposCobros()
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            using (db)
             {
                 return db.TiposCobros
                     .Select(t =>
