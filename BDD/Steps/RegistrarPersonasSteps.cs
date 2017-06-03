@@ -11,6 +11,7 @@ namespace BDD
     public class RegistrarPersonasSteps
     {
         IWebDriver chrome;
+        Random rnd = new Random(DateTime.Now.Millisecond);
         [Given(@"ya logueado en el sistema")]
         public void GivenYaLogueadoEnElSistema()
         {
@@ -31,13 +32,14 @@ namespace BDD
         [Given(@"registro la persona")]
         public void GivenRegistroLaPersona()
         {
+            int random = rnd.Next(1, 99999);
             chrome.FindElement(By.XPath("//label[text()='Natural']")).Click();
             System.Threading.Thread.Sleep(2000);
             //rol
             SelectElement selectRol = new SelectElement(chrome.FindElement(By.Id("cmbRol")));
             selectRol.SelectByText("Deudor");
             //datos personales
-            chrome.FindElement(By.Name("identificacion")).SendKeys("12334567");
+            chrome.FindElement(By.Name("identificacion")).SendKeys("12"+random);
             chrome.FindElement(By.Name("nombres")).SendKeys("juana");
             chrome.FindElement(By.Name("pApellido")).SendKeys("la loca");
             SelectElement selectSexo = new SelectElement(chrome.FindElement(By.Id("cmbSexo")));
@@ -57,24 +59,30 @@ namespace BDD
             SelectElement selectPaisCorr = new SelectElement(chrome.FindElement(By.Id("cmbPaisCorrespondencia")));
             selectPaisCorr.SelectByText("Colombia");
             chrome.FindElement(By.Name("telefono")).SendKeys("34243234");
-            chrome.FindElement(By.Id("inputEmailCorr")).SendKeys("samiranda@hotmail.com");
+            chrome.FindElement(By.Id("inputEmailCorr")).SendKeys("prueba"+random+"@hotmail.com");
             //datos de usuario
-            chrome.FindElement(By.Name("usuario")).SendKeys("juanita");
-            chrome.FindElement(By.Name("password")).SendKeys("pendejuela1*");
-            chrome.FindElement(By.Name("confirmpassword")).SendKeys("pendejuela1*");
+            chrome.FindElement(By.Name("usuario")).SendKeys("juanita"+random);
+            chrome.FindElement(By.Name("password")).SendKeys("Pendejuela1*");
+            chrome.FindElement(By.Name("confirmpassword")).SendKeys("Pendejuela1*");
         }
         
         [When(@"al dar clic en el boton registrar")]
         public void WhenAlDarClicEnElBotonRegistrar()
         {
-            //chrome.FindElement(By.Id("btnreg")).Click();
-            ScenarioContext.Current.Pending();
+            chrome.FindElement(By.Id("btnreg")).Click();
+            //ScenarioContext.Current.Pending();
         }
 
-        [Then(@"el sistema me mostrara un mensaje")]
-        public void ThenElSistemaMeMostraraUnMensaje()
+        [Then(@"el sistema me mostrara un mensaje de ""(.*)""")]
+        public void ThenElSistemaMeMostraraUnMensajeDe(string msgEsperado)
         {
-            ScenarioContext.Current.Pending();
+            System.Threading.Thread.Sleep(8000);
+            string mensaje = chrome.FindElement(By.Id("msgRta")).Text;
+            Assert.AreEqual(msgEsperado, mensaje);
+            //Console.WriteLine(mensaje);
+            System.Threading.Thread.Sleep(1000);
+            chrome.Quit();
         }
+
     }
 }

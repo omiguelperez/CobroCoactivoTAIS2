@@ -10,6 +10,8 @@ namespace BDD
     [Binding]
     public class RegistrarCarteraSteps
     {
+        Random rnd = new Random(DateTime.Now.Millisecond);
+
         IWebDriver driver;
 
         [Given(@"ya logueada dentro del sistema")]
@@ -39,9 +41,10 @@ namespace BDD
         public void GivenRellenoElFormulario()
         {
             //datos personales
+            int random = rnd.Next(1, 99999);
             System.Threading.Thread.Sleep(2000);
             driver.FindElement(By.XPath("//label[@for='radioNatural']")).Click();
-            driver.FindElement(By.Id("inputidentificacion")).SendKeys("133456");
+            driver.FindElement(By.Id("inputidentificacion")).SendKeys("133456"+ random+"");
             driver.FindElement(By.Id("inputNombres")).SendKeys("julio");
             driver.FindElement(By.Id("inputpApellido")).SendKeys("monsalvo");
             SelectElement selectSexo = new SelectElement(driver.FindElement(By.Id("cmbSexo")));
@@ -61,7 +64,7 @@ namespace BDD
             //direccion de correspondencia
             driver.FindElement(By.Id("inputDireccion")).SendKeys("aqui vivo yo");
             driver.FindElement(By.Id("inputTelefonoCorr")).SendKeys("987654567");
-            driver.FindElement(By.Id("inputEmailCorr")).SendKeys("correo@gmail.com");
+            driver.FindElement(By.Id("inputEmailCorr")).SendKeys("correo"+ random+"@gmail.com");
             //informacion adicional
             driver.FindElement(By.Id("textarea1")).SendKeys("una descripcion");            
             driver.FindElement(By.Id("inputDirEjecutado")).SendKeys("direccion de algo");
@@ -80,14 +83,19 @@ namespace BDD
         [When(@"presione el boton registrar")]
         public void WhenPresioneElBotonRegistrar()
         {
-            //driver.FindElement(By.Id("btnreg")).Click();
-            ScenarioContext.Current.Pending();
+            driver.FindElement(By.Id("btnreg")).Click();
+            //ScenarioContext.Current.Pending();
         }
         
         [Then(@"el sistema me arroja el mensaje ""(.*)""")]
-        public void ThenElSistemaMeArrojaElMensaje(string p0)
+        public void ThenElSistemaMeArrojaElMensaje(string msgEsperado)
         {
-            ScenarioContext.Current.Pending();
+            System.Threading.Thread.Sleep(1000);
+            string mensaje = driver.FindElement(By.Id("msgRta")).Text;
+            Assert.AreEqual(msgEsperado,mensaje);
+            //Console.WriteLine(mensaje);
+            System.Threading.Thread.Sleep(1000);
+            driver.Quit();
         }
     }
 }

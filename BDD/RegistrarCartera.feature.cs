@@ -84,7 +84,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 12
  testRunner.When("presione el boton registrar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 13
- testRunner.Then("el sistema me arroja el mensaje \"registrado correctamente\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("el sistema me arroja el mensaje \"Se realizó la operación satisfactoriamente\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

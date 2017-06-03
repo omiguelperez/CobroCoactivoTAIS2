@@ -82,7 +82,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 11
  testRunner.When("al dar clic en el boton registrar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 12
- testRunner.Then("el sistema me mostrara un mensaje", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("el sistema me mostrara un mensaje de \"Usuario Registrado Correctamente\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

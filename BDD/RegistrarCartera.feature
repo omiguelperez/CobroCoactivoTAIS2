@@ -10,4 +10,4 @@ Scenario: Registar CarteraBDD
 	And luego clic en agregar nueva deuda
 	And relleno el formulario
 	When presione el boton registrar
-	Then el sistema me arroja el mensaje "registrado correctamente"
+	Then el sistema me arroja el mensaje "Se realizó la operación satisfactoriamente"

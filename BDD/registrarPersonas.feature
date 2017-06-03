@@ -9,4 +9,4 @@ Scenario: registro de Personas ExitosoBDD
 	And estando en el modulo de registro
 	And registro la persona
 	When al dar clic en el boton registrar
-	Then el sistema me mostrara un mensaje
+	Then el sistema me mostrara un mensaje de "Usuario Registrado Correctamente"
