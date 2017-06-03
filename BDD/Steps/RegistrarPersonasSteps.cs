@@ -33,8 +33,8 @@ namespace BDD
         public void GivenRegistroLaPersona()
         {
             int random = rnd.Next(1, 99999);
+            System.Threading.Thread.Sleep(7000);
             chrome.FindElement(By.XPath("//label[text()='Natural']")).Click();
-            System.Threading.Thread.Sleep(2000);
             //rol
             SelectElement selectRol = new SelectElement(chrome.FindElement(By.Id("cmbRol")));
             selectRol.SelectByText("Deudor");
@@ -48,10 +48,10 @@ namespace BDD
             chrome.FindElement(By.Name("fechaNac")).SendKeys("18-08-1994");
             SelectElement selectPaisNac = new SelectElement(chrome.FindElement(By.Id("cmbPaisNacimiento")));
             selectPaisNac.SelectByText("Colombia");
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(2000);
             SelectElement selectDpto = new SelectElement(chrome.FindElement(By.Id("cmbDepartamento")));
             selectDpto.SelectByText("Cesar");
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(2000);
             SelectElement selectMuni = new SelectElement(chrome.FindElement(By.Id("cmbMunicipio")));
             selectMuni.SelectByText("Valledupar");
             //direccion de correspondencia
@@ -76,7 +76,7 @@ namespace BDD
         [Then(@"el sistema me mostrara un mensaje de ""(.*)""")]
         public void ThenElSistemaMeMostraraUnMensajeDe(string msgEsperado)
         {
-            System.Threading.Thread.Sleep(8000);
+            System.Threading.Thread.Sleep(10000);
             string mensaje = chrome.FindElement(By.Id("msgRta")).Text;
             Assert.AreEqual(msgEsperado, mensaje);
             //Console.WriteLine(mensaje);

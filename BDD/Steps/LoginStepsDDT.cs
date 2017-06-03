@@ -45,7 +45,7 @@ namespace BDD
         [Then(@"mi url cambiara de acuerdo a mi rol (.*)")]
         public void ThenMiUrlCambiaraDeAcuerdoAMiRol(string url) //para exitoso
         {
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(7000);
             Assert.AreEqual(url, chrome.Url);
             System.Threading.Thread.Sleep(1000);
             chrome.Quit();

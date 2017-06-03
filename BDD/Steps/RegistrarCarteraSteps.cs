@@ -18,11 +18,11 @@ namespace BDD
         public void GivenYaLogueadaDentroDelSistema()
         {
             driver = new ChromeDriver();
-            driver.Url = "http://localhost:9000";
+            driver.Url = "http://localhost:9999";
             driver.FindElement(By.Id("textIdentificacion")).SendKeys("Secretaria");
             driver.FindElement(By.Id("textPass")).SendKeys("secretaria1*");
             driver.FindElement(By.Id("btningresar")).Click();
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(5000);
         }
         
         [Given(@"presiono la opcion registar cartera")]
@@ -42,7 +42,7 @@ namespace BDD
         {
             //datos personales
             int random = rnd.Next(1, 99999);
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(5000);
             driver.FindElement(By.XPath("//label[@for='radioNatural']")).Click();
             driver.FindElement(By.Id("inputidentificacion")).SendKeys("133456"+ random+"");
             driver.FindElement(By.Id("inputNombres")).SendKeys("julio");
@@ -55,10 +55,10 @@ namespace BDD
             driver.FindElement(By.Name("fechaNac")).SendKeys("18-08-1994");
             SelectElement selectPaisNac = new SelectElement(driver.FindElement(By.Id("cmbPaisNacimiento")));
             selectPaisNac.SelectByText("Colombia");
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(2000);
             SelectElement selectDpto = new SelectElement(driver.FindElement(By.Id("cmbDepartamento")));
             selectDpto.SelectByText("Cesar");
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(2000);
             SelectElement selectMuni = new SelectElement(driver.FindElement(By.Id("cmbMunicipio")));
             selectMuni.SelectByText("Valledupar");
             //direccion de correspondencia
@@ -90,7 +90,7 @@ namespace BDD
         [Then(@"el sistema me arroja el mensaje ""(.*)""")]
         public void ThenElSistemaMeArrojaElMensaje(string msgEsperado)
         {
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(3000);
             string mensaje = driver.FindElement(By.Id("msgRta")).Text;
             Assert.AreEqual(msgEsperado,mensaje);
             //Console.WriteLine(mensaje);
