@@ -7,6 +7,7 @@ namespace DAL.Migrations
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
 
@@ -58,6 +59,7 @@ namespace DAL.Migrations
             int counter = 0;
             string line;
             String prepath = AppDomain.CurrentDomain.BaseDirectory;
+
             if (prepath.Contains("wwwroot") == false && prepath.Contains("AspNetIdentity") == false)//no es la mejor forma pero estamos de afanes
             {
                 //no es la mejor forma pero por el momento solucionamos el problema
@@ -78,6 +80,23 @@ namespace DAL.Migrations
                 }
                 prepath = Regex.Split(prepath, CapaActual)[0]+ "AspNetIdentity";
             }
+
+            if (prepath.Contains("ws") && prepath.Contains("Coactivo"))
+            {
+                try
+                {
+                    if (!Directory.Exists("D:\\ws\\Coactivo\\AspNetIdentity"))
+                    {
+                        Directory.CreateDirectory("D:\\ws\\Coactivo\\AspNetIdentity");
+                        prepath = prepath + "/AspNetIdentity";
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+
             System.IO.StreamReader file =
                 new System.IO.StreamReader(prepath + "/departamentoscolombiacsv.txt");
             while ((line = file.ReadLine()) != null)
