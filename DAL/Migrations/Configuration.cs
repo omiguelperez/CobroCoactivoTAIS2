@@ -81,7 +81,7 @@ namespace DAL.Migrations
                 prepath = Regex.Split(prepath, CapaActual)[0]+ "AspNetIdentity";
             }
 
-            if (prepath.Contains("ws") && prepath.Contains("Coactivo"))
+            if (prepath.Contains("CoactivoSite"))
             {
                 prepath = prepath + "/..";
             }
