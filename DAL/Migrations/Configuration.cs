@@ -83,18 +83,7 @@ namespace DAL.Migrations
 
             if (prepath.Contains("ws") && prepath.Contains("Coactivo"))
             {
-                try
-                {
-                    if (!Directory.Exists("D:\\ws\\Coactivo\\AspNetIdentity"))
-                    {
-                        Directory.CreateDirectory("D:\\ws\\Coactivo\\AspNetIdentity");
-                        prepath = prepath + "/AspNetIdentity";
-                    }
-                }
-                catch (Exception)
-                {
-
-                }
+                prepath = prepath + "/..";
             }
 
             System.IO.StreamReader file =
