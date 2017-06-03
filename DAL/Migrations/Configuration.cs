@@ -50,8 +50,9 @@ namespace DAL.Migrations
                 });
             context.Paises.AddOrUpdate(tipo => tipo.PaisId, new Pais[]
                 {
-                    new Pais{PaisId=1,Nombre = "Colombia"},
-                    //etc...
+                    new Pais{PaisId = 1,Nombre = "Colombia"},
+                    new Pais {PaisId = 2, Nombre = "Venezuela"},
+                    // etc...
                 });
             context.SaveChanges();
             //Cargando Ciudades
