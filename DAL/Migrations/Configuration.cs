@@ -133,13 +133,45 @@ namespace DAL.Migrations
             context.Municipios.AddOrUpdate(tipo => tipo.MunicipioId, Ciudadesvector);
 
             file.Close();
-            context.SaveChanges();
-            //  This method will be called after migrating to the latest version.
-            //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
-            //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            context.SaveChanges();
+            
+            // User and Role manager
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
             var roleManager = new ApplicationRoleManager(new RoleStore<IdentityRole>(context));
+
+            var abogadoInfo = new Persona()
+            {
+                Apellidos = "Abogado Proyecto",
+                Direccion = "Carrera 30 # 30 - 17",
+                Identificacion = "102536523432",
+                Nombres = "Soy",
+                Sexo = "F",
+                Email = "soyabogado.14@hotmail.com",
+                Nacionalidad = "Colombia",
+                PaisNacimiento = "Colombia",
+                PaisCorrespondencia = "Colombia",
+                Departamento = "Cesar",
+                MunicipioId = 68020,
+                PaisId = 1,
+                FechaNacimiento = new DateTime(1996, 07, 30),
+                TipoPersonaId = 1,
+                Telefono = "31868758",
+                CreatedAt = tiempoactual,
+                UpdateAt = tiempoactual
+            };
+
+            var abogado = new ApplicationUser()
+            {
+                UserName = "abogado",
+                Email = "abogado@gmail.com",
+                EmailConfirmed = true,
+                FirstName = "Abogado",
+                LastName = "Proyecto",
+                Level = 1,
+                JoinDate = DateTime.Now.AddYears(-3),
+                Persona = abogadoInfo
+            };
 
             var personaadmin = new Persona()
             {
@@ -207,11 +239,12 @@ namespace DAL.Migrations
                 Persona = personasecretaria
             };
 
-
+            // Create users
             manager.Create(user, "lider1*");
-
             manager.Create(secretaria, "secretaria1*");
+            manager.Create(abogado, "abogado1*");
 
+            // Create roles if not exist
             if (roleManager.Roles.Count() == 0)
             {
                 roleManager.Create(new IdentityRole { Name = "Deudor" });
@@ -221,25 +254,17 @@ namespace DAL.Migrations
                 roleManager.Create(new IdentityRole { Name = "Auxiliar Administrativo" });
             }
 
+            // Get users to add roles
             var adminUser = manager.FindByName("lider");
             var secretariaUser = manager.FindByName("secretaria");
+            var abogadoUser = manager.FindByName("abogado");
 
+            // Add users to roles
             manager.AddToRoles(adminUser.Id, new string[] { "Lider" });
-
             manager.AddToRoles(secretariaUser.Id, new string[] { "Secretaria" });
-            context.SaveChanges();
-            //  This method will be called after migrating to the latest version.
+            manager.AddToRoles(abogadoUser.Id, new string[] { "Abogado" });
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.SaveChanges();
         }
     }
 }

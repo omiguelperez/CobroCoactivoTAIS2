@@ -67,9 +67,9 @@ namespace BDD
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Logueo ExitosoBDD")]
         [NUnit.Framework.CategoryAttribute("mytag")]
-        [NUnit.Framework.TestCaseAttribute("secretaria", "secretaria1*", "http://localhost:9000/#!/Secretaria", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("lider", "lider1*", "http://localhost:9000/#!/Lider", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("abogado", "abogado1*", "http://localhost:9000/#!/Abogado", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("secretaria", "secretaria1*", "http://localhost:9999/#!/Secretaria", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("lider", "lider1*", "http://localhost:9999/#!/Lider", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("abogado", "abogado1*", "http://localhost:9999/#!/Abogado", new string[0])]
         public virtual void LogueoExitosoBDD(string usuario, string clave, string url, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -111,7 +111,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 23
  testRunner.When("presione el boton ingresar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 24
- testRunner.Then("mi url sera \"http://localhost:9000/#!/login\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("mi url sera \"http://localhost:9999/#!/login\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
