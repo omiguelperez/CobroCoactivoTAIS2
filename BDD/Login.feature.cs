@@ -65,12 +65,20 @@ namespace BDD
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Logueo Exitoso")]
+        [NUnit.Framework.DescriptionAttribute("Logueo ExitosoBDD")]
         [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void LogueoExitoso()
+        [NUnit.Framework.TestCaseAttribute("secretaria", "secretaria1*", "http://localhost:9000/#!/Secretaria", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("lider", "lider1*", "http://localhost:9000/#!/Lider", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("abogado", "abogado1*", "http://localhost:9000/#!/Abogado", new string[0])]
+        public virtual void LogueoExitosoBDD(string usuario, string clave, string url, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logueo Exitoso", new string[] {
-                        "mytag"});
+            string[] @__tags = new string[] {
+                    "mytag"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logueo ExitosoBDD", @__tags);
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
@@ -78,31 +86,31 @@ this.ScenarioSetup(scenarioInfo);
 #line 9
  testRunner.And("ingreso la url del sistema", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 10
- testRunner.And("ingreso mi usuario \"Secretaria\" y mi clave \"Secretaria\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("ingreso mis credenciales {0} and {1}", usuario, clave), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
  testRunner.When("presione el boton ingresar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 12
- testRunner.Then("mi url sera \"http://localhost:9000/#!/Secretaria\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("mi url cambiara de acuerdo a mi rol {0}", url), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Logueo Erroneo")]
-        public virtual void LogueoErroneo()
+        [NUnit.Framework.DescriptionAttribute("Logueo ErroneoBDD")]
+        public virtual void LogueoErroneoBDD()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logueo Erroneo", ((string[])(null)));
-#line 14
-this.ScenarioSetup(scenarioInfo);
-#line 15
- testRunner.Given("abrir el navegador", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 16
- testRunner.And("ingreso la url del sistema", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 17
- testRunner.And("ingreso mi usuario \"secretaria\" y mi clave \"olakase\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 18
- testRunner.When("presione el boton ingresar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logueo ErroneoBDD", ((string[])(null)));
 #line 19
+this.ScenarioSetup(scenarioInfo);
+#line 20
+ testRunner.Given("abrir el navegador", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 21
+ testRunner.And("ingreso la url del sistema", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 22
+ testRunner.And("ingreso mi usuario \"secretaria\" y mi clave \"olakase\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 23
+ testRunner.When("presione el boton ingresar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 24
  testRunner.Then("mi url sera \"http://localhost:9000/#!/login\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
