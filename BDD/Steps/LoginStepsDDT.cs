@@ -25,15 +25,15 @@ namespace BDD
         [Given(@"ingreso mis credenciales (.*) and (.*)")]
         public void GivenIngresoMisCredencialesAnd(string usuario, string clave) //para exitoso
         {
-            By inputIdentificacion = null;
-            By inputPassword;
+            IWebElement inputIdentificacion;
+            IWebElement inputPassword;
 
             while (true)
             {
                 try
                 {
-                    inputIdentificacion = By.Id("textIdentificacion");
-                    inputPassword = By.Id("textPass");
+                    inputIdentificacion = chrome.FindElement(By.Id("textIdentificacion"));
+                    inputPassword = chrome.FindElement(By.Id("textPass"));
                     break;
                 }
                 catch (Exception)
@@ -42,8 +42,8 @@ namespace BDD
                 }
             }
 
-            chrome.FindElement(inputIdentificacion).SendKeys(usuario);
-            chrome.FindElement(inputPassword).SendKeys(clave);
+            inputIdentificacion.SendKeys(usuario);
+            inputPassword.SendKeys(clave);
         }
         
         [Given(@"ingreso mi usuario ""(.*)"" y mi clave ""(.*)""")]
