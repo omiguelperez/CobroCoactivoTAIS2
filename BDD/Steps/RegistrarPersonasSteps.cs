@@ -15,11 +15,32 @@ namespace BDD
         [Given(@"ya logueado en el sistema")]
         public void GivenYaLogueadoEnElSistema()
         {
+            IWebElement inputIdentificacion;
+            IWebElement inputPassword;
+            IWebElement buttonIngresar;
+
             chrome = new ChromeDriver();
             chrome.Url = "http://localhost:9999";
-            chrome.FindElement(By.Id("textIdentificacion")).SendKeys("lider");
-            chrome.FindElement(By.Id("textPass")).SendKeys("lider1*");
-            chrome.FindElement(By.Id("btningresar")).Click();
+
+            while (true)
+            {
+                try
+                {
+                    inputIdentificacion = chrome.FindElement(By.Id("textIdentificacion"));
+                    inputPassword = chrome.FindElement(By.Id("textPass"));
+                    buttonIngresar = chrome.FindElement(By.Id("btningresar"));
+                    break;
+                }
+                catch (Exception)
+                {
+                    System.Threading.Thread.Sleep(1000);
+                }
+            }
+
+            inputIdentificacion.SendKeys("lider");
+            inputPassword.SendKeys("lider1*");
+            buttonIngresar.Click();
+
             System.Threading.Thread.Sleep(2000);
         }
         
