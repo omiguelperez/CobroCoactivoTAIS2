@@ -21,12 +21,29 @@ namespace BDD
         {
             chrome.Url = "http://localhost:9999";
         }
-        
+
         [Given(@"ingreso mis credenciales (.*) and (.*)")]
         public void GivenIngresoMisCredencialesAnd(string usuario, string clave) //para exitoso
         {
-            chrome.FindElement(By.Id("textIdentificacion")).SendKeys(usuario);
-            chrome.FindElement(By.Id("textPass")).SendKeys(clave);
+            By inputIdentificacion = null;
+            By inputPassword;
+
+            while (true)
+            {
+                try
+                {
+                    inputIdentificacion = By.Id("textIdentificacion");
+                    inputPassword = By.Id("textPass");
+                    break;
+                }
+                catch (Exception)
+                {
+                    System.Threading.Thread.Sleep(1000);
+                }
+            }
+
+            chrome.FindElement(inputIdentificacion).SendKeys(usuario);
+            chrome.FindElement(inputPassword).SendKeys(clave);
         }
         
         [Given(@"ingreso mi usuario ""(.*)"" y mi clave ""(.*)""")]
