@@ -28,13 +28,35 @@ namespace BDD
         [Given(@"presiono la opcion registar cartera")]
         public void GivenPresionoLaOpcionRegistarCartera()
         {
-            driver.FindElement(By.XPath("(//a[contains(text(),'Registrar Cartera')])[2]")).Click();
+            while (true)
+            {
+                try
+                {
+                    driver.FindElement(By.XPath("(//a[contains(text(),'Registrar Cartera')])[2]")).Click();
+                    break;
+                }
+                catch (Exception)
+                {
+                    System.Threading.Thread.Sleep(1000);
+                }
+            }
         }
 
         [Given(@"luego clic en agregar nueva deuda")]
         public void GivenLuegoClicEnAgregarNuevaDeuda()
         {
-            driver.FindElement(By.XPath("//div[3]/a/i")).Click();
+            while (true)
+            {
+                try
+                {
+                    driver.FindElement(By.XPath("//div[3]/a/i")).Click();
+                    break;
+                }
+                catch (Exception)
+                {
+                    System.Threading.Thread.Sleep(1000);
+                }
+            }
         }
         
         [Given(@"relleno el formulario")]
@@ -84,16 +106,28 @@ namespace BDD
         public void WhenPresioneElBotonRegistrar()
         {
             driver.FindElement(By.Id("btnreg")).Click();
-            //ScenarioContext.Current.Pending();
         }
         
         [Then(@"el sistema me arroja el mensaje ""(.*)""")]
         public void ThenElSistemaMeArrojaElMensaje(string msgEsperado)
         {
-            System.Threading.Thread.Sleep(3000);
-            string mensaje = driver.FindElement(By.Id("msgRta")).Text;
-            Assert.AreEqual(msgEsperado,mensaje);
-            //Console.WriteLine(mensaje);
+            string mensaje = null;
+
+            while (true)
+            {
+                try
+                {
+                    mensaje = driver.FindElement(By.Id("msgRta")).Text;
+                    break;
+                }
+                catch (Exception)
+                {
+                    System.Threading.Thread.Sleep(1000);
+                }
+            }
+            
+            Assert.AreEqual(msgEsperado, mensaje);
+
             System.Threading.Thread.Sleep(1000);
             driver.Quit();
         }

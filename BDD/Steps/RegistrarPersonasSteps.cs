@@ -76,8 +76,19 @@ namespace BDD
         [Then(@"el sistema me mostrara un mensaje de ""(.*)""")]
         public void ThenElSistemaMeMostraraUnMensajeDe(string msgEsperado)
         {
-            System.Threading.Thread.Sleep(10000);
-            string mensaje = chrome.FindElement(By.Id("msgRta")).Text;
+            string mensaje = null;
+            do
+            {
+                try
+                {
+                    mensaje = chrome.FindElement(By.Id("msgRta")).Text;
+                }
+                catch (Exception)
+                {
+                }
+                System.Threading.Thread.Sleep(1000);
+            } while (mensaje == null);
+            
             Assert.AreEqual(msgEsperado, mensaje);
             //Console.WriteLine(mensaje);
             System.Threading.Thread.Sleep(1000);
